@@ -24,13 +24,13 @@ apply plugin: "com.android.application"
 apply from: "obb.gradle"
 
 dependencies {
-	compile project(":tests:gdx-tests")
-	compile project(":gdx")
-	compile project(":extensions:gdx-box2d:gdx-box2d")
-	compile project(":extensions:gdx-bullet")
-	compile project(":extensions:gdx-controllers:gdx-controllers-android")
-	compile project(":extensions:gdx-freetype")
-	compile project(":backends:gdx-backend-android")
+	compile project(":api:libgdx:tests:gdx-tests")
+	compile project(":api:libgdx:gdx")
+	compile project(":api:libgdx:extensions:gdx-box2d:gdx-box2d")
+	compile project(":api:libgdx:extensions:gdx-bullet")
+	compile project(":api:libgdx:extensions:gdx-controllers:gdx-controllers-android")
+	compile project(":api:libgdx:extensions:gdx-freetype")
+	compile project(":api:libgdx:backends:gdx-backend-android")
 	compile libraries.android
 }
 

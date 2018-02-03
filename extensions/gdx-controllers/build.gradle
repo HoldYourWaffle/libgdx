@@ -18,6 +18,6 @@ group = "controllers-parent"
 
 subprojects {
     dependencies {
-        compileOnly project(":gdx")
+        compileOnly project(":api:libgdx:gdx")
     }
 }

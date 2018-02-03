@@ -15,6 +15,6 @@
  ******************************************************************************/
 
 dependencies {
-    compileOnly project(":backends:gdx-backend-android")
-    compileOnly project(":extensions:gdx-controllers:gdx-controllers")
+    compileOnly project(":api:libgdx:backends:gdx-backend-android")
+    compileOnly project(":api:libgdx:extensions:gdx-controllers:gdx-controllers")
 }

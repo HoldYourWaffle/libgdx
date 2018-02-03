@@ -15,6 +15,6 @@
  ******************************************************************************/
 
 dependencies {
-    compileOnly project(":extensions:gdx-controllers:gdx-controllers")
+    compileOnly project(":api:libgdx:extensions:gdx-controllers:gdx-controllers")
     compileOnly libraries.lwjgl3
 }

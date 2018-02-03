@@ -24,6 +24,6 @@ subprojects {
 
 
     dependencies {
-        compile project(":gdx")
+        compile project(":api:libgdx:gdx")
     }
 }

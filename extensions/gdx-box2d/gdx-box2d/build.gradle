@@ -22,5 +22,5 @@ task runBox2DBuild (type: JavaExec) {
 }
 
 dependencies {
-    compile project(":extensions:gdx-jnigen")
+    compile project(":api:libgdx:extensions:gdx-jnigen")
 }

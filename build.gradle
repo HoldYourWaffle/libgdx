@@ -36,7 +36,7 @@ allprojects {
     }
 }
 
-configure(subprojects - project(":tests:gdx-tests-android")) {
+configure(subprojects - project(":api:libgdx:tests:gdx-tests-android")) {
     apply plugin: "idea"
     apply plugin: "java"
 

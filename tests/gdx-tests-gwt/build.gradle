@@ -27,10 +27,10 @@ apply plugin: "gwt"
 
 
 dependencies {
-    compile project(":tests:gdx-tests")
-    compile project(":backends:gdx-backends-gwt")
-    compile project(":extensions:gdx-box2d:gdx-box2d-gwt")
-    compile project(":extensions:gdx-controllers:gdx-controllers-gwt")
+    compile project(":api:libgdx:tests:gdx-tests")
+    compile project(":api:libgdx:backends:gdx-backends-gwt")
+    compile project(":api:libgdx:extensions:gdx-box2d:gdx-box2d-gwt")
+    compile project(":api:libgdx:extensions:gdx-controllers:gdx-controllers-gwt")
 }
 
 gwt {

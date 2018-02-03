@@ -15,9 +15,9 @@
  ******************************************************************************/
 
 dependencies {
-    compile project(":gdx")
-    compile project(":extensions:gdx-box2d:gdx-box2d")
-    compile project(":extensions:gdx-bullet")
-    compile project(":extensions:gdx-controllers:gdx-controllers")
-    compile project(":extensions:gdx-freetype")
+    compile project(":api:libgdx:gdx")
+    compile project(":api:libgdx:extensions:gdx-box2d:gdx-box2d")
+    compile project(":api:libgdx:extensions:gdx-bullet")
+    compile project(":api:libgdx:extensions:gdx-controllers:gdx-controllers")
+    compile project(":api:libgdx:extensions:gdx-freetype")
 }

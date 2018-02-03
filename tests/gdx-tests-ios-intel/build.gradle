@@ -58,8 +58,8 @@ configurations {
 }
 
 dependencies {
-    compile project(":tests:gdx-tests")
-    compile project(":backends:gdx-backend-moe")
+    compile project(":api:libgdx:tests:gdx-tests")
+    compile project(":api:libgdx:backends:gdx-backend-moe")
     natives testnatives.ios
 }
 
