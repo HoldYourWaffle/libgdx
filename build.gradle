@@ -36,13 +36,15 @@ allprojects {
     }
 }
 
-configure(subprojects - project(":tests:gdx-tests-android")) {
+configure(subprojects) {// - project(":tests:gdx-tests-android")) {
     apply plugin: "idea"
     apply plugin: "java"
 
     compileJava {
         options.fork = true
         options.incremental = true
+		options.warnings = false
+		options.compilerArgs = ['-Xlint:-options']
     }
 
     idea {
