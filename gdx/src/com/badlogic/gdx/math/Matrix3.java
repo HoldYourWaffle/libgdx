@@ -268,6 +268,7 @@ public class Matrix3 implements Serializable {
 		return this;
 	}
 
+	@Override
 	public String toString () {
 		float[] val = this.val;
 		return "[" + val[M00] + "|" + val[M01] + "|" + val[M02] + "]\n" //

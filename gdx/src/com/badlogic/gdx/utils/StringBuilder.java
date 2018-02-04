@@ -190,6 +190,7 @@ public class StringBuilder implements Appendable, CharSequence {
 	 * @param index the index of the character to retrieve.
 	 * @return the char value.
 	 * @throws IndexOutOfBoundsException if {@code index} is negative or greater than or equal to the current {@link #length()}. */
+	@Override
 	public char charAt (int index) {
 		if (index < 0 || index >= length) {
 			throw new StringIndexOutOfBoundsException(index);
@@ -321,6 +322,7 @@ public class StringBuilder implements Appendable, CharSequence {
 	/** The current length.
 	 * 
 	 * @return the number of characters contained in this instance. */
+	@Override
 	public int length () {
 		return length;
 	}
@@ -511,6 +513,7 @@ public class StringBuilder implements Appendable, CharSequence {
 	 * @throws IndexOutOfBoundsException if {@code start} is negative, greater than {@code end} or if {@code end} is greater than
 	 *            the current {@link #length()}.
 	 * @since 1.4 */
+	@Override
 	public CharSequence subSequence (int start, int end) {
 		return substring(start, end);
 	}
@@ -716,6 +719,7 @@ public class StringBuilder implements Appendable, CharSequence {
 	 * @param c the {@code char} value to append.
 	 * @return this builder.
 	 * @see String#valueOf(char) */
+	@Override
 	public StringBuilder append (char c) {
 		append0(c);
 		return this;
@@ -927,6 +931,7 @@ public class StringBuilder implements Appendable, CharSequence {
 	 * 
 	 * @param csq the {@code CharSequence} to append.
 	 * @return this builder. */
+	@Override
 	public StringBuilder append (CharSequence csq) {
 		if (csq == null) {
 			appendNull();
@@ -956,6 +961,7 @@ public class StringBuilder implements Appendable, CharSequence {
 	 * @return this builder.
 	 * @throws IndexOutOfBoundsException if {@code start} or {@code end} are negative, {@code start} is greater than {@code end} or
 	 *            {@code end} is greater than the length of {@code csq}. */
+	@Override
 	public StringBuilder append (CharSequence csq, int start, int end) {
 		append0(csq, start, end);
 		return this;
@@ -1216,6 +1222,7 @@ public class StringBuilder implements Appendable, CharSequence {
 		return this;
 	}
 
+	@Override
 	public int hashCode () {
 		final int prime = 31;
 		int result = 1;
@@ -1224,6 +1231,7 @@ public class StringBuilder implements Appendable, CharSequence {
 		return result;
 	}
 
+	@Override
 	public boolean equals (Object obj) {
 		if (this == obj) return true;
 		if (obj == null) return false;

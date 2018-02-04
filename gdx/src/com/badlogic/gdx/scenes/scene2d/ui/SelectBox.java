@@ -16,7 +16,10 @@
 
 package com.badlogic.gdx.scenes.scene2d.ui;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.removeActor;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
@@ -82,6 +85,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 		selectBoxList = new SelectBoxList(this);
 
 		addListener(clickListener = new ClickListener() {
+			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				if (pointer == 0 && button != 0) return false;
 				if (disabled) return false;
@@ -105,6 +109,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 		return selectBoxList.maxListCount;
 	}
 
+	@Override
 	protected void setStage (Stage stage) {
 		if (stage == null) selectBoxList.hide();
 		super.setStage(stage);
@@ -284,20 +289,24 @@ public class SelectBox<T> extends Widget implements Disableable {
 		selection.set(items.get(index));
 	}
 
+	@Override
 	public void setDisabled (boolean disabled) {
 		if (disabled && !this.disabled) hideList();
 		this.disabled = disabled;
 	}
 
+	@Override
 	public boolean isDisabled () {
 		return disabled;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		validate();
 		return prefWidth;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		validate();
 		return prefHeight;
@@ -369,11 +378,13 @@ public class SelectBox<T> extends Widget implements Disableable {
 			setActor(list);
 
 			list.addListener(new ClickListener() {
+				@Override
 				public void clicked (InputEvent event, float x, float y) {
 					selectBox.selection.choose(list.getSelected());
 					hide();
 				}
 
+				@Override
 				public boolean mouseMoved (InputEvent event, float x, float y) {
 					list.setSelectedIndex(Math.min(selectBox.items.size - 1, (int)((list.getHeight() - y) / list.getItemHeight())));
 					return true;
@@ -381,12 +392,14 @@ public class SelectBox<T> extends Widget implements Disableable {
 			});
 
 			addListener(new InputListener() {
+				@Override
 				public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
 					if (toActor == null || !isAscendantOf(toActor)) list.selection.set(selectBox.getSelected());
 				}
 			});
 
 			hideListener = new InputListener() {
+				@Override
 				public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 					Actor target = event.getTarget();
 					if (isAscendantOf(target)) return false;
@@ -395,6 +408,7 @@ public class SelectBox<T> extends Widget implements Disableable {
 					return false;
 				}
 
+				@Override
 				public boolean keyDown (InputEvent event, int keycode) {
 					if (keycode == Keys.ESCAPE) hide();
 					return false;
@@ -472,12 +486,14 @@ public class SelectBox<T> extends Widget implements Disableable {
 			selectBox.onHide(this);
 		}
 
+		@Override
 		public void draw (Batch batch, float parentAlpha) {
 			selectBox.localToStageCoordinates(temp.set(0, 0));
 			if (!temp.equals(screenPosition)) hide();
 			super.draw(batch, parentAlpha);
 		}
 
+		@Override
 		public void act (float delta) {
 			super.act(delta);
 			toFront();

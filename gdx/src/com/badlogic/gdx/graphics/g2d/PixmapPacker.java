@@ -230,6 +230,7 @@ public class PixmapPacker implements Disposable {
 
 	/** Disposes any pixmap pages which don't have a texture. Page pixmaps that have a texture will not be disposed until their
 	 * texture is disposed. */
+	@Override
 	public synchronized void dispose () {
 		for (Page page : pages) {
 			if (page.texture == null) {
@@ -405,9 +406,11 @@ public class PixmapPacker implements Disposable {
 	static public class GuillotineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
 
+		@Override
 		public void sort (Array<Pixmap> pixmaps) {
 			if (comparator == null) {
 				comparator = new Comparator<Pixmap>() {
+					@Override
 					public int compare (Pixmap o1, Pixmap o2) {
 						return Math.max(o1.getWidth(), o1.getHeight()) - Math.max(o2.getWidth(), o2.getHeight());
 					}
@@ -416,6 +419,7 @@ public class PixmapPacker implements Disposable {
 			pixmaps.sort(comparator);
 		}
 
+		@Override
 		public Page pack (PixmapPacker packer, String name, Rectangle rect) {
 			GuillotinePage page;
 			if (packer.pages.size == 0) {
@@ -509,9 +513,11 @@ public class PixmapPacker implements Disposable {
 	static public class SkylineStrategy implements PackStrategy {
 		Comparator<Pixmap> comparator;
 
+		@Override
 		public void sort (Array<Pixmap> images) {
 			if (comparator == null) {
 				comparator = new Comparator<Pixmap>() {
+					@Override
 					public int compare (Pixmap o1, Pixmap o2) {
 						return o1.getHeight() - o2.getHeight();
 					}
@@ -520,6 +526,7 @@ public class PixmapPacker implements Disposable {
 			images.sort(comparator);
 		}
 
+		@Override
 		public Page pack (PixmapPacker packer, String name, Rectangle rect) {
 			int padding = packer.padding;
 			int pageWidth = packer.pageWidth - padding * 2, pageHeight = packer.pageHeight - padding * 2;

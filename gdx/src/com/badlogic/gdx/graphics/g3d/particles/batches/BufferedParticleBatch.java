@@ -34,6 +34,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 		renderData = new com.badlogic.gdx.utils.Array<T>(false, 10, type);
 	}
 
+	@Override
 	public void begin () {
 		renderData.clear();
 		bufferedParticlesCount = 0;
@@ -48,6 +49,7 @@ public abstract class BufferedParticleBatch<T extends ParticleControllerRenderDa
 	}
 
 	/** */
+	@Override
 	public void end () {
 		if (bufferedParticlesCount > 0) {
 			ensureCapacity(bufferedParticlesCount);

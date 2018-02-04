@@ -42,6 +42,7 @@ public class Group extends Actor implements Cullable {
 	boolean transform = true;
 	private Rectangle cullingArea;
 
+	@Override
 	public void act (float delta) {
 		super.act(delta);
 		Actor[] actors = children.begin();
@@ -52,6 +53,7 @@ public class Group extends Actor implements Cullable {
 
 	/** Draws the group and its children. The default implementation calls {@link #applyTransform(Batch, Matrix4)} if needed, then
 	 * {@link #drawChildren(Batch, float)}, then {@link #resetTransform(Batch)} if needed. */
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		if (transform) applyTransform(batch, computeTransform());
 		drawChildren(batch, parentAlpha);
@@ -133,6 +135,7 @@ public class Group extends Actor implements Cullable {
 
 	/** Draws this actor's debug lines if {@link #getDebug()} is true and, regardless of {@link #getDebug()}, calls
 	 * {@link Actor#drawDebug(ShapeRenderer)} on each child. */
+	@Override
 	public void drawDebug (ShapeRenderer shapes) {
 		drawDebugBounds(shapes);
 		if (transform) applyTransform(shapes, computeTransform());
@@ -227,6 +230,7 @@ public class Group extends Actor implements Cullable {
 	/** Children completely outside of this rectangle will not be drawn. This is only valid for use with unrotated and unscaled
 	 * actors.
 	 * @param cullingArea May be null. */
+	@Override
 	public void setCullingArea (Rectangle cullingArea) {
 		this.cullingArea = cullingArea;
 	}
@@ -237,6 +241,7 @@ public class Group extends Actor implements Cullable {
 		return cullingArea;
 	}
 
+	@Override
 	public Actor hit (float x, float y, boolean touchable) {
 		if (touchable && getTouchable() == Touchable.disabled) return null;
 		Vector2 point = tmp;
@@ -352,6 +357,7 @@ public class Group extends Actor implements Cullable {
 	}
 
 	/** Removes all children, actions, and listeners from this group. */
+	@Override
 	public void clear () {
 		super.clear();
 		clearChildren();
@@ -373,6 +379,7 @@ public class Group extends Actor implements Cullable {
 		return null;
 	}
 
+	@Override
 	protected void setStage (Stage stage) {
 		super.setStage(stage);
 		Actor[] childrenArray = children.items;
@@ -453,6 +460,7 @@ public class Group extends Actor implements Cullable {
 	}
 
 	/** Returns a description of the actor hierarchy, recursively. */
+	@Override
 	public String toString () {
 		StringBuilder buffer = new StringBuilder(128);
 		toString(buffer, 1);

@@ -67,36 +67,42 @@ public class InputMultiplexer implements InputProcessor {
 		return processors;
 	}
 
+	@Override
 	public boolean keyDown (int keycode) {
 		for (int i = 0, n = processors.size; i < n; i++)
 			if (processors.get(i).keyDown(keycode)) return true;
 		return false;
 	}
 
+	@Override
 	public boolean keyUp (int keycode) {
 		for (int i = 0, n = processors.size; i < n; i++)
 			if (processors.get(i).keyUp(keycode)) return true;
 		return false;
 	}
 
+	@Override
 	public boolean keyTyped (char character) {
 		for (int i = 0, n = processors.size; i < n; i++)
 			if (processors.get(i).keyTyped(character)) return true;
 		return false;
 	}
 
+	@Override
 	public boolean touchDown (int screenX, int screenY, int pointer, int button) {
 		for (int i = 0, n = processors.size; i < n; i++)
 			if (processors.get(i).touchDown(screenX, screenY, pointer, button)) return true;
 		return false;
 	}
 
+	@Override
 	public boolean touchUp (int screenX, int screenY, int pointer, int button) {
 		for (int i = 0, n = processors.size; i < n; i++)
 			if (processors.get(i).touchUp(screenX, screenY, pointer, button)) return true;
 		return false;
 	}
 
+	@Override
 	public boolean touchDragged (int screenX, int screenY, int pointer) {
 		for (int i = 0, n = processors.size; i < n; i++)
 			if (processors.get(i).touchDragged(screenX, screenY, pointer)) return true;

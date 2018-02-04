@@ -16,13 +16,13 @@
 
 package com.badlogic.gdx.graphics;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
 
 /** <p>
  * A Pixmap represents an image in memory. It has a width and height expressed in pixels as well as a {@link Format} specifying
@@ -312,6 +312,7 @@ public class Pixmap implements Disposable {
 	}
 
 	/** Releases all resources associated with this Pixmap. */
+	@Override
 	public void dispose () {
 		if (disposed) throw new GdxRuntimeException("Pixmap already disposed!");
 		pixmap.dispose();

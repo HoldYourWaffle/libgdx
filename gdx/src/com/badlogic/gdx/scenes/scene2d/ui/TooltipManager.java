@@ -16,8 +16,13 @@
 
 package com.badlogic.gdx.scenes.scene2d.ui;
 
-import static com.badlogic.gdx.math.Interpolation.*;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.math.Interpolation.fade;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.removeActor;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.scaleTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
@@ -56,6 +61,7 @@ public class TooltipManager {
 
 	float time = initialTime;
 	final Task resetTask = new Task() {
+		@Override
 		public void run () {
 			time = initialTime;
 		}
@@ -63,6 +69,7 @@ public class TooltipManager {
 
 	Tooltip showTooltip;
 	final Task showTask = new Task() {
+		@Override
 		public void run () {
 			if (showTooltip == null) return;
 

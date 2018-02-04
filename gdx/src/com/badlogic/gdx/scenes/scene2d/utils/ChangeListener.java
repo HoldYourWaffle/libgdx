@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 /** Listener for {@link ChangeEvent}.
  * @author Nathan Sweet */
 abstract public class ChangeListener implements EventListener {
+	@Override
 	public boolean handle (Event event) {
 		if (!(event instanceof ChangeEvent)) return false;
 		changed((ChangeEvent)event, event.getTarget());

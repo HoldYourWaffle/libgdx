@@ -60,6 +60,7 @@ public abstract class ParticleControllerComponent implements Disposable, Json.Se
 	public void end () {
 	};
 
+	@Override
 	public void dispose () {
 	}
 

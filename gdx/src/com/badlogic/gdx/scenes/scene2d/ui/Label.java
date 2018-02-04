@@ -116,6 +116,7 @@ public class Label extends Widget {
 		return text;
 	}
 
+	@Override
 	public void invalidate () {
 		super.invalidate();
 		prefSizeInvalid = true;
@@ -144,6 +145,7 @@ public class Label extends Widget {
 		prefSize.set(prefSizeLayout.width, prefSizeLayout.height);
 	}
 
+	@Override
 	public void layout () {
 		BitmapFont font = cache.getFont();
 		float oldScaleX = font.getScaleX();
@@ -205,6 +207,7 @@ public class Label extends Widget {
 		if (fontScaleChanged) font.getData().setScale(oldScaleX, oldScaleY);
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 		Color color = tempColor.set(getColor());
@@ -219,6 +222,7 @@ public class Label extends Widget {
 		cache.draw(batch);
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (wrap) return 0;
 		if (prefSizeInvalid) scaleAndComputePrefSize();
@@ -228,6 +232,7 @@ public class Label extends Widget {
 		return width;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (prefSizeInvalid) scaleAndComputePrefSize();
 		float descentScaleCorrection = 1;
@@ -332,6 +337,7 @@ public class Label extends Widget {
 		return cache;
 	}
 
+	@Override
 	public String toString () {
 		return super.toString() + ": " + text;
 	}

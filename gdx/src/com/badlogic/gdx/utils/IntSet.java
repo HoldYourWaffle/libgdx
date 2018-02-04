@@ -16,9 +16,9 @@
 
 package com.badlogic.gdx.utils;
 
-import com.badlogic.gdx.math.MathUtils;
-
 import java.util.NoSuchElementException;
+
+import com.badlogic.gdx.math.MathUtils;
 
 /** An unordered set that uses int keys. This implementation uses cuckoo hashing using 3 hashes, random walking, and a small stash
  * for problematic keys. No allocation is done except when growing the table size. <br>
@@ -425,6 +425,7 @@ public class IntSet {
 		return (h ^ h >>> hashShift) & mask;
 	}
 
+	@Override
 	public int hashCode () {
 		int h = 0;
 		for (int i = 0, n = capacity + stashSize; i < n; i++)
@@ -432,6 +433,7 @@ public class IntSet {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object obj) {
 		if (!(obj instanceof IntSet)) return false;
 		IntSet other = (IntSet)obj;
@@ -442,6 +444,7 @@ public class IntSet {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "[]";
 		StringBuilder buffer = new StringBuilder(32);

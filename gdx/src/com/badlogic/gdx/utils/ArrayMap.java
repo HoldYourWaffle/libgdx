@@ -398,6 +398,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		size = newSize;
 	}
 
+	@Override
 	public int hashCode () {
 		K[] keys = this.keys;
 		V[] values = this.values;
@@ -411,6 +412,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object obj) {
 		if (obj == this) return true;
 		if (!(obj instanceof ArrayMap)) return false;
@@ -434,6 +436,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "{}";
 		K[] keys = this.keys;
@@ -453,6 +456,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return buffer.toString();
 	}
 
+	@Override
 	public Iterator<Entry<K, V>> iterator () {
 		return entries();
 	}
@@ -524,16 +528,19 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			this.map = map;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return index < map.size;
 		}
 
+		@Override
 		public Iterator<Entry<K, V>> iterator () {
 			return this;
 		}
 
 		/** Note the same entry instance is returned each time this method is called. */
+		@Override
 		public Entry<K, V> next () {
 			if (index >= map.size) throw new NoSuchElementException(String.valueOf(index));
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -542,6 +549,7 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			return entry;
 		}
 
+		@Override
 		public void remove () {
 			index--;
 			map.removeIndex(index);
@@ -561,21 +569,25 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			this.map = map;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return index < map.size;
 		}
 
+		@Override
 		public Iterator<V> iterator () {
 			return this;
 		}
 
+		@Override
 		public V next () {
 			if (index >= map.size) throw new NoSuchElementException(String.valueOf(index));
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return map.values[index++];
 		}
 
+		@Override
 		public void remove () {
 			index--;
 			map.removeIndex(index);
@@ -604,21 +616,25 @@ public class ArrayMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			this.map = map;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return index < map.size;
 		}
 
+		@Override
 		public Iterator<K> iterator () {
 			return this;
 		}
 
+		@Override
 		public K next () {
 			if (index >= map.size) throw new NoSuchElementException(String.valueOf(index));
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return map.keys[index++];
 		}
 
+		@Override
 		public void remove () {
 			index--;
 			map.removeIndex(index);

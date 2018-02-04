@@ -49,6 +49,7 @@ public class TextButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Override
 	public void setStyle (ButtonStyle style) {
 		if (style == null) throw new NullPointerException("style cannot be null");
 		if (!(style instanceof TextButtonStyle)) throw new IllegalArgumentException("style must be a TextButtonStyle.");
@@ -63,10 +64,12 @@ public class TextButton extends Button {
 		}
 	}
 
+	@Override
 	public TextButtonStyle getStyle () {
 		return style;
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		Color fontColor;
 		if (isDisabled() && style.disabledFontColor != null)

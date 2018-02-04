@@ -138,6 +138,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 		return null;
 	}
 
+	@Override
 	public void dispose () {
 		for (int i = 0, n = controllers.size; i < n; i++) {
 			controllers.get(i).dispose();
@@ -170,6 +171,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 	}
 
 	/** Saves all the assets required by all the controllers inside this effect. */
+	@Override
 	public void save (AssetManager assetManager, ResourceData data) {
 		for (ParticleController controller : controllers) {
 			controller.save(assetManager, data);
@@ -177,6 +179,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 	}
 
 	/** Loads all the assets required by all the controllers inside this effect. */
+	@Override
 	public void load (AssetManager assetManager, ResourceData data) {
 		int i = 0;
 		for (ParticleController controller : controllers) {

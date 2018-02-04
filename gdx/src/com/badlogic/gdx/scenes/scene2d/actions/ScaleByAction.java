@@ -21,6 +21,7 @@ package com.badlogic.gdx.scenes.scene2d.actions;
 public class ScaleByAction extends RelativeTemporalAction {
 	private float amountX, amountY;
 
+	@Override
 	protected void updateRelative (float percentDelta) {
 		target.scaleBy(amountX * percentDelta, amountY * percentDelta);
 	}

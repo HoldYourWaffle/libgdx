@@ -344,6 +344,7 @@ public class LongArray {
 		return array;
 	}
 
+	@Override
 	public int hashCode () {
 		if (!ordered) return super.hashCode();
 		long[] items = this.items;
@@ -353,6 +354,7 @@ public class LongArray {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object object) {
 		if (object == this) return true;
 		if (!ordered) return false;
@@ -368,6 +370,7 @@ public class LongArray {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "[]";
 		long[] items = this.items;

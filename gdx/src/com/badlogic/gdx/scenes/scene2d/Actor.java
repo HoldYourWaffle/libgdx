@@ -16,7 +16,10 @@
 
 package com.badlogic.gdx.scenes.scene2d;
 
-import static com.badlogic.gdx.utils.Align.*;
+import static com.badlogic.gdx.utils.Align.bottom;
+import static com.badlogic.gdx.utils.Align.left;
+import static com.badlogic.gdx.utils.Align.right;
+import static com.badlogic.gdx.utils.Align.top;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -891,6 +894,7 @@ public class Actor {
 		return this;
 	}
 
+	@Override
 	public String toString () {
 		String name = this.name;
 		if (name == null) {

@@ -214,6 +214,7 @@ public class VertexBufferObjectSubData implements VertexData {
 	}
 
 	/** Invalidates the VertexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss. */
+	@Override
 	public void invalidate () {
 		bufferHandle = createBufferObject();
 		isDirty = true;

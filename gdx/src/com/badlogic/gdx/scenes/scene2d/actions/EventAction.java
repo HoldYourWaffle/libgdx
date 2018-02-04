@@ -15,6 +15,7 @@ abstract public class EventAction<T extends Event> extends Action {
 	boolean result, active;
 
 	private final EventListener listener = new EventListener() {
+		@Override
 		public boolean handle (Event event) {
 			if (!active || !ClassReflection.isInstance(eventClass, event)) return false;
 			result = EventAction.this.handle((T)event);
@@ -26,11 +27,13 @@ abstract public class EventAction<T extends Event> extends Action {
 		this.eventClass = eventClass;
 	}
 
+	@Override
 	public void restart () {
 		result = false;
 		active = false;
 	}
 
+	@Override
 	public void setTarget (Actor newTarget) {
 		if (target != null) target.removeListener(listener);
 		super.setTarget(newTarget);
@@ -41,6 +44,7 @@ abstract public class EventAction<T extends Event> extends Action {
 	 * @return true if the event should be considered {@link Event#handle() handled} and this EventAction considered complete. */
 	abstract public boolean handle (T event);
 
+	@Override
 	public boolean act (float delta) {
 		active = true;
 		return result;

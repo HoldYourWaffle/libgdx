@@ -21,7 +21,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -65,6 +64,7 @@ public class Slider extends ProgressBar {
 		super(min, max, stepSize, vertical, style);
 
 		addListener(new InputListener() {
+			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				if (disabled) return false;
 				if (draggingPointer != -1) return false;
@@ -73,6 +73,7 @@ public class Slider extends ProgressBar {
 				return true;
 			}
 
+			@Override
 			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 				if (pointer != draggingPointer) return;
 				draggingPointer = -1;
@@ -84,6 +85,7 @@ public class Slider extends ProgressBar {
 				}
 			}
 
+			@Override
 			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				calculatePositionAndValue(x, y);
 			}
@@ -108,10 +110,12 @@ public class Slider extends ProgressBar {
 
 	/** Returns the slider's style. Modifying the returned style may not have an effect until {@link #setStyle(SliderStyle)} is
 	 * called. */
+	@Override
 	public SliderStyle getStyle () {
 		return (SliderStyle)super.getStyle();
 	}
 
+	@Override
 	protected Drawable getKnobDrawable () {
 		SliderStyle style = getStyle();
 		return (disabled && style.disabledKnob != null) ? style.disabledKnob

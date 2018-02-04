@@ -23,7 +23,6 @@ import java.nio.ByteBuffer;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -124,10 +123,12 @@ public class ETC1 {
 		}
 
 		/** Releases the native resources of the ETC1Data instance. */
+		@Override
 		public void dispose () {
 			BufferUtils.disposeUnsafeByteBuffer(compressedData);
 		}
 
+		@Override
 		public String toString () {
 			if (hasPKMHeader()) {
 				return (ETC1.isValidPKM(compressedData, 0) ? "valid" : "invalid") + " pkm [" + ETC1.getWidthPKM(compressedData, 0)

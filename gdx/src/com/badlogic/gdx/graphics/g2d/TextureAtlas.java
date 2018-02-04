@@ -16,7 +16,13 @@
 
 package com.badlogic.gdx.graphics.g2d;
 
-import static com.badlogic.gdx.graphics.Texture.TextureWrap.*;
+import static com.badlogic.gdx.graphics.Texture.TextureWrap.ClampToEdge;
+import static com.badlogic.gdx.graphics.Texture.TextureWrap.Repeat;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Comparator;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
@@ -32,15 +38,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectSet;
-import com.badlogic.gdx.utils.Sort;
 import com.badlogic.gdx.utils.StreamUtils;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
 
 /** Loads images from texture atlases created by TexturePacker.<br>
  * <br>
@@ -413,6 +411,7 @@ public class TextureAtlas implements Disposable {
 
 	/** Releases all resources associated with this TextureAtlas instance. This releases all the textures backing all TextureRegions
 	 * and Sprites, which should no longer be used after calling dispose. */
+	@Override
 	public void dispose () {
 		for (Texture texture : textures)
 			texture.dispose();
@@ -420,6 +419,7 @@ public class TextureAtlas implements Disposable {
 	}
 
 	static final Comparator<Region> indexComparator = new Comparator<Region>() {
+		@Override
 		public int compare (Region region1, Region region2) {
 			int i1 = region1.index;
 			if (i1 == -1) i1 = Integer.MAX_VALUE;
@@ -535,6 +535,7 @@ public class TextureAtlas implements Disposable {
 			return rotate ? packedWidth : packedHeight;
 		}
 
+		@Override
 		public String toString () {
 			return name;
 		}
@@ -707,6 +708,7 @@ public class TextureAtlas implements Disposable {
 			return region;
 		}
 
+		@Override
 		public String toString () {
 			return region.toString();
 		}

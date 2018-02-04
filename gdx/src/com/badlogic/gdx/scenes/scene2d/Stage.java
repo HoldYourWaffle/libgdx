@@ -256,6 +256,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a touch down event to the stage and returns true if an actor in the scene {@link Event#handle() handled} the
 	 * event. */
+	@Override
 	public boolean touchDown (int screenX, int screenY, int pointer, int button) {
 		if (!isInsideViewport(screenX, screenY)) return false;
 
@@ -287,6 +288,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a touch moved event to the stage and returns true if an actor in the scene {@link Event#handle() handled} the
 	 * event. Only {@link InputListener listeners} that returned true for touchDown will receive this event. */
+	@Override
 	public boolean touchDragged (int screenX, int screenY, int pointer) {
 		pointerScreenX[pointer] = screenX;
 		pointerScreenY[pointer] = screenY;
@@ -323,6 +325,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a touch up event to the stage and returns true if an actor in the scene {@link Event#handle() handled} the event.
 	 * Only {@link InputListener listeners} that returned true for touchDown will receive this event. */
+	@Override
 	public boolean touchUp (int screenX, int screenY, int pointer, int button) {
 		pointerTouched[pointer] = false;
 		pointerScreenX[pointer] = screenX;
@@ -360,6 +363,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a mouse moved event to the stage and returns true if an actor in the scene {@link Event#handle() handled} the
 	 * event. This event only occurs on the desktop. */
+	@Override
 	public boolean mouseMoved (int screenX, int screenY) {
 		mouseScreenX = screenX;
 		mouseScreenY = screenY;
@@ -385,6 +389,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a mouse scroll event to the stage and returns true if an actor in the scene {@link Event#handle() handled} the
 	 * event. This event only occurs on the desktop. */
+	@Override
 	public boolean scrolled (int amount) {
 		Actor target = scrollFocus == null ? root : scrollFocus;
 
@@ -404,6 +409,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a key down event to the actor that has {@link Stage#setKeyboardFocus(Actor) keyboard focus}, if any, and returns
 	 * true if the event was {@link Event#handle() handled}. */
+	@Override
 	public boolean keyDown (int keyCode) {
 		Actor target = keyboardFocus == null ? root : keyboardFocus;
 		InputEvent event = Pools.obtain(InputEvent.class);
@@ -418,6 +424,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a key up event to the actor that has {@link Stage#setKeyboardFocus(Actor) keyboard focus}, if any, and returns true
 	 * if the event was {@link Event#handle() handled}. */
+	@Override
 	public boolean keyUp (int keyCode) {
 		Actor target = keyboardFocus == null ? root : keyboardFocus;
 		InputEvent event = Pools.obtain(InputEvent.class);
@@ -432,6 +439,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 	/** Applies a key typed event to the actor that has {@link Stage#setKeyboardFocus(Actor) keyboard focus}, if any, and returns
 	 * true if the event was {@link Event#handle() handled}. */
+	@Override
 	public boolean keyTyped (char character) {
 		Actor target = keyboardFocus == null ? root : keyboardFocus;
 		InputEvent event = Pools.obtain(InputEvent.class);
@@ -826,6 +834,7 @@ public class Stage extends InputAdapter implements Disposable {
 		setDebugTableUnderMouse(debugTableUnderMouse ? Debug.all : Debug.none);
 	}
 
+	@Override
 	public void dispose () {
 		clear();
 		if (ownsBatch) batch.dispose();
@@ -848,6 +857,7 @@ public class Stage extends InputAdapter implements Disposable {
 		Actor listenerActor, target;
 		int pointer, button;
 
+		@Override
 		public void reset () {
 			listenerActor = null;
 			listener = null;

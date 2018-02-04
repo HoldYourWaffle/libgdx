@@ -86,11 +86,13 @@ public class IndexBufferObjectSubData implements IndexData {
 	}
 
 	/** @return the number of indices currently stored in this buffer */
+	@Override
 	public int getNumIndices () {
 		return buffer.limit();
 	}
 
 	/** @return the maximum number of indices this IndexBufferObject can store. */
+	@Override
 	public int getNumMaxIndices () {
 		return buffer.capacity();
 	}
@@ -107,6 +109,7 @@ public class IndexBufferObjectSubData implements IndexData {
 	 * @param indices the vertex data
 	 * @param offset the offset to start copying the data from
 	 * @param count the number of floats to copy */
+	@Override
 	public void setIndices (short[] indices, int offset, int count) {
 		isDirty = true;
 		buffer.clear();
@@ -121,6 +124,7 @@ public class IndexBufferObjectSubData implements IndexData {
 		}
 	}
 
+	@Override
 	public void setIndices (ShortBuffer indices) {
 		int pos = indices.position();
 		isDirty = true;
@@ -159,12 +163,14 @@ public class IndexBufferObjectSubData implements IndexData {
 	 * </p>
 	 * 
 	 * @return the underlying short buffer. */
+	@Override
 	public ShortBuffer getBuffer () {
 		isDirty = true;
 		return buffer;
 	}
 
 	/** Binds this IndexBufferObject for rendering with glDrawElements. */
+	@Override
 	public void bind () {
 		if (bufferHandle == 0) throw new GdxRuntimeException("IndexBufferObject cannot be used after it has been disposed.");
 
@@ -178,18 +184,21 @@ public class IndexBufferObjectSubData implements IndexData {
 	}
 
 	/** Unbinds this IndexBufferObject. */
+	@Override
 	public void unbind () {
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);
 		isBound = false;
 	}
 
 	/** Invalidates the IndexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss. */
+	@Override
 	public void invalidate () {
 		bufferHandle = createBufferObject();
 		isDirty = true;
 	}
 
 	/** Disposes this IndexBufferObject and all its associated OpenGL resources. */
+	@Override
 	public void dispose () {
 		GL20 gl = Gdx.gl20;
 		gl.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);

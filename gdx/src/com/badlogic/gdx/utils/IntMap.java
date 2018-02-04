@@ -547,6 +547,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		return (h ^ h >>> hashShift) & mask;
 	}
 
+	@Override
 	public int hashCode () {
 		int h = 0;
 		if (hasZeroValue && zeroValue != null) {
@@ -568,6 +569,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object obj) {
 		if (obj == this) return true;
 		if (!(obj instanceof IntMap)) return false;
@@ -601,6 +603,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "[]";
 		StringBuilder buffer = new StringBuilder(32);
@@ -633,6 +636,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		return buffer.toString();
 	}
 
+	@Override
 	public Iterator<Entry<V>> iterator () {
 		return entries();
 	}
@@ -698,6 +702,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		public int key;
 		public V value;
 
+		@Override
 		public String toString () {
 			return key + "=" + value;
 		}
@@ -765,6 +770,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 		}
 
 		/** Note the same entry instance is returned each time this method is called. */
+		@Override
 		public Entry<V> next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -781,15 +787,18 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 			return entry;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public Iterator<Entry<V>> iterator () {
 			return this;
 		}
 
+		@Override
 		public void remove () {
 			super.remove();
 		}
@@ -800,11 +809,13 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 			super(map);
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public V next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -818,6 +829,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 			return value;
 		}
 
+		@Override
 		public Iterator<V> iterator () {
 			return this;
 		}
@@ -830,6 +842,7 @@ public class IntMap<V> implements Iterable<IntMap.Entry<V>> {
 			return array;
 		}
 
+		@Override
 		public void remove () {
 			super.remove();
 		}

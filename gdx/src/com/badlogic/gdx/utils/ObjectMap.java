@@ -513,6 +513,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return (h ^ h >>> hashShift) & mask;
 	}
 
+	@Override
 	public int hashCode () {
 		int h = 0;
 		K[] keyTable = this.keyTable;
@@ -531,6 +532,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object obj) {
 		if (obj == this) return true;
 		if (!(obj instanceof ObjectMap)) return false;
@@ -560,6 +562,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return toString(separator, false);
 	}
 
+	@Override
 	public String toString () {
 		return toString(", ", true);
 	}
@@ -591,6 +594,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		return buffer.toString();
 	}
 
+	@Override
 	public Entries<K, V> iterator () {
 		return entries();
 	}
@@ -656,6 +660,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		public K key;
 		public V value;
 
+		@Override
 		public String toString () {
 			return key + "=" + value;
 		}
@@ -690,6 +695,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			}
 		}
 
+		@Override
 		public void remove () {
 			if (currentIndex < 0) throw new IllegalStateException("next must be called before remove.");
 			if (currentIndex >= map.capacity) {
@@ -713,6 +719,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 		}
 
 		/** Note the same entry instance is returned each time this method is called. */
+		@Override
 		public Entry<K, V> next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -724,11 +731,13 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			return entry;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public Entries<K, V> iterator () {
 			return this;
 		}
@@ -739,11 +748,13 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			super((ObjectMap<Object, V>)map);
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public V next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -753,6 +764,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			return value;
 		}
 
+		@Override
 		public Values<V> iterator () {
 			return this;
 		}
@@ -775,11 +787,13 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			super((ObjectMap<K, Object>)map);
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public K next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -789,6 +803,7 @@ public class ObjectMap<K, V> implements Iterable<ObjectMap.Entry<K, V>> {
 			return key;
 		}
 
+		@Override
 		public Keys<K> iterator () {
 			return this;
 		}

@@ -33,7 +33,9 @@ public interface ParticleBatch<T extends ParticleControllerRenderData> extends R
 	/** Must be called after all the drawing operations */
 	public void end ();
 
+	@Override
 	public void save (AssetManager manager, ResourceData assetDependencyData);
 
+	@Override
 	public void load (AssetManager manager, ResourceData assetDependencyData);
 }

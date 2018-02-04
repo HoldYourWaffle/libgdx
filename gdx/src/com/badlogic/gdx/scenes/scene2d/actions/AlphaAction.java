@@ -26,15 +26,18 @@ public class AlphaAction extends TemporalAction {
 	private float start, end;
 	private Color color;
 
+	@Override
 	protected void begin () {
 		if (color == null) color = target.getColor();
 		start = color.a;
 	}
 
+	@Override
 	protected void update (float percent) {
 		color.a = start + (end - start) * percent;
 	}
 
+	@Override
 	public void reset () {
 		super.reset();
 		color = null;

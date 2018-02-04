@@ -37,35 +37,43 @@ public class Widget extends Actor implements Layout {
 	private boolean fillParent;
 	private boolean layoutEnabled = true;
 
+	@Override
 	public float getMinWidth () {
 		return getPrefWidth();
 	}
 
+	@Override
 	public float getMinHeight () {
 		return getPrefHeight();
 	}
 
+	@Override
 	public float getPrefWidth () {
 		return 0;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		return 0;
 	}
 
+	@Override
 	public float getMaxWidth () {
 		return 0;
 	}
 
+	@Override
 	public float getMaxHeight () {
 		return 0;
 	}
 
+	@Override
 	public void setLayoutEnabled (boolean enabled) {
 		layoutEnabled = enabled;
 		if (enabled) invalidateHierarchy();
 	}
 
+	@Override
 	public void validate () {
 		if (!layoutEnabled) return;
 
@@ -93,10 +101,12 @@ public class Widget extends Actor implements Layout {
 		return needsLayout;
 	}
 
+	@Override
 	public void invalidate () {
 		needsLayout = true;
 	}
 
+	@Override
 	public void invalidateHierarchy () {
 		if (!layoutEnabled) return;
 		invalidate();
@@ -104,24 +114,29 @@ public class Widget extends Actor implements Layout {
 		if (parent instanceof Layout) ((Layout)parent).invalidateHierarchy();
 	}
 
+	@Override
 	protected void sizeChanged () {
 		invalidate();
 	}
 
+	@Override
 	public void pack () {
 		setSize(getPrefWidth(), getPrefHeight());
 		validate();
 	}
 
+	@Override
 	public void setFillParent (boolean fillParent) {
 		this.fillParent = fillParent;
 	}
 
 	/** If this method is overridden, the super method or {@link #validate()} should be called to ensure the widget is laid out. */
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 	}
 
+	@Override
 	public void layout () {
 	}
 }

@@ -60,6 +60,7 @@ public class ImageButton extends Button {
 		this(new ImageButtonStyle(null, null, null, imageUp, imageDown, imageChecked));
 	}
 
+	@Override
 	public void setStyle (ButtonStyle style) {
 		if (!(style instanceof ImageButtonStyle)) throw new IllegalArgumentException("style must be an ImageButtonStyle.");
 		super.setStyle(style);
@@ -67,6 +68,7 @@ public class ImageButton extends Button {
 		if (image != null) updateImage();
 	}
 
+	@Override
 	public ImageButtonStyle getStyle () {
 		return style;
 	}
@@ -87,6 +89,7 @@ public class ImageButton extends Button {
 		image.setDrawable(drawable);
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		updateImage();
 		super.draw(batch, parentAlpha);

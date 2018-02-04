@@ -20,7 +20,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.SnapshotArray;
 
@@ -48,30 +47,37 @@ public class WidgetGroup extends Group implements Layout {
 			addActor(actor);
 	}
 
+	@Override
 	public float getMinWidth () {
 		return getPrefWidth();
 	}
 
+	@Override
 	public float getMinHeight () {
 		return getPrefHeight();
 	}
 
+	@Override
 	public float getPrefWidth () {
 		return 0;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		return 0;
 	}
 
+	@Override
 	public float getMaxWidth () {
 		return 0;
 	}
 
+	@Override
 	public float getMaxHeight () {
 		return 0;
 	}
 
+	@Override
 	public void setLayoutEnabled (boolean enabled) {
 		if (layoutEnabled == enabled) return;
 		layoutEnabled = enabled;
@@ -89,6 +95,7 @@ public class WidgetGroup extends Group implements Layout {
 		}
 	}
 
+	@Override
 	public void validate () {
 		if (!layoutEnabled) return;
 
@@ -120,24 +127,29 @@ public class WidgetGroup extends Group implements Layout {
 		return needsLayout;
 	}
 
+	@Override
 	public void invalidate () {
 		needsLayout = true;
 	}
 
+	@Override
 	public void invalidateHierarchy () {
 		invalidate();
 		Group parent = getParent();
 		if (parent instanceof Layout) ((Layout)parent).invalidateHierarchy();
 	}
 
+	@Override
 	protected void childrenChanged () {
 		invalidateHierarchy();
 	}
 
+	@Override
 	protected void sizeChanged () {
 		invalidate();
 	}
 
+	@Override
 	public void pack () {
 		setSize(getPrefWidth(), getPrefHeight());
 		validate();
@@ -149,15 +161,18 @@ public class WidgetGroup extends Group implements Layout {
 		}
 	}
 
+	@Override
 	public void setFillParent (boolean fillParent) {
 		this.fillParent = fillParent;
 	}
 
+	@Override
 	public void layout () {
 	}
 
 	/** If this method is overridden, the super method or {@link #validate()} should be called to ensure the widget group is laid
 	 * out. */
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 		super.draw(batch, parentAlpha);

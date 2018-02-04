@@ -1122,9 +1122,11 @@ public class Json {
 	}
 
 	static abstract public class ReadOnlySerializer<T> implements Serializer<T> {
+		@Override
 		public void write (Json json, T object, Class knownType) {
 		}
 
+		@Override
 		abstract public T read (Json json, JsonValue jsonData, Class type);
 	}
 

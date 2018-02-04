@@ -519,6 +519,7 @@ public class Mesh implements Disposable {
 	}
 
 	/** Frees all resources associated with this Mesh */
+	@Override
 	public void dispose () {
 		if (meshes.get(Gdx.app) != null) meshes.get(Gdx.app).removeValue(this, true);
 		vertices.dispose();

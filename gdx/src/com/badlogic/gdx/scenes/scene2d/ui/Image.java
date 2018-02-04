@@ -85,6 +85,7 @@ public class Image extends Widget {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Override
 	public void layout () {
 		if (drawable == null) return;
 
@@ -112,6 +113,7 @@ public class Image extends Widget {
 			imageY = (int)(height / 2 - imageHeight / 2);
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 
@@ -164,19 +166,23 @@ public class Image extends Widget {
 		invalidate();
 	}
 
+	@Override
 	public float getMinWidth () {
 		return 0;
 	}
 
+	@Override
 	public float getMinHeight () {
 		return 0;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (drawable != null) return drawable.getMinWidth();
 		return 0;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (drawable != null) return drawable.getMinHeight();
 		return 0;

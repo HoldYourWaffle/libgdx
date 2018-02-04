@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class JniHeaderCMethodParser implements CMethodParser {
 	private static final String C_METHOD_MARKER = "JNIEXPORT";
 
+	@Override
 	public CMethodParserResult parse (String headerFile) {
 		ArrayList<CMethod> methods = new ArrayList<CMethod>();
 

@@ -44,6 +44,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		this.manager = manager;
 
 		container = new Container(contents) {
+			@Override
 			public void act (float delta) {
 				super.act(delta);
 				if (targetActor != null && targetActor.getStage() == null) remove();
@@ -78,6 +79,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		this.always = always;
 	}
 
+	@Override
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 		if (instant) {
 			container.toFront();
@@ -87,6 +89,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		return false;
 	}
 
+	@Override
 	public boolean mouseMoved (InputEvent event, float x, float y) {
 		if (container.hasParent()) return false;
 		setContainerPosition(event.getListenerActor(), x, y);
@@ -112,6 +115,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		container.setOrigin(point.x, point.y);
 	}
 
+	@Override
 	public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
 		if (pointer != -1) return;
 		if (Gdx.input.isTouched()) return;
@@ -121,6 +125,7 @@ public class Tooltip<T extends Actor> extends InputListener {
 		manager.enter(this);
 	}
 
+	@Override
 	public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
 		if (toActor != null && toActor.isDescendantOf(event.getListenerActor())) return;
 		hide();

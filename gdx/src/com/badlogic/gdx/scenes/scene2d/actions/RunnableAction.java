@@ -26,6 +26,7 @@ public class RunnableAction extends Action {
 	private Runnable runnable;
 	private boolean ran;
 
+	@Override
 	public boolean act (float delta) {
 		if (!ran) {
 			ran = true;
@@ -45,10 +46,12 @@ public class RunnableAction extends Action {
 		}
 	}
 
+	@Override
 	public void restart () {
 		ran = false;
 	}
 
+	@Override
 	public void reset () {
 		super.reset();
 		runnable = null;

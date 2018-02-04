@@ -1,12 +1,9 @@
 
 package com.badlogic.gdx.math;
 
-import static com.badlogic.gdx.math.MathUtils.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import com.badlogic.gdx.math.MathUtils;
 
 public class MathUtilsTest {
 

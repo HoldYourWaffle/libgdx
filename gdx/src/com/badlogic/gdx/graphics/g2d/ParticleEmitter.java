@@ -22,7 +22,6 @@ import java.io.Writer;
 import java.util.Arrays;
 
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -1257,12 +1256,14 @@ public class ParticleEmitter {
 			this.value = value;
 		}
 
+		@Override
 		public void save (Writer output) throws IOException {
 			super.save(output);
 			if (!active) return;
 			output.write("value: " + value + "\n");
 		}
 
+		@Override
 		public void load (BufferedReader reader) throws IOException {
 			super.load(reader);
 			if (!active) return;
@@ -1319,6 +1320,7 @@ public class ParticleEmitter {
 			this.lowMax = value.lowMax;
 		}
 
+		@Override
 		public void save (Writer output) throws IOException {
 			super.save(output);
 			if (!active) return;
@@ -1326,6 +1328,7 @@ public class ParticleEmitter {
 			output.write("lowMax: " + lowMax + "\n");
 		}
 
+		@Override
 		public void load (BufferedReader reader) throws IOException {
 			super.load(reader);
 			if (!active) return;
@@ -1376,12 +1379,14 @@ public class ParticleEmitter {
 			this.highMax = highMax;
 		}
 		
+		@Override
 		public void scale (float scale){
 			super.scale(scale);
 			highMin *= scale;
 			highMax *= scale;
 		}
 		
+		@Override
 		public void set (RangedNumericValue value){
 			if (value instanceof ScaledNumericValue)
 				set((ScaledNumericValue)value);
@@ -1447,6 +1452,7 @@ public class ParticleEmitter {
 			return startValue + (scaling[endIndex] - startValue) * ((percent - startTime) / (timeline[endIndex] - startTime));
 		}
 
+		@Override
 		public void save (Writer output) throws IOException {
 			super.save(output);
 			if (!active) return;
@@ -1461,6 +1467,7 @@ public class ParticleEmitter {
 				output.write("timeline" + i + ": " + timeline[i] + "\n");
 		}
 
+		@Override
 		public void load (BufferedReader reader) throws IOException {
 			super.load(reader);
 			if (!active) return;
@@ -1546,6 +1553,7 @@ public class ParticleEmitter {
 			return temp;
 		}
 
+		@Override
 		public void save (Writer output) throws IOException {
 			super.save(output);
 			if (!active) return;
@@ -1557,6 +1565,7 @@ public class ParticleEmitter {
 				output.write("timeline" + i + ": " + timeline[i] + "\n");
 		}
 
+		@Override
 		public void load (BufferedReader reader) throws IOException {
 			super.load(reader);
 			if (!active) return;
@@ -1606,6 +1615,7 @@ public class ParticleEmitter {
 			this.side = side;
 		}
 
+		@Override
 		public void save (Writer output) throws IOException {
 			super.save(output);
 			if (!active) return;
@@ -1616,6 +1626,7 @@ public class ParticleEmitter {
 			}
 		}
 
+		@Override
 		public void load (BufferedReader reader) throws IOException {
 			super.load(reader);
 			if (!active) return;

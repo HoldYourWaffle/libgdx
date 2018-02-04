@@ -24,6 +24,7 @@ public class RepeatAction extends DelegateAction {
 	private int repeatCount, executedCount;
 	private boolean finished;
 
+	@Override
 	protected boolean delegate (float delta) {
 		if (executedCount == repeatCount) return true;
 		if (action.act(delta)) {
@@ -40,6 +41,7 @@ public class RepeatAction extends DelegateAction {
 		finished = true;
 	}
 
+	@Override
 	public void restart () {
 		super.restart();
 		executedCount = 0;

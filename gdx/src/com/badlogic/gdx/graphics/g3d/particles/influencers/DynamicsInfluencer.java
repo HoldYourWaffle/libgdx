@@ -91,6 +91,7 @@ public class DynamicsInfluencer extends Influencer {
 		}
 	}
 
+	@Override
 	public void activateParticles (int startIndex, int count) {
 		if (hasAcceleration) {
 			// Previous position is the current position
@@ -128,6 +129,7 @@ public class DynamicsInfluencer extends Influencer {
 		}
 	}
 
+	@Override
 	public void update () {
 		// Clean previouse frame velocities
 		if (hasAcceleration)

@@ -46,6 +46,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		items.addAll(set.items);
 	}
 
+	@Override
 	public boolean add (T key) {
 		if (!super.add(key)) return false;
 		items.add(key);
@@ -62,16 +63,19 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		return true;
 	}
 
+	@Override
 	public boolean remove (T key) {
 		items.removeValue(key, false);
 		return super.remove(key);
 	}
 
+	@Override
 	public void clear (int maximumCapacity) {
 		items.clear();
 		super.clear(maximumCapacity);
 	}
 
+	@Override
 	public void clear () {
 		items.clear();
 		super.clear();
@@ -81,6 +85,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		return items;
 	}
 
+	@Override
 	public OrderedSetIterator<T> iterator () {
 		if (iterator1 == null) {
 			iterator1 = new OrderedSetIterator(this);
@@ -98,6 +103,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		return iterator2;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "{}";
 		T[] items = this.items.items;
@@ -112,6 +118,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 		return buffer.toString();
 	}
 
+	@Override
 	public String toString (String separator) {
 		return items.toString(separator);
 	}
@@ -124,11 +131,13 @@ public class OrderedSet<T> extends ObjectSet<T> {
 			items = set.items;
 		}
 
+		@Override
 		public void reset () {
 			nextIndex = 0;
 			hasNext = set.size > 0;
 		}
 
+		@Override
 		public T next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -138,6 +147,7 @@ public class OrderedSet<T> extends ObjectSet<T> {
 			return key;
 		}
 
+		@Override
 		public void remove () {
 			if (nextIndex < 0) throw new IllegalStateException("next must be called before remove.");
 			nextIndex--;

@@ -53,6 +53,7 @@ public class ClickListener extends InputListener {
 		this.button = button;
 	}
 
+	@Override
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 		if (pressed) return false;
 		if (pointer == 0 && this.button != -1 && button != this.button) return false;
@@ -65,6 +66,7 @@ public class ClickListener extends InputListener {
 		return true;
 	}
 
+	@Override
 	public void touchDragged (InputEvent event, float x, float y, int pointer) {
 		if (pointer != pressedPointer || cancelled) return;
 		pressed = isOver(event.getListenerActor(), x, y);
@@ -75,6 +77,7 @@ public class ClickListener extends InputListener {
 		}
 	}
 
+	@Override
 	public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 		if (pointer == pressedPointer) {
 			if (!cancelled) {
@@ -96,10 +99,12 @@ public class ClickListener extends InputListener {
 		}
 	}
 
+	@Override
 	public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
 		if (pointer == -1 && !cancelled) over = true;
 	}
 
+	@Override
 	public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
 		if (pointer == -1 && !cancelled) over = false;
 	}

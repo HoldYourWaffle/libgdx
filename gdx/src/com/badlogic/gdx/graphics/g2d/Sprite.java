@@ -16,7 +16,26 @@
 
 package com.badlogic.gdx.graphics.g2d;
 
-import static com.badlogic.gdx.graphics.g2d.SpriteBatch.*;
+import static com.badlogic.gdx.graphics.g2d.Batch.C1;
+import static com.badlogic.gdx.graphics.g2d.Batch.C2;
+import static com.badlogic.gdx.graphics.g2d.Batch.C3;
+import static com.badlogic.gdx.graphics.g2d.Batch.C4;
+import static com.badlogic.gdx.graphics.g2d.Batch.U1;
+import static com.badlogic.gdx.graphics.g2d.Batch.U2;
+import static com.badlogic.gdx.graphics.g2d.Batch.U3;
+import static com.badlogic.gdx.graphics.g2d.Batch.U4;
+import static com.badlogic.gdx.graphics.g2d.Batch.V1;
+import static com.badlogic.gdx.graphics.g2d.Batch.V2;
+import static com.badlogic.gdx.graphics.g2d.Batch.V3;
+import static com.badlogic.gdx.graphics.g2d.Batch.V4;
+import static com.badlogic.gdx.graphics.g2d.Batch.X1;
+import static com.badlogic.gdx.graphics.g2d.Batch.X2;
+import static com.badlogic.gdx.graphics.g2d.Batch.X3;
+import static com.badlogic.gdx.graphics.g2d.Batch.X4;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y1;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y2;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y3;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y4;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -579,6 +598,7 @@ public class Sprite extends TextureRegion {
 		return color;
 	}
 
+	@Override
 	public void setRegion (float u, float v, float u2, float v2) {
 		super.setRegion(u, v, u2, v2);
 
@@ -596,24 +616,28 @@ public class Sprite extends TextureRegion {
 		vertices[V4] = v2;
 	}
 
+	@Override
 	public void setU (float u) {
 		super.setU(u);
 		vertices[U1] = u;
 		vertices[U2] = u;
 	}
 
+	@Override
 	public void setV (float v) {
 		super.setV(v);
 		vertices[V2] = v;
 		vertices[V3] = v;
 	}
 
+	@Override
 	public void setU2 (float u2) {
 		super.setU2(u2);
 		vertices[U3] = u2;
 		vertices[U4] = u2;
 	}
 
+	@Override
 	public void setV2 (float v2) {
 		super.setV2(v2);
 		vertices[V1] = v2;
@@ -638,6 +662,7 @@ public class Sprite extends TextureRegion {
 	/** boolean parameters x,y are not setting a state, but performing a flip
 	 * @param x perform horizontal flip
 	 * @param y perform vertical flip */
+	@Override
 	public void flip (boolean x, boolean y) {
 		super.flip(x, y);
 		float[] vertices = Sprite.this.vertices;
@@ -659,6 +684,7 @@ public class Sprite extends TextureRegion {
 		}
 	}
 
+	@Override
 	public void scroll (float xAmount, float yAmount) {
 		float[] vertices = Sprite.this.vertices;
 		if (xAmount != 0) {

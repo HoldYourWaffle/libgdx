@@ -16,13 +16,11 @@
 
 package com.badlogic.gdx.graphics.glutils;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
-
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 
 public class GLVersion {
 

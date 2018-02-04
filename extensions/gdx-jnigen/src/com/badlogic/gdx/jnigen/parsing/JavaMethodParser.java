@@ -46,10 +46,12 @@ public interface JavaMethodParser {
 			this.nativeCode = nativeCode;
 		}
 
+		@Override
 		public int getStartIndex () {
 			return startIndex;
 		}
 
+		@Override
 		public int getEndIndex () {
 			return endIndex;
 		}

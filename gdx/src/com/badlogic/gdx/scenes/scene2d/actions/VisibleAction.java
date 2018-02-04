@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class VisibleAction extends Action {
 	private boolean visible;
 
+	@Override
 	public boolean act (float delta) {
 		target.setVisible(visible);
 		return true;

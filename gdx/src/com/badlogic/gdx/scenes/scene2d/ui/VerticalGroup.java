@@ -48,6 +48,7 @@ public class VerticalGroup extends WidgetGroup {
 		setTouchable(Touchable.childrenOnly);
 	}
 
+	@Override
 	public void invalidate () {
 		super.invalidate();
 		sizeInvalid = true;
@@ -126,6 +127,7 @@ public class VerticalGroup extends WidgetGroup {
 		}
 	}
 
+	@Override
 	public void layout () {
 		if (sizeInvalid) computeSize();
 
@@ -286,11 +288,13 @@ public class VerticalGroup extends WidgetGroup {
 		}
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (sizeInvalid) computeSize();
 		return prefWidth;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (wrap) return 0;
 		if (sizeInvalid) computeSize();
@@ -521,6 +525,7 @@ public class VerticalGroup extends WidgetGroup {
 		return this;
 	}
 
+	@Override
 	protected void drawDebugBounds (ShapeRenderer shapes) {
 		super.drawDebugBounds(shapes);
 		if (!getDebug()) return;

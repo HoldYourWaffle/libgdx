@@ -50,6 +50,7 @@ public class DragAndDrop {
 
 	public void addSource (final Source source) {
 		DragListener listener = new DragListener() {
+			@Override
 			public void dragStart (InputEvent event, float x, float y, int pointer) {
 				if (activePointer != -1) {
 					event.stop();
@@ -65,6 +66,7 @@ public class DragAndDrop {
 				if (cancelTouchFocus && payload != null) source.getActor().getStage().cancelTouchFocusExcept(this, source.getActor());
 			}
 
+			@Override
 			public void drag (InputEvent event, float x, float y, int pointer) {
 				if (payload == null) return;
 				if (pointer != activePointer) return;
@@ -123,6 +125,7 @@ public class DragAndDrop {
 				actor.setPosition(actorX, actorY);
 			}
 
+			@Override
 			public void dragStop (InputEvent event, float x, float y, int pointer) {
 				if (pointer != activePointer) return;
 				activePointer = -1;

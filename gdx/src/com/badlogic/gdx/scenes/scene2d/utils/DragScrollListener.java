@@ -35,11 +35,13 @@ public class DragScrollListener extends DragListener {
 		this.scroll = scroll;
 
 		scrollUp = new Task() {
+			@Override
 			public void run () {
 				scroll.setScrollY(scroll.getScrollY() - getScrollPixels());
 			}
 		};
 		scrollDown = new Task() {
+			@Override
 			public void run () {
 				scroll.setScrollY(scroll.getScrollY() + getScrollPixels());
 			}
@@ -57,6 +59,7 @@ public class DragScrollListener extends DragListener {
 		return interpolation.apply(minSpeed, maxSpeed, Math.min(1, (System.currentTimeMillis() - startTime) / (float)rampTime));
 	}
 
+	@Override
 	public void drag (InputEvent event, float x, float y, int pointer) {
 		if (x >= 0 && x < scroll.getWidth()) {
 			if (y >= scroll.getHeight()) {
@@ -79,6 +82,7 @@ public class DragScrollListener extends DragListener {
 		scrollDown.cancel();
 	}
 
+	@Override
 	public void dragStop (InputEvent event, float x, float y, int pointer) {
 		scrollUp.cancel();
 		scrollDown.cancel();

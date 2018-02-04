@@ -236,6 +236,7 @@ public class ParticleEffect implements Disposable {
 	}
 
 	/** Disposes the texture for each sprite for each ParticleEmitter. */
+	@Override
 	public void dispose () {
 		if (!ownsTexture) return;
 		for (int i = 0, n = emitters.size; i < n; i++) {

@@ -60,6 +60,7 @@ public class ParallelAction extends Action {
 		addAction(action5);
 	}
 
+	@Override
 	public boolean act (float delta) {
 		if (complete) return true;
 		complete = true;
@@ -78,6 +79,7 @@ public class ParallelAction extends Action {
 		}
 	}
 
+	@Override
 	public void restart () {
 		complete = false;
 		Array<Action> actions = this.actions;
@@ -85,6 +87,7 @@ public class ParallelAction extends Action {
 			actions.get(i).restart();
 	}
 
+	@Override
 	public void reset () {
 		super.reset();
 		actions.clear();
@@ -95,6 +98,7 @@ public class ParallelAction extends Action {
 		if (actor != null) action.setActor(actor);
 	}
 
+	@Override
 	public void setActor (Actor actor) {
 		Array<Action> actions = this.actions;
 		for (int i = 0, n = actions.size; i < n; i++)
@@ -106,6 +110,7 @@ public class ParallelAction extends Action {
 		return actions;
 	}
 
+	@Override
 	public String toString () {
 		StringBuilder buffer = new StringBuilder(64);
 		buffer.append(super.toString());

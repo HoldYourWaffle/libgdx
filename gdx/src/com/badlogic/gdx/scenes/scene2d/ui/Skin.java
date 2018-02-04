@@ -409,6 +409,7 @@ public class Skin implements Disposable {
 	}
 
 	/** Disposes the {@link TextureAtlas} and all {@link Disposable} resources in the skin. */
+	@Override
 	public void dispose () {
 		if (atlas != null) atlas.dispose();
 		for (ObjectMap<String, Object> entry : resources.values()) {
@@ -421,6 +422,7 @@ public class Skin implements Disposable {
 		final Skin skin = this;
 
 		final Json json = new Json() {
+			@Override
 			public <T> T readValue (Class<T> type, Class elementType, JsonValue jsonData) {
 				// If the JSON is a string but the type is not, look up the actual value by name.
 				if (jsonData.isString() && !ClassReflection.isAssignableFrom(CharSequence.class, type))
@@ -432,6 +434,7 @@ public class Skin implements Disposable {
 		json.setUsePrototypes(false);
 
 		json.setSerializer(Skin.class, new ReadOnlySerializer<Skin>() {
+			@Override
 			public Skin read (Json json, JsonValue typeToValueMap, Class ignored) {
 				for (JsonValue valueMap = typeToValueMap.child; valueMap != null; valueMap = valueMap.next) {
 					try {
@@ -461,6 +464,7 @@ public class Skin implements Disposable {
 		});
 
 		json.setSerializer(BitmapFont.class, new ReadOnlySerializer<BitmapFont>() {
+			@Override
 			public BitmapFont read (Json json, JsonValue jsonData, Class type) {
 				String path = json.readValue("file", String.class, jsonData);
 				int scaledSize = json.readValue("scaledSize", int.class, -1, jsonData);
@@ -501,6 +505,7 @@ public class Skin implements Disposable {
 		});
 
 		json.setSerializer(Color.class, new ReadOnlySerializer<Color>() {
+			@Override
 			public Color read (Json json, JsonValue jsonData, Class type) {
 				if (jsonData.isString()) return get(jsonData.asString(), Color.class);
 				String hex = json.readValue("hex", String.class, (String)null, jsonData);
@@ -514,6 +519,7 @@ public class Skin implements Disposable {
 		});
 
 		json.setSerializer(TintedDrawable.class, new ReadOnlySerializer() {
+			@Override
 			public Object read (Json json, JsonValue jsonData, Class type) {
 				String name = json.readValue("name", String.class, jsonData);
 				Color color = json.readValue("color", Color.class, jsonData);

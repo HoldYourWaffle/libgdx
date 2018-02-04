@@ -85,11 +85,13 @@ public class IndexBufferObject implements IndexData {
 	}
 
 	/** @return the number of indices currently stored in this buffer */
+	@Override
 	public int getNumIndices () {
 		return empty ? 0 : buffer.limit();
 	}
 
 	/** @return the maximum number of indices this IndexBufferObject can store. */
+	@Override
 	public int getNumMaxIndices () {
 		return empty ? 0 : buffer.capacity();
 	}
@@ -106,6 +108,7 @@ public class IndexBufferObject implements IndexData {
 	 * @param indices the vertex data
 	 * @param offset the offset to start copying the data from
 	 * @param count the number of shorts to copy */
+	@Override
 	public void setIndices (short[] indices, int offset, int count) {
 		isDirty = true;
 		buffer.clear();
@@ -120,6 +123,7 @@ public class IndexBufferObject implements IndexData {
 		}
 	}
 
+	@Override
 	public void setIndices (ShortBuffer indices) {
 		isDirty = true;
 		int pos = indices.position();
@@ -157,12 +161,14 @@ public class IndexBufferObject implements IndexData {
 	 * </p>
 	 * 
 	 * @return the underlying short buffer. */
+	@Override
 	public ShortBuffer getBuffer () {
 		isDirty = true;
 		return buffer;
 	}
 
 	/** Binds this IndexBufferObject for rendering with glDrawElements. */
+	@Override
 	public void bind () {
 		if (bufferHandle == 0) throw new GdxRuntimeException("No buffer allocated!");
 
@@ -176,18 +182,21 @@ public class IndexBufferObject implements IndexData {
 	}
 
 	/** Unbinds this IndexBufferObject. */
+	@Override
 	public void unbind () {
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);
 		isBound = false;
 	}
 
 	/** Invalidates the IndexBufferObject so a new OpenGL buffer handle is created. Use this in case of a context loss. */
+	@Override
 	public void invalidate () {
 		bufferHandle = Gdx.gl20.glGenBuffer();
 		isDirty = true;
 	}
 
 	/** Disposes this IndexBufferObject and all its associated OpenGL resources. */
+	@Override
 	public void dispose () {
 		Gdx.gl20.glBindBuffer(GL20.GL_ELEMENT_ARRAY_BUFFER, 0);
 		Gdx.gl20.glDeleteBuffer(bufferHandle);

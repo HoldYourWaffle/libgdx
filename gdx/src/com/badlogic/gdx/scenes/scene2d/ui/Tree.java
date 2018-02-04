@@ -56,6 +56,7 @@ public class Tree extends WidgetGroup {
 
 	public Tree (TreeStyle style) {
 		selection = new Selection<Node>() {
+			@Override
 			protected void changed () {
 				switch (size()) {
 				case 0:
@@ -75,6 +76,7 @@ public class Tree extends WidgetGroup {
 
 	private void initialize () {
 		addListener(clickListener = new ClickListener() {
+			@Override
 			public void clicked (InputEvent event, float x, float y) {
 				Node node = getNodeAt(y);
 				if (node == null) return;
@@ -110,11 +112,13 @@ public class Tree extends WidgetGroup {
 				if (!selection.isEmpty()) rangeStart = node;
 			}
 
+			@Override
 			public boolean mouseMoved (InputEvent event, float x, float y) {
 				setOverNode(getNodeAt(y));
 				return false;
 			}
 
+			@Override
 			public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
 				super.exit(event, x, y, pointer, toActor);
 				if (toActor == null || !toActor.isDescendantOf(Tree.this)) setOverNode(null);
@@ -150,6 +154,7 @@ public class Tree extends WidgetGroup {
 	}
 
 	/** Removes all tree nodes. */
+	@Override
 	public void clearChildren () {
 		super.clearChildren();
 		setOverNode(null);
@@ -161,6 +166,7 @@ public class Tree extends WidgetGroup {
 		return rootNodes;
 	}
 
+	@Override
 	public void invalidate () {
 		super.invalidate();
 		sizeInvalid = true;
@@ -204,6 +210,7 @@ public class Tree extends WidgetGroup {
 		}
 	}
 
+	@Override
 	public void layout () {
 		if (sizeInvalid) computeSize();
 		layout(rootNodes, leftColumnWidth + indentSpacing + iconSpacingRight, getHeight() - ySpacing / 2);
@@ -223,6 +230,7 @@ public class Tree extends WidgetGroup {
 		return y;
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		drawBackground(batch, parentAlpha);
 		Color color = getColor();
@@ -359,11 +367,13 @@ public class Tree extends WidgetGroup {
 		this.iconSpacingRight = right;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (sizeInvalid) computeSize();
 		return prefWidth;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (sizeInvalid) computeSize();
 		return prefHeight;

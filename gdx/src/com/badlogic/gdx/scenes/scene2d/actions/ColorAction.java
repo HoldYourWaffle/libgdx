@@ -27,6 +27,7 @@ public class ColorAction extends TemporalAction {
 	private Color color;
 	private final Color end = new Color();
 
+	@Override
 	protected void begin () {
 		if (color == null) color = target.getColor();
 		startR = color.r;
@@ -35,6 +36,7 @@ public class ColorAction extends TemporalAction {
 		startA = color.a;
 	}
 
+	@Override
 	protected void update (float percent) {
 		float r = startR + (end.r - startR) * percent;
 		float g = startG + (end.g - startG) * percent;
@@ -43,6 +45,7 @@ public class ColorAction extends TemporalAction {
 		color.set(r, g, b, a);
 	}
 
+	@Override
 	public void reset () {
 		super.reset();
 		color = null;

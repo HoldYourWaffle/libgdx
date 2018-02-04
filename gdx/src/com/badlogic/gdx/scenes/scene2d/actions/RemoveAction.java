@@ -17,13 +17,13 @@
 package com.badlogic.gdx.scenes.scene2d.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /** Removes an action from an actor.
  * @author Nathan Sweet */
 public class RemoveAction extends Action {
 	private Action action;
 
+	@Override
 	public boolean act (float delta) {
 		target.removeAction(action);
 		return true;
@@ -37,6 +37,7 @@ public class RemoveAction extends Action {
 		this.action = action;
 	}
 
+	@Override
 	public void reset () {
 		super.reset();
 		action = null;

@@ -239,6 +239,7 @@ public class Encoder {
 				UpdateTable(posState);
 		}
 
+		@Override
 		public void Encode (com.badlogic.gdx.utils.compression.rangecoder.Encoder rangeEncoder, int symbol, int posState)
 			throws IOException {
 			super.Encode(rangeEncoder, symbol, posState);

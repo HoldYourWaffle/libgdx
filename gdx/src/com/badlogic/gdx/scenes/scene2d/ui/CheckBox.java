@@ -48,6 +48,7 @@ public class CheckBox extends TextButton {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Override
 	public void setStyle (ButtonStyle style) {
 		if (!(style instanceof CheckBoxStyle)) throw new IllegalArgumentException("style must be a CheckBoxStyle.");
 		super.setStyle(style);
@@ -56,10 +57,12 @@ public class CheckBox extends TextButton {
 
 	/** Returns the checkbox's style. Modifying the returned style may not have an effect until {@link #setStyle(ButtonStyle)} is
 	 * called. */
+	@Override
 	public CheckBoxStyle getStyle () {
 		return style;
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		Drawable checkbox = null;
 		if (isDisabled()) {

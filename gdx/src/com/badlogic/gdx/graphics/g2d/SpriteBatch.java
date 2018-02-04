@@ -1108,6 +1108,7 @@ public class SpriteBatch implements Batch {
 		return !blendingDisabled;
 	}
 
+	@Override
 	public boolean isDrawing () {
 		return drawing;
 	}

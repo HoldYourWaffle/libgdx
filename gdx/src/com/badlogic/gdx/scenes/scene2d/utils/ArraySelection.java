@@ -3,8 +3,6 @@ package com.badlogic.gdx.scenes.scene2d.utils;
 
 import java.util.Iterator;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Array;
 
 /** A selection that supports range selection by knowing about the array of items being selected.
@@ -18,6 +16,7 @@ public class ArraySelection<T> extends Selection<T> {
 		this.array = array;
 	}
 
+	@Override
 	public void choose (T item) {
 		if (item == null) throw new IllegalArgumentException("item cannot be null.");
 		if (isDisabled) return;

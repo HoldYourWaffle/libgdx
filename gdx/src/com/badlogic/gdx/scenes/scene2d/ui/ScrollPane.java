@@ -108,6 +108,7 @@ public class ScrollPane extends WidgetGroup {
 		addCaptureListener(new InputListener() {
 			private float handlePosition;
 
+			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				if (draggingPointer != -1) return false;
 				if (pointer == 0 && button != 0) return false;
@@ -146,11 +147,13 @@ public class ScrollPane extends WidgetGroup {
 				return false;
 			}
 
+			@Override
 			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 				if (pointer != draggingPointer) return;
 				cancel();
 			}
 
+			@Override
 			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (pointer != draggingPointer) return;
 				if (touchScrollH) {
@@ -174,6 +177,7 @@ public class ScrollPane extends WidgetGroup {
 				}
 			}
 
+			@Override
 			public boolean mouseMoved (InputEvent event, float x, float y) {
 				if (!flickScroll) resetFade();
 				return false;
@@ -181,6 +185,7 @@ public class ScrollPane extends WidgetGroup {
 		});
 
 		flickScrollListener = new ActorGestureListener() {
+			@Override
 			public void pan (InputEvent event, float x, float y, float deltaX, float deltaY) {
 				resetFade();
 				amountX -= deltaX;
@@ -189,6 +194,7 @@ public class ScrollPane extends WidgetGroup {
 				if (cancelTouchFocus && ((scrollX && deltaX != 0) || (scrollY && deltaY != 0))) cancelTouchFocus();
 			}
 
+			@Override
 			public void fling (InputEvent event, float x, float y, int button) {
 				if (Math.abs(x) > 150 && scrollX) {
 					flingTimer = flingTime;
@@ -202,6 +208,7 @@ public class ScrollPane extends WidgetGroup {
 				}
 			}
 
+			@Override
 			public boolean handle (Event event) {
 				if (super.handle(event)) {
 					if (((InputEvent)event).getType() == InputEvent.Type.touchDown) flingTimer = 0;
@@ -213,6 +220,7 @@ public class ScrollPane extends WidgetGroup {
 		addListener(flickScrollListener);
 
 		addListener(new InputListener() {
+			@Override
 			public boolean scrolled (InputEvent event, float x, float y, int amount) {
 				resetFade();
 				if (scrollY)
@@ -267,6 +275,7 @@ public class ScrollPane extends WidgetGroup {
 		return style;
 	}
 
+	@Override
 	public void act (float delta) {
 		super.act(delta);
 
@@ -365,6 +374,7 @@ public class ScrollPane extends WidgetGroup {
 		}
 	}
 
+	@Override
 	public void layout () {
 		final Drawable bg = style.background;
 		final Drawable hScrollKnob = style.hScrollKnob;
@@ -627,6 +637,7 @@ public class ScrollPane extends WidgetGroup {
 		this.velocityY = velocityY;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (widget instanceof Layout) {
 			float width = ((Layout)widget).getPrefWidth();
@@ -642,6 +653,7 @@ public class ScrollPane extends WidgetGroup {
 		return 150;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (widget instanceof Layout) {
 			float height = ((Layout)widget).getPrefHeight();
@@ -657,10 +669,12 @@ public class ScrollPane extends WidgetGroup {
 		return 150;
 	}
 
+	@Override
 	public float getMinWidth () {
 		return 0;
 	}
 
+	@Override
 	public float getMinHeight () {
 		return 0;
 	}
@@ -680,39 +694,50 @@ public class ScrollPane extends WidgetGroup {
 	}
 
 	/** @deprecated Use {@link #setActor(Actor)}. */
+	@Deprecated
 	public void setWidget (Actor actor) {
 		setActor(actor);
 	}
 
 	/** @deprecated Use {@link #getActor()}. */
+	@Deprecated
 	public Actor getWidget () {
 		return widget;
 	}
 
 	/** @deprecated ScrollPane may have only a single child.
 	 * @see #setWidget(Actor) */
+	@Deprecated
+	@Override
 	public void addActor (Actor actor) {
 		throw new UnsupportedOperationException("Use ScrollPane#setWidget.");
 	}
 
 	/** @deprecated ScrollPane may have only a single child.
 	 * @see #setWidget(Actor) */
+	@Deprecated
+	@Override
 	public void addActorAt (int index, Actor actor) {
 		throw new UnsupportedOperationException("Use ScrollPane#setWidget.");
 	}
 
 	/** @deprecated ScrollPane may have only a single child.
 	 * @see #setWidget(Actor) */
+	@Deprecated
+	@Override
 	public void addActorBefore (Actor actorBefore, Actor actor) {
 		throw new UnsupportedOperationException("Use ScrollPane#setWidget.");
 	}
 
 	/** @deprecated ScrollPane may have only a single child.
 	 * @see #setWidget(Actor) */
+	@Deprecated
+	@Override
 	public void addActorAfter (Actor actorAfter, Actor actor) {
 		throw new UnsupportedOperationException("Use ScrollPane#setWidget.");
 	}
 
+	@Override
 	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != widget) return false;
@@ -720,6 +745,7 @@ public class ScrollPane extends WidgetGroup {
 		return true;
 	}
 
+	@Override
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != widget) return false;
@@ -727,6 +753,7 @@ public class ScrollPane extends WidgetGroup {
 		return super.removeActor(actor, unfocus);
 	}
 
+	@Override
 	public Actor hit (float x, float y, boolean touchable) {
 		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) return null;
 		if (scrollX && hScrollBounds.contains(x, y)) return this;
@@ -1056,6 +1083,7 @@ public class ScrollPane extends WidgetGroup {
 		this.cancelTouchFocus = cancelTouchFocus;
 	}
 
+	@Override
 	public void drawDebug (ShapeRenderer shapes) {
 		shapes.flush();
 		applyTransform(shapes, computeTransform());

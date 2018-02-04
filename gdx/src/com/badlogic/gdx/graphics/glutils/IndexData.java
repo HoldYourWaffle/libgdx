@@ -75,5 +75,6 @@ public interface IndexData extends Disposable {
 	public void invalidate ();
 
 	/** Disposes this IndexDatat and all its associated OpenGL resources. */
+	@Override
 	public void dispose ();
 }

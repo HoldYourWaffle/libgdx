@@ -16,10 +16,10 @@
 
 package com.badlogic.gdx.utils;
 
-import com.badlogic.gdx.math.MathUtils;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import com.badlogic.gdx.math.MathUtils;
 
 /** An unordered set where the keys are objects. This implementation uses cuckoo hashing using 3 hashes, random walking, and a
  * small stash for problematic keys. Null keys are not allowed. No allocation is done except when growing the table size. <br>
@@ -422,6 +422,7 @@ public class ObjectSet<T> implements Iterable<T> {
 		return (h ^ h >>> hashShift) & mask;
 	}
 
+	@Override
 	public int hashCode () {
 		int h = 0;
 		for (int i = 0, n = capacity + stashSize; i < n; i++)
@@ -429,6 +430,7 @@ public class ObjectSet<T> implements Iterable<T> {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object obj) {
 		if (!(obj instanceof ObjectSet)) return false;
 		ObjectSet other = (ObjectSet)obj;
@@ -438,6 +440,7 @@ public class ObjectSet<T> implements Iterable<T> {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		return '{' + toString(", ") + '}';
 	}
@@ -464,6 +467,7 @@ public class ObjectSet<T> implements Iterable<T> {
 
 	/** Returns an iterator for the keys in the set. Remove is supported. Note that the same iterator instance is returned each
 	 * time this method is called. Use the {@link ObjectSetIterator} constructor for nested or multithreaded iteration. */
+	@Override
 	public ObjectSetIterator<T> iterator () {
 		if (iterator1 == null) {
 			iterator1 = new ObjectSetIterator(this);
@@ -516,6 +520,7 @@ public class ObjectSet<T> implements Iterable<T> {
 			}
 		}
 
+		@Override
 		public void remove () {
 			if (currentIndex < 0) throw new IllegalStateException("next must be called before remove.");
 			if (currentIndex >= set.capacity) {
@@ -529,11 +534,13 @@ public class ObjectSet<T> implements Iterable<T> {
 			set.size--;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public K next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -543,6 +550,7 @@ public class ObjectSet<T> implements Iterable<T> {
 			return key;
 		}
 
+		@Override
 		public ObjectSetIterator<K> iterator () {
 			return this;
 		}

@@ -1218,6 +1218,7 @@ public class ShapeRenderer implements Disposable {
 		return shapeType != null;
 	}
 
+	@Override
 	public void dispose () {
 		renderer.dispose();
 	}

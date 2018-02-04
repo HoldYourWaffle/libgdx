@@ -990,6 +990,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			throw new SerializationException("Unknown object type: " + object);
 	}
 
+	@Override
 	public String toString () {
 		if (isValue()) return name == null ? asString() : name + ": " + asString();
 		return (name == null ? "" : name + ": ") + prettyPrint(OutputType.minimal, 0);
@@ -1101,6 +1102,7 @@ public class JsonValue implements Iterable<JsonValue> {
 		object, array, stringValue, doubleValue, longValue, booleanValue, nullValue
 	}
 
+	@Override
 	public JsonIterator iterator () {
 		return new JsonIterator();
 	}
@@ -1109,10 +1111,12 @@ public class JsonValue implements Iterable<JsonValue> {
 		JsonValue entry = child;
 		JsonValue current;
 
+		@Override
 		public boolean hasNext () {
 			return entry != null;
 		}
 
+		@Override
 		public JsonValue next () {
 			current = entry;
 			if (current == null) throw new NoSuchElementException();
@@ -1120,6 +1124,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			return current;
 		}
 
+		@Override
 		public void remove () {
 			if (current.prev == null) {
 				child = current.next;
@@ -1131,6 +1136,7 @@ public class JsonValue implements Iterable<JsonValue> {
 			size--;
 		}
 
+		@Override
 		public Iterator<JsonValue> iterator () {
 			return this;
 		}

@@ -96,12 +96,14 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		if (!lifeOffsetValue.isRelative()) lifeOffsetDiff -= lifeOffset;
 	}
 
+	@Override
 	public void init () {
 		super.init();
 		emissionDelta = 0;
 		durationTimer = duration;
 	}
 
+	@Override
 	public void activateParticles (int startIndex, int count) {
 		int currentTotaLife = life + (int)(lifeDiff * lifeValue.getScale(percent)), currentLife = currentTotaLife;
 		int offsetTime = (int)(lifeOffset + lifeOffsetDiff * lifeOffsetValue.getScale(percent));
@@ -118,6 +120,7 @@ public class RegularEmitter extends Emitter implements Json.Serializable {
 		}
 	}
 
+	@Override
 	public void update () {
 		int deltaMillis = (int)(controller.deltaTime * 1000);
 

@@ -16,9 +16,9 @@
 
 package com.badlogic.gdx.utils;
 
-import com.badlogic.gdx.math.MathUtils;
-
 import java.util.Arrays;
+
+import com.badlogic.gdx.math.MathUtils;
 
 /** A resizable, ordered or unordered int array. Avoids the boxing that occurs with ArrayList<Integer>. If unordered, this class
  * avoids a memory copy when removing elements (the last element is moved to the removed element's position).
@@ -344,6 +344,7 @@ public class IntArray {
 		return array;
 	}
 
+	@Override
 	public int hashCode () {
 		if (!ordered) return super.hashCode();
 		int[] items = this.items;
@@ -353,6 +354,7 @@ public class IntArray {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object object) {
 		if (object == this) return true;
 		if (!ordered) return false;
@@ -368,6 +370,7 @@ public class IntArray {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "[]";
 		int[] items = this.items;

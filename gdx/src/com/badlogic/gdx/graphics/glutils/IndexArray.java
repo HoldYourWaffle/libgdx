@@ -45,11 +45,13 @@ public class IndexArray implements IndexData {
 	}
 
 	/** @return the number of indices currently stored in this buffer */
+	@Override
 	public int getNumIndices () {
 		return empty ? 0 : buffer.limit();
 	}
 
 	/** @return the maximum number of indices this IndexArray can store. */
+	@Override
 	public int getNumMaxIndices () {
 		return empty ? 0 : buffer.capacity();
 	}
@@ -66,6 +68,7 @@ public class IndexArray implements IndexData {
 	 * @param indices the vertex data
 	 * @param offset the offset to start copying the data from
 	 * @param count the number of shorts to copy */
+	@Override
 	public void setIndices (short[] indices, int offset, int count) {
 		buffer.clear();
 		buffer.put(indices, offset, count);
@@ -74,6 +77,7 @@ public class IndexArray implements IndexData {
 		byteBuffer.limit(count << 1);
 	}
 	
+	@Override
 	public void setIndices (ShortBuffer indices) {
 		int pos = indices.position();
 		buffer.clear();
@@ -99,23 +103,28 @@ public class IndexArray implements IndexData {
 	 * </p>
 	 * 
 	 * @return the underlying short buffer. */
+	@Override
 	public ShortBuffer getBuffer () {
 		return buffer;
 	}
 
 	/** Binds this IndexArray for rendering with glDrawElements. */
+	@Override
 	public void bind () {
 	}
 
 	/** Unbinds this IndexArray. */
+	@Override
 	public void unbind () {
 	}
 
 	/** Invalidates the IndexArray so a new OpenGL buffer handle is created. Use this in case of a context loss. */
+	@Override
 	public void invalidate () {
 	}
 
 	/** Disposes this IndexArray and all its associated OpenGL resources. */
+	@Override
 	public void dispose () {
 		BufferUtils.disposeUnsafeByteBuffer(byteBuffer);
 	}

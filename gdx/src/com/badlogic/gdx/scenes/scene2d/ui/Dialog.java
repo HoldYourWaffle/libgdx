@@ -16,14 +16,14 @@
 
 package com.badlogic.gdx.scenes.scene2d.ui;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -33,7 +33,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 /** Displays a dialog, which is a modal window containing a content table with a button table underneath it. Methods are provided
  * to add a label to the content table and buttons to the button table, but any widgets can be added. When a button is clicked,
@@ -48,6 +47,7 @@ public class Dialog extends Window {
 	FocusListener focusListener;
 
 	protected InputListener ignoreTouchDown = new InputListener() {
+		@Override
 		public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 			event.cancel();
 			return false;
@@ -85,6 +85,7 @@ public class Dialog extends Window {
 		buttonTable.defaults().space(6);
 
 		buttonTable.addListener(new ChangeListener() {
+			@Override
 			public void changed (ChangeEvent event, Actor actor) {
 				if (!values.containsKey(actor)) return;
 				while (actor.getParent() != buttonTable)
@@ -96,10 +97,12 @@ public class Dialog extends Window {
 		});
 
 		focusListener = new FocusListener() {
+			@Override
 			public void keyboardFocusChanged (FocusEvent event, Actor actor, boolean focused) {
 				if (!focused) focusChanged(event);
 			}
 
+			@Override
 			public void scrollFocusChanged (FocusEvent event, Actor actor, boolean focused) {
 				if (!focused) focusChanged(event);
 			}
@@ -117,6 +120,7 @@ public class Dialog extends Window {
 		};
 	}
 
+	@Override
 	protected void setStage (Stage stage) {
 		if (stage == null)
 			addListener(focusListener);
@@ -248,10 +252,12 @@ public class Dialog extends Window {
 	 * @see Keys */
 	public Dialog key (final int keycode, final Object object) {
 		addListener(new InputListener() {
+			@Override
 			public boolean keyDown (InputEvent event, int keycode2) {
 				if (keycode == keycode2) {
 					// Delay a frame to eat the keyTyped event.
 					Gdx.app.postRunnable(new Runnable() {
+						@Override
 						public void run () {
 							result(object);
 							if (!cancelHide) hide();

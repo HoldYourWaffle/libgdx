@@ -501,6 +501,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 		return (h ^ h >>> hashShift) & mask;
 	}
 
+	@Override
 	public int hashCode () {
 		int h = 0;
 		K[] keyTable = this.keyTable;
@@ -519,6 +520,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object obj) {
 		if (obj == this) return true;
 		if (!(obj instanceof IdentityMap)) return false;
@@ -544,6 +546,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "[]";
 		StringBuilder buffer = new StringBuilder(32);
@@ -571,6 +574,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 		return buffer.toString();
 	}
 
+	@Override
 	public Iterator<Entry<K, V>> iterator () {
 		return entries();
 	}
@@ -636,6 +640,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 		public K key;
 		public V value;
 
+		@Override
 		public String toString () {
 			return key + "=" + value;
 		}
@@ -670,6 +675,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 			}
 		}
 
+		@Override
 		public void remove () {
 			if (currentIndex < 0) throw new IllegalStateException("next must be called before remove.");
 			if (currentIndex >= map.capacity) {
@@ -693,6 +699,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 		}
 
 		/** Note the same entry instance is returned each time this method is called. */
+		@Override
 		public Entry<K, V> next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -704,11 +711,13 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 			return entry;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public Iterator<Entry<K, V>> iterator () {
 			return this;
 		}
@@ -719,11 +728,13 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 			super((IdentityMap<Object, V>)map);
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public V next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -733,6 +744,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 			return value;
 		}
 
+		@Override
 		public Iterator<V> iterator () {
 			return this;
 		}
@@ -757,11 +769,13 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 			super((IdentityMap<K, Object>)map);
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
 			return hasNext;
 		}
 
+		@Override
 		public K next () {
 			if (!hasNext) throw new NoSuchElementException();
 			if (!valid) throw new GdxRuntimeException("#iterator() cannot be used nested.");
@@ -771,6 +785,7 @@ public class IdentityMap<K, V> implements Iterable<IdentityMap.Entry<K, V>> {
 			return key;
 		}
 
+		@Override
 		public Iterator<K> iterator () {
 			return this;
 		}

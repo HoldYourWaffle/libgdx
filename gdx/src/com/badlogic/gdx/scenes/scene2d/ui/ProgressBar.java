@@ -17,7 +17,6 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -300,6 +299,7 @@ public class ProgressBar extends Widget implements Disableable {
 		this.stepSize = stepSize;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (vertical) {
 			final Drawable knob = getKnobDrawable();
@@ -309,6 +309,7 @@ public class ProgressBar extends Widget implements Disableable {
 			return 140;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (vertical)
 			return 140;
@@ -352,10 +353,12 @@ public class ProgressBar extends Widget implements Disableable {
 		this.round = round;
 	}
 
+	@Override
 	public void setDisabled (boolean disabled) {
 		this.disabled = disabled;
 	}
 
+	@Override
 	public boolean isDisabled () {
 		return disabled;
 	}

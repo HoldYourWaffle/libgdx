@@ -1,13 +1,13 @@
 
 package com.badlogic.gdx.scenes.scene2d.utils;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.OrderedSet;
 import com.badlogic.gdx.utils.Pools;
-
-import java.util.Iterator;
 
 /** Manages selected objects. Optionally fires a {@link ChangeEvent} on an actor. Selection changes can be vetoed via
  * {@link ChangeEvent#cancel()}.
@@ -236,6 +236,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		return null;
 	}
 
+	@Override
 	public Iterator<T> iterator () {
 		return selected.iterator();
 	}
@@ -249,10 +250,12 @@ public class Selection<T> implements Disableable, Iterable<T> {
 	}
 
 	/** If true, prevents {@link #choose(Object)} from changing the selection. Default is false. */
+	@Override
 	public void setDisabled (boolean isDisabled) {
 		this.isDisabled = isDisabled;
 	}
 
+	@Override
 	public boolean isDisabled () {
 		return isDisabled;
 	}
@@ -289,6 +292,7 @@ public class Selection<T> implements Disableable, Iterable<T> {
 		this.programmaticChangeEvents = programmaticChangeEvents;
 	}
 
+	@Override
 	public String toString () {
 		return selected.toString();
 	}

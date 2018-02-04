@@ -30,6 +30,7 @@ public abstract class Interpolation {
 	//
 
 	static public final Interpolation linear = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return a;
 		}
@@ -39,11 +40,13 @@ public abstract class Interpolation {
 
 	/** Aka "smoothstep". */
 	static public final Interpolation smooth = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return a * a * (3 - 2 * a);
 		}
 	};
 	static public final Interpolation smooth2 = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			a = a * a * (3 - 2 * a);
 			return a * a * (3 - 2 * a);
@@ -52,6 +55,7 @@ public abstract class Interpolation {
 
 	/** By Ken Perlin. */
 	static public final Interpolation smoother = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return a * a * a * (a * (a * 6 - 15) + 10);
 		}
@@ -66,11 +70,13 @@ public abstract class Interpolation {
 	/** Fast, then slow. */
 	static public final PowOut pow2Out = new PowOut(2);
 	static public final Interpolation pow2InInverse = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return (float)Math.sqrt(a);
 		}
 	};
 	static public final Interpolation pow2OutInverse = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return 1 - (float)Math.sqrt(-(a - 1));
 		}
@@ -80,11 +86,13 @@ public abstract class Interpolation {
 	static public final PowIn pow3In = new PowIn(3);
 	static public final PowOut pow3Out = new PowOut(3);
 	static public final Interpolation pow3InInverse = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return (float)Math.cbrt(a);
 		}
 	};
 	static public final Interpolation pow3OutInverse = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return 1 - (float)Math.cbrt(-(a - 1));
 		}
@@ -99,18 +107,21 @@ public abstract class Interpolation {
 	static public final PowOut pow5Out = new PowOut(5);
 
 	static public final Interpolation sine = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return (1 - MathUtils.cos(a * MathUtils.PI)) / 2;
 		}
 	};
 
 	static public final Interpolation sineIn = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return 1 - MathUtils.cos(a * MathUtils.PI / 2);
 		}
 	};
 
 	static public final Interpolation sineOut = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return MathUtils.sin(a * MathUtils.PI / 2);
 		}
@@ -125,6 +136,7 @@ public abstract class Interpolation {
 	static public final ExpOut exp5Out = new ExpOut(2, 5);
 
 	static public final Interpolation circle = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			if (a <= 0.5f) {
 				a *= 2;
@@ -137,12 +149,14 @@ public abstract class Interpolation {
 	};
 
 	static public final Interpolation circleIn = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			return 1 - (float)Math.sqrt(1 - a * a);
 		}
 	};
 
 	static public final Interpolation circleOut = new Interpolation() {
+		@Override
 		public float apply (float a) {
 			a--;
 			return (float)Math.sqrt(1 - a * a);
@@ -170,6 +184,7 @@ public abstract class Interpolation {
 			this.power = power;
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a <= 0.5f) return (float)Math.pow(a * 2, power) / 2;
 			return (float)Math.pow((a - 1) * 2, power) / (power % 2 == 0 ? -2 : 2) + 1;
@@ -181,6 +196,7 @@ public abstract class Interpolation {
 			super(power);
 		}
 
+		@Override
 		public float apply (float a) {
 			return (float)Math.pow(a, power);
 		}
@@ -191,6 +207,7 @@ public abstract class Interpolation {
 			super(power);
 		}
 
+		@Override
 		public float apply (float a) {
 			return (float)Math.pow(a - 1, power) * (power % 2 == 0 ? -1 : 1) + 1;
 		}
@@ -208,6 +225,7 @@ public abstract class Interpolation {
 			scale = 1 / (1 - min);
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a <= 0.5f) return ((float)Math.pow(value, power * (a * 2 - 1)) - min) * scale / 2;
 			return (2 - ((float)Math.pow(value, -power * (a * 2 - 1)) - min) * scale) / 2;
@@ -219,6 +237,7 @@ public abstract class Interpolation {
 			super(value, power);
 		}
 
+		@Override
 		public float apply (float a) {
 			return ((float)Math.pow(value, power * (a - 1)) - min) * scale;
 		}
@@ -229,6 +248,7 @@ public abstract class Interpolation {
 			super(value, power);
 		}
 
+		@Override
 		public float apply (float a) {
 			return 1 - ((float)Math.pow(value, -power * a) - min) * scale;
 		}
@@ -246,6 +266,7 @@ public abstract class Interpolation {
 			this.bounces = bounces * MathUtils.PI * (bounces % 2 == 0 ? 1 : -1);
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a <= 0.5f) {
 				a *= 2;
@@ -262,6 +283,7 @@ public abstract class Interpolation {
 			super(value, power, bounces, scale);
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a >= 0.99) return 1;
 			return (float)Math.pow(value, power * (a - 1)) * MathUtils.sin(a * bounces) * scale;
@@ -273,6 +295,7 @@ public abstract class Interpolation {
 			super(value, power, bounces, scale);
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a == 0) return 0;
 			a = 1 - a;
@@ -297,6 +320,7 @@ public abstract class Interpolation {
 			return super.apply(a);
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a <= 0.5f) return (1 - out(1 - a * 2)) / 2;
 			return out(a * 2 - 1) / 2 + 0.5f;
@@ -355,6 +379,7 @@ public abstract class Interpolation {
 			widths[0] *= 2;
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a == 1) return 1;
 			a += widths[0] / 2;
@@ -382,6 +407,7 @@ public abstract class Interpolation {
 			super(bounces);
 		}
 
+		@Override
 		public float apply (float a) {
 			return 1 - super.apply(1 - a);
 		}
@@ -396,6 +422,7 @@ public abstract class Interpolation {
 			this.scale = scale * 2;
 		}
 
+		@Override
 		public float apply (float a) {
 			if (a <= 0.5f) {
 				a *= 2;
@@ -414,6 +441,7 @@ public abstract class Interpolation {
 			this.scale = scale;
 		}
 
+		@Override
 		public float apply (float a) {
 			a--;
 			return a * a * ((scale + 1) * a + scale) + 1;
@@ -427,6 +455,7 @@ public abstract class Interpolation {
 			this.scale = scale;
 		}
 
+		@Override
 		public float apply (float a) {
 			return a * a * ((scale + 1) * a - scale);
 		}

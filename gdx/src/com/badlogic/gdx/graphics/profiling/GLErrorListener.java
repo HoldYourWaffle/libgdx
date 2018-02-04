@@ -16,9 +16,10 @@
 
 package com.badlogic.gdx.graphics.profiling;
 
+import static com.badlogic.gdx.graphics.profiling.GLInterceptor.resolveErrorNumber;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import static com.badlogic.gdx.graphics.profiling.GLInterceptor.resolveErrorNumber;
 
 /** Listener for GL errors detected by {@link GLProfiler}.
  * 

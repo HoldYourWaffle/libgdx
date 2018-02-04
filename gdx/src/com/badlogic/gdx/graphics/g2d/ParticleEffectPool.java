@@ -28,10 +28,12 @@ public class ParticleEffectPool extends Pool<PooledEffect> {
 		this.effect = effect;
 	}
 
+	@Override
 	protected PooledEffect newObject () {
 		return new PooledEffect(effect);
 	}
 	
+	@Override
 	public void free (PooledEffect effect) {
 		super.free(effect);
 		

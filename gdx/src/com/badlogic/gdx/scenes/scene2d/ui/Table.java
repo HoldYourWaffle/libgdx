@@ -43,6 +43,7 @@ public class Table extends WidgetGroup {
 	static public Color debugActorColor = new Color(0, 1, 0, 1);
 
 	static final Pool<Cell> cellPool = new Pool<Cell>() {
+		@Override
 		protected Cell newObject () {
 			return new Cell();
 		}
@@ -97,6 +98,7 @@ public class Table extends WidgetGroup {
 		return cell;
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 		if (isTransform()) {
@@ -165,6 +167,7 @@ public class Table extends WidgetGroup {
 		return background;
 	}
 
+	@Override
 	public Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
@@ -185,6 +188,7 @@ public class Table extends WidgetGroup {
 		return clip;
 	}
 
+	@Override
 	public void invalidate () {
 		sizeInvalid = true;
 		super.invalidate();
@@ -290,10 +294,12 @@ public class Table extends WidgetGroup {
 		return add(stack);
 	}
 
+	@Override
 	public boolean removeActor (Actor actor) {
 		return removeActor(actor, true);
 	}
 
+	@Override
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (!super.removeActor(actor, unfocus)) return false;
 		Cell cell = getCell(actor);
@@ -302,6 +308,7 @@ public class Table extends WidgetGroup {
 	}
 
 	/** Removes all actors and cells from the table. */
+	@Override
 	public void clearChildren () {
 		Array<Cell> cells = this.cells;
 		for (int i = cells.size - 1; i >= 0; i--) {
@@ -397,6 +404,7 @@ public class Table extends WidgetGroup {
 		return cells;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (sizeInvalid) computeSize();
 		float width = tablePrefWidth;
@@ -404,6 +412,7 @@ public class Table extends WidgetGroup {
 		return width;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (sizeInvalid) computeSize();
 		float height = tablePrefHeight;
@@ -411,11 +420,13 @@ public class Table extends WidgetGroup {
 		return height;
 	}
 
+	@Override
 	public float getMinWidth () {
 		if (sizeInvalid) computeSize();
 		return tableMinWidth;
 	}
 
+	@Override
 	public float getMinHeight () {
 		if (sizeInvalid) computeSize();
 		return tableMinHeight;
@@ -566,15 +577,18 @@ public class Table extends WidgetGroup {
 		return this;
 	}
 
+	@Override
 	public void setDebug (boolean enabled) {
 		debug(enabled ? Debug.all : Debug.none);
 	}
 
+	@Override
 	public Table debug () {
 		super.debug();
 		return this;
 	}
 
+	@Override
 	public Table debugAll () {
 		super.debugAll();
 		return this;
@@ -750,6 +764,7 @@ public class Table extends WidgetGroup {
 		return array;
 	}
 
+	@Override
 	public void layout () {
 		float width = getWidth();
 		float height = getHeight();
@@ -1202,6 +1217,7 @@ public class Table extends WidgetGroup {
 		debugRects.add(rect);
 	}
 
+	@Override
 	public void drawDebug (ShapeRenderer shapes) {
 		if (isTransform()) {
 			applyTransform(shapes, computeTransform());
@@ -1228,6 +1244,7 @@ public class Table extends WidgetGroup {
 		}
 	}
 
+	@Override
 	protected void drawDebugBounds (ShapeRenderer shapes) {
 	}
 
@@ -1266,6 +1283,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the top padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundTop = new Value() {
+		@Override
 		public float get (Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getTopHeight();
@@ -1275,6 +1293,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the left padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundLeft = new Value() {
+		@Override
 		public float get (Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getLeftWidth();
@@ -1284,6 +1303,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the bottom padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundBottom = new Value() {
+		@Override
 		public float get (Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getBottomHeight();
@@ -1293,6 +1313,7 @@ public class Table extends WidgetGroup {
 	/** Value that is the right padding of the table's background.
 	 * @author Nathan Sweet */
 	static public Value backgroundRight = new Value() {
+		@Override
 		public float get (Actor context) {
 			Drawable background = ((Table)context).background;
 			return background == null ? 0 : background.getRightWidth();

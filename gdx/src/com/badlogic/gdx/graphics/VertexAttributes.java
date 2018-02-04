@@ -109,6 +109,7 @@ public final class VertexAttributes implements Iterable<VertexAttribute>, Compar
 		return attributes[index];
 	}
 
+	@Override
 	public String toString () {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[");

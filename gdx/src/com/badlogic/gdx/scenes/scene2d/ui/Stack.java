@@ -55,6 +55,7 @@ public class Stack extends WidgetGroup {
 			addActor(actor);
 	}
 
+	@Override
 	public void invalidate () {
 		super.invalidate();
 		sizeInvalid = true;
@@ -97,6 +98,7 @@ public class Stack extends WidgetGroup {
 		addActor(actor);
 	}
 
+	@Override
 	public void layout () {
 		if (sizeInvalid) computeSize();
 		float width = getWidth(), height = getHeight();
@@ -108,31 +110,37 @@ public class Stack extends WidgetGroup {
 		}
 	}
 
+	@Override
 	public float getPrefWidth () {
 		if (sizeInvalid) computeSize();
 		return prefWidth;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		if (sizeInvalid) computeSize();
 		return prefHeight;
 	}
 
+	@Override
 	public float getMinWidth () {
 		if (sizeInvalid) computeSize();
 		return minWidth;
 	}
 
+	@Override
 	public float getMinHeight () {
 		if (sizeInvalid) computeSize();
 		return minHeight;
 	}
 
+	@Override
 	public float getMaxWidth () {
 		if (sizeInvalid) computeSize();
 		return maxWidth;
 	}
 
+	@Override
 	public float getMaxHeight () {
 		if (sizeInvalid) computeSize();
 		return maxHeight;

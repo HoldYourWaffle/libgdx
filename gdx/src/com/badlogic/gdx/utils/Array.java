@@ -440,6 +440,7 @@ public class Array<T> implements Iterable<T> {
 
 	/** Returns an iterator for the items in the array. Remove is supported. Note that the same iterator instance is returned each
 	 * time this method is called. Use the {@link ArrayIterator} constructor for nested or multithreaded iteration. */
+	@Override
 	public Iterator<T> iterator () {
 		if (iterable == null) iterable = new ArrayIterable(this);
 		return iterable.iterator();
@@ -483,6 +484,7 @@ public class Array<T> implements Iterable<T> {
 		return result;
 	}
 
+	@Override
 	public int hashCode () {
 		if (!ordered) return super.hashCode();
 		Object[] items = this.items;
@@ -495,6 +497,7 @@ public class Array<T> implements Iterable<T> {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object object) {
 		if (object == this) return true;
 		if (!ordered) return false;
@@ -513,6 +516,7 @@ public class Array<T> implements Iterable<T> {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "[]";
 		T[] items = this.items;
@@ -571,6 +575,7 @@ public class Array<T> implements Iterable<T> {
 			this.allowRemove = allowRemove;
 		}
 
+		@Override
 		public boolean hasNext () {
 			if (!valid) {
 // System.out.println(iterable.lastAcquire);
@@ -579,6 +584,7 @@ public class Array<T> implements Iterable<T> {
 			return index < array.size;
 		}
 
+		@Override
 		public T next () {
 			if (index >= array.size) throw new NoSuchElementException(String.valueOf(index));
 			if (!valid) {
@@ -588,6 +594,7 @@ public class Array<T> implements Iterable<T> {
 			return array.items[index++];
 		}
 
+		@Override
 		public void remove () {
 			if (!allowRemove) throw new GdxRuntimeException("Remove not allowed.");
 			index--;
@@ -598,6 +605,7 @@ public class Array<T> implements Iterable<T> {
 			index = 0;
 		}
 
+		@Override
 		public Iterator<T> iterator () {
 			return this;
 		}
@@ -619,6 +627,7 @@ public class Array<T> implements Iterable<T> {
 			this.allowRemove = allowRemove;
 		}
 
+		@Override
 		public Iterator<T> iterator () {
 // lastAcquire.getBuffer().setLength(0);
 // new Throwable().printStackTrace(new java.io.PrintWriter(lastAcquire));

@@ -311,6 +311,7 @@ public class BitmapFont implements Disposable {
 	}
 
 	/** Disposes the texture used by this BitmapFont's region IF this BitmapFont created the texture. */
+	@Override
 	public void dispose () {
 		if (ownsTexture) {
 			for (int i = 0; i < regions.size; i++)
@@ -381,6 +382,7 @@ public class BitmapFont implements Disposable {
 		return new BitmapFontCache(this, integer);
 	}
 
+	@Override
 	public String toString () {
 		if (data.fontFile != null) return data.fontFile.nameWithoutExtension();
 		return super.toString();
@@ -416,6 +418,7 @@ public class BitmapFont implements Disposable {
 			page[ch & PAGE_SIZE - 1] = (byte)value;
 		}
 
+		@Override
 		public String toString () {
 			return Character.toString((char)id);
 		}

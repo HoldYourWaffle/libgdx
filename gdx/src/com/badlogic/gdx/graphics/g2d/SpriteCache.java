@@ -938,6 +938,7 @@ public class SpriteCache implements Disposable {
 	}
 
 	/** Releases all resources held by this SpriteCache. */
+	@Override
 	public void dispose () {
 		mesh.dispose();
 		if (shader != null) shader.dispose();

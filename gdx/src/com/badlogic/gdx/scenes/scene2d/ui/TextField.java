@@ -693,10 +693,12 @@ public class TextField extends Widget implements Disableable {
 		this.clipboard = clipboard;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		return 150;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		float topAndBottom = 0, minHeight = 0;
 		if (style.background != null) {
@@ -744,10 +746,12 @@ public class TextField extends Widget implements Disableable {
 		this.blinkTime = blinkTime;
 	}
 
+	@Override
 	public void setDisabled (boolean disabled) {
 		this.disabled = disabled;
 	}
 
+	@Override
 	public boolean isDisabled () {
 		return disabled;
 	}
@@ -768,6 +772,7 @@ public class TextField extends Widget implements Disableable {
 	class KeyRepeatTask extends Task {
 		int keycode;
 
+		@Override
 		public void run () {
 			inputListener.keyDown(null, keycode);
 		}
@@ -811,6 +816,7 @@ public class TextField extends Widget implements Disableable {
 
 	/** Basic input listener for the text field */
 	public class TextFieldClickListener extends ClickListener {
+		@Override
 		public void clicked (InputEvent event, float x, float y) {
 			int count = getTapCount() % 4;
 			if (count == 0) clearSelection();
@@ -821,6 +827,7 @@ public class TextField extends Widget implements Disableable {
 			if (count == 3) selectAll();
 		}
 
+		@Override
 		public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 			if (!super.touchDown(event, x, y, pointer, button)) return false;
 			if (pointer == 0 && button != 0) return false;
@@ -834,11 +841,13 @@ public class TextField extends Widget implements Disableable {
 			return true;
 		}
 
+		@Override
 		public void touchDragged (InputEvent event, float x, float y, int pointer) {
 			super.touchDragged(event, x, y, pointer);
 			setCursorPosition(x, y);
 		}
 
+		@Override
 		public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 			if (selectionStart == cursor) hasSelection = false;
 			super.touchUp(event, x, y, pointer, button);
@@ -858,6 +867,7 @@ public class TextField extends Widget implements Disableable {
 			cursor = text.length();
 		}
 
+		@Override
 		public boolean keyDown (InputEvent event, int keycode) {
 			if (disabled) return false;
 
@@ -983,12 +993,14 @@ public class TextField extends Widget implements Disableable {
 			}
 		}
 
+		@Override
 		public boolean keyUp (InputEvent event, int keycode) {
 			if (disabled) return false;
 			keyRepeatTask.cancel();
 			return true;
 		}
 
+		@Override
 		public boolean keyTyped (InputEvent event, char character) {
 			if (disabled) return false;
 

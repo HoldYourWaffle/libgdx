@@ -100,6 +100,7 @@ public class InputEventQueue implements InputProcessor {
 		queue.add((int)time);
 	}
 
+	@Override
 	public synchronized boolean keyDown (int keycode) {
 		queueTime();
 		queue.add(KEY_DOWN);
@@ -107,6 +108,7 @@ public class InputEventQueue implements InputProcessor {
 		return false;
 	}
 
+	@Override
 	public synchronized boolean keyUp (int keycode) {
 		queueTime();
 		queue.add(KEY_UP);
@@ -114,6 +116,7 @@ public class InputEventQueue implements InputProcessor {
 		return false;
 	}
 
+	@Override
 	public synchronized boolean keyTyped (char character) {
 		queueTime();
 		queue.add(KEY_TYPED);
@@ -121,6 +124,7 @@ public class InputEventQueue implements InputProcessor {
 		return false;
 	}
 
+	@Override
 	public synchronized boolean touchDown (int screenX, int screenY, int pointer, int button) {
 		queueTime();
 		queue.add(TOUCH_DOWN);
@@ -131,6 +135,7 @@ public class InputEventQueue implements InputProcessor {
 		return false;
 	}
 
+	@Override
 	public synchronized boolean touchUp (int screenX, int screenY, int pointer, int button) {
 		queueTime();
 		queue.add(TOUCH_UP);
@@ -141,6 +146,7 @@ public class InputEventQueue implements InputProcessor {
 		return false;
 	}
 
+	@Override
 	public synchronized boolean touchDragged (int screenX, int screenY, int pointer) {
 		queueTime();
 		queue.add(TOUCH_DRAGGED);
@@ -150,6 +156,7 @@ public class InputEventQueue implements InputProcessor {
 		return false;
 	}
 
+	@Override
 	public synchronized boolean mouseMoved (int screenX, int screenY) {
 		queueTime();
 		queue.add(MOUSE_MOVED);
@@ -158,6 +165,7 @@ public class InputEventQueue implements InputProcessor {
 		return false;
 	}
 
+	@Override
 	public synchronized boolean scrolled (int amount) {
 		queueTime();
 		queue.add(SCROLLED);

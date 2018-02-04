@@ -699,6 +699,7 @@ public class ShaderProgram implements Disposable {
 	}
 
 	/** Disposes all resources associated with this shader. Must be called when the shader is no longer used. */
+	@Override
 	public void dispose () {
 		GL20 gl = Gdx.gl20;
 		gl.glUseProgram(0);

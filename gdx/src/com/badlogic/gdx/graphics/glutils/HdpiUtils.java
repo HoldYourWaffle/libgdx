@@ -17,7 +17,6 @@
 package com.badlogic.gdx.graphics.glutils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics.GraphicsType;
 import com.badlogic.gdx.graphics.GL20;
 
 /** To deal with HDPI monitors properly, use the glViewport and glScissor functions of this class instead of directly calling

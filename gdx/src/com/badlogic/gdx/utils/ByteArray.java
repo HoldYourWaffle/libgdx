@@ -16,9 +16,9 @@
 
 package com.badlogic.gdx.utils;
 
-import com.badlogic.gdx.math.MathUtils;
-
 import java.util.Arrays;
+
+import com.badlogic.gdx.math.MathUtils;
 
 /** A resizable, ordered or unordered byte array. Avoids the boxing that occurs with ArrayList<Byte>. If unordered, this class
  * avoids a memory copy when removing elements (the last element is moved to the removed element's position).
@@ -344,6 +344,7 @@ public class ByteArray {
 		return array;
 	}
 
+	@Override
 	public int hashCode () {
 		if (!ordered) return super.hashCode();
 		byte[] items = this.items;
@@ -353,6 +354,7 @@ public class ByteArray {
 		return h;
 	}
 
+	@Override
 	public boolean equals (Object object) {
 		if (object == this) return true;
 		if (!ordered) return false;
@@ -368,6 +370,7 @@ public class ByteArray {
 		return true;
 	}
 
+	@Override
 	public String toString () {
 		if (size == 0) return "[]";
 		byte[] items = this.items;

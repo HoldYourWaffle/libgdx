@@ -68,6 +68,7 @@ public class DistanceFieldFont extends BitmapFont {
 		super(fontFile);
 	}
 
+	@Override
 	protected void load (BitmapFontData data) {
 		super.load(data);
 

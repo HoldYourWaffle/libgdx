@@ -71,6 +71,7 @@ public class Window extends Table {
 		titleLabel.setEllipsis(true);
 
 		titleTable = new Table() {
+			@Override
 			public void draw (Batch batch, float parentAlpha) {
 				if (drawTitleTable) super.draw(batch, parentAlpha);
 			}
@@ -83,6 +84,7 @@ public class Window extends Table {
 		setHeight(150);
 
 		addCaptureListener(new InputListener() {
+			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				toFront();
 				return false;
@@ -109,6 +111,7 @@ public class Window extends Table {
 				if (isMovable && edge == 0 && y <= height && y >= height - padTop && x >= left && x <= right) edge = MOVE;
 			}
 
+			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				if (button == 0) {
 					updateEdge(x, y);
@@ -121,10 +124,12 @@ public class Window extends Table {
 				return edge != 0 || isModal;
 			}
 
+			@Override
 			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 				dragging = false;
 			}
 
+			@Override
 			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (!dragging) return;
 				float width = getWidth(), height = getHeight();
@@ -170,23 +175,28 @@ public class Window extends Table {
 				setBounds(Math.round(windowX), Math.round(windowY), Math.round(width), Math.round(height));
 			}
 
+			@Override
 			public boolean mouseMoved (InputEvent event, float x, float y) {
 				updateEdge(x, y);
 				return isModal;
 			}
 
+			@Override
 			public boolean scrolled (InputEvent event, float x, float y, int amount) {
 				return isModal;
 			}
 
+			@Override
 			public boolean keyDown (InputEvent event, int keycode) {
 				return isModal;
 			}
 
+			@Override
 			public boolean keyUp (InputEvent event, int keycode) {
 				return isModal;
 			}
 
+			@Override
 			public boolean keyTyped (InputEvent event, char character) {
 				return isModal;
 			}
@@ -233,6 +243,7 @@ public class Window extends Table {
 		}
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		Stage stage = getStage();
 		if (stage.getKeyboardFocus() == null) stage.setKeyboardFocus(this);
@@ -255,6 +266,7 @@ public class Window extends Table {
 		style.stageBackground.draw(batch, x, y, width, height);
 	}
 
+	@Override
 	protected void drawBackground (Batch batch, float parentAlpha, float x, float y) {
 		super.drawBackground(batch, parentAlpha, x, y);
 
@@ -268,6 +280,7 @@ public class Window extends Table {
 		drawTitleTable = false; // Avoid drawing the title table again in drawChildren.
 	}
 
+	@Override
 	public Actor hit (float x, float y, boolean touchable) {
 		Actor hit = super.hit(x, y, touchable);
 		if (hit == null && isModal && (!touchable || getTouchable() == Touchable.enabled)) return this;
@@ -319,6 +332,7 @@ public class Window extends Table {
 		return dragging;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		return Math.max(super.getPrefWidth(), titleTable.getPrefWidth() + getPadLeft() + getPadRight());
 	}

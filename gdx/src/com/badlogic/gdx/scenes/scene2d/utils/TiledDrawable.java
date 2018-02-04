@@ -38,6 +38,7 @@ public class TiledDrawable extends TextureRegionDrawable {
 		super(drawable);
 	}
 
+	@Override
 	public void draw (Batch batch, float x, float y, float width, float height) {
 		float batchColor = batch.getPackedColor();
 		batch.setColor(batch.getColor().mul(color));
@@ -88,6 +89,7 @@ public class TiledDrawable extends TextureRegionDrawable {
 		batch.setColor(batchColor);
 	}
 
+	@Override
 	public void draw (Batch batch, float x, float y, float originX, float originY, float width, float height, float scaleX,
 		float scaleY, float rotation) {
 		throw new UnsupportedOperationException();
@@ -97,6 +99,7 @@ public class TiledDrawable extends TextureRegionDrawable {
 		return color;
 	}
 
+	@Override
 	public TiledDrawable tint (Color tint) {
 		TiledDrawable drawable = new TiledDrawable(this);
 		drawable.color.set(tint);

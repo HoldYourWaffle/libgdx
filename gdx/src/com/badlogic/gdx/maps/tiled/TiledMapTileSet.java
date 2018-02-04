@@ -17,6 +17,7 @@
 package com.badlogic.gdx.maps.tiled;
 
 import java.util.Iterator;
+
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.IntMap;
 

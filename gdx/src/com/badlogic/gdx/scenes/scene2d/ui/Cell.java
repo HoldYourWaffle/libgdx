@@ -913,6 +913,7 @@ public class Cell<T extends Actor> implements Poolable {
 	}
 
 	/** Reset state so the cell can be reused, setting all constraints to their {@link #defaults() default} values. */
+	@Override
 	public void reset () {
 		actor = null;
 		table = null;
@@ -975,6 +976,7 @@ public class Cell<T extends Actor> implements Poolable {
 		if (cell.uniformY != null) uniformY = cell.uniformY;
 	}
 
+	@Override
 	public String toString () {
 		return actor != null ? actor.toString() : super.toString();
 	}

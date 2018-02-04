@@ -82,6 +82,7 @@ public class SplitPane extends WidgetGroup {
 		addListener(new InputListener() {
 			int draggingPointer = -1;
 
+			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				if (draggingPointer != -1) return false;
 				if (pointer == 0 && button != 0) return false;
@@ -94,10 +95,12 @@ public class SplitPane extends WidgetGroup {
 				return false;
 			}
 
+			@Override
 			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 				if (pointer == draggingPointer) draggingPointer = -1;
 			}
 
+			@Override
 			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (pointer != draggingPointer) return;
 
@@ -179,6 +182,7 @@ public class SplitPane extends WidgetGroup {
 		return first + style.handle.getMinHeight() + second;
 	}
 
+	@Override
 	public float getMinWidth () {
 		float first = firstWidget instanceof Layout ? ((Layout)firstWidget).getMinWidth() : 0;
 		float second = secondWidget instanceof Layout ? ((Layout)secondWidget).getMinWidth() : 0;
@@ -186,6 +190,7 @@ public class SplitPane extends WidgetGroup {
 		return first + style.handle.getMinWidth() + second;
 	}
 
+	@Override
 	public float getMinHeight () {
 		float first = firstWidget instanceof Layout ? ((Layout)firstWidget).getMinHeight() : 0;
 		float second = secondWidget instanceof Layout ? ((Layout)secondWidget).getMinHeight() : 0;
@@ -337,18 +342,22 @@ public class SplitPane extends WidgetGroup {
 		invalidate();
 	}
 
+	@Override
 	public void addActor (Actor actor) {
 		throw new UnsupportedOperationException("Use SplitPane#setWidget.");
 	}
 
+	@Override
 	public void addActorAt (int index, Actor actor) {
 		throw new UnsupportedOperationException("Use SplitPane#setWidget.");
 	}
 
+	@Override
 	public void addActorBefore (Actor actorBefore, Actor actor) {
 		throw new UnsupportedOperationException("Use SplitPane#setWidget.");
 	}
 
+	@Override
 	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {
@@ -362,6 +371,7 @@ public class SplitPane extends WidgetGroup {
 		return true;
 	}
 
+	@Override
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor == firstWidget) {

@@ -398,6 +398,7 @@ public class GlyphLayout implements Poolable {
 		return -1; // Unclosed color tag.
 	}
 
+	@Override
 	public void reset () {
 		Pools.get(GlyphRun.class).freeAll(runs);
 		runs.clear();
@@ -406,6 +407,7 @@ public class GlyphLayout implements Poolable {
 		height = 0;
 	}
 
+	@Override
 	public String toString () {
 		if (runs.size == 0) return "";
 		StringBuilder buffer = new StringBuilder(128);
@@ -431,12 +433,14 @@ public class GlyphLayout implements Poolable {
 		public float x, y, width;
 		public final Color color = new Color();
 
+		@Override
 		public void reset () {
 			glyphs.clear();
 			xAdvances.clear();
 			width = 0;
 		}
 
+		@Override
 		public String toString () {
 			StringBuilder buffer = new StringBuilder(glyphs.size);
 			Array<Glyph> glyphs = this.glyphs;

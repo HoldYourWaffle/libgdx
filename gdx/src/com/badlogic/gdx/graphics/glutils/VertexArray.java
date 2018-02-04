@@ -75,6 +75,7 @@ public class VertexArray implements VertexData {
 		return buffer.limit() * 4 / attributes.vertexSize;
 	}
 
+	@Override
 	public int getNumMaxVertices () {
 		return byteBuffer.capacity() / attributes.vertexSize;
 	}

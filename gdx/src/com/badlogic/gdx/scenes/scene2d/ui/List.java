@@ -29,8 +29,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.Cullable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.UIUtils;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.Pool;
@@ -69,6 +69,7 @@ public class List<T> extends Widget implements Cullable {
 		setSize(getPrefWidth(), getPrefHeight());
 
 		addListener(new InputListener() {
+			@Override
 			public boolean keyDown (InputEvent event, int keycode) {
 				if (keycode == Keys.A && UIUtils.ctrl() && selection.getMultiple()) {
 					selection.clear();
@@ -78,6 +79,7 @@ public class List<T> extends Widget implements Cullable {
 				return false;
 			}
 
+			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				if (pointer != 0 || button != 0) return false;
 				if (selection.isDisabled()) return false;
@@ -97,11 +99,13 @@ public class List<T> extends Widget implements Cullable {
 				return true;
 			}
 
+			@Override
 			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 				if (pointer != 0 || button != 0) return;
 				touchDown = -1;
 			}
 
+			@Override
 			public void exit (InputEvent event, float x, float y, int pointer, Actor toActor) {
 				if (pointer != 0) return;
 				touchDown = -1;
@@ -121,6 +125,7 @@ public class List<T> extends Widget implements Cullable {
 		return style;
 	}
 
+	@Override
 	public void layout () {
 		BitmapFont font = style.font;
 		Drawable selectedDrawable = style.selection;
@@ -283,11 +288,13 @@ public class List<T> extends Widget implements Cullable {
 		return itemHeight;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		validate();
 		return prefWidth;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		validate();
 		return prefHeight;
@@ -297,6 +304,7 @@ public class List<T> extends Widget implements Cullable {
 		return object.toString();
 	}
 
+	@Override
 	public void setCullingArea (Rectangle cullingArea) {
 		this.cullingArea = cullingArea;
 	}

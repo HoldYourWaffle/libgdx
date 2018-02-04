@@ -197,6 +197,7 @@ public class Timer {
 
 		/** If this is the last time the task will be ran or the task is first cancelled, it may be scheduled again in this
 		 * method. */
+		@Override
 		abstract public void run ();
 
 		/** Cancels the task. It will not be executed until it is scheduled again. This method can be called at any time. */
@@ -243,6 +244,7 @@ public class Timer {
 			thread.start();
 		}
 
+		@Override
 		public void run () {
 			while (true) {
 				synchronized (threadLock) {
@@ -271,6 +273,7 @@ public class Timer {
 			dispose();
 		}
 
+		@Override
 		public void resume () {
 			synchronized (threadLock) {
 				long delayMillis = System.nanoTime() / 1000000 - pauseMillis;
@@ -281,6 +284,7 @@ public class Timer {
 			}
 		}
 
+		@Override
 		public void pause () {
 			synchronized (threadLock) {
 				pauseMillis = System.nanoTime() / 1000000;
@@ -288,6 +292,7 @@ public class Timer {
 			}
 		}
 
+		@Override
 		public void dispose () { // OK to call multiple times.
 			synchronized (threadLock) {
 				if (thread == this) thread = null;

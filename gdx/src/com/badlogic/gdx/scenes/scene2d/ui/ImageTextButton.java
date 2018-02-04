@@ -65,6 +65,7 @@ public class ImageTextButton extends Button {
 		setSize(getPrefWidth(), getPrefHeight());
 	}
 
+	@Override
 	public void setStyle (ButtonStyle style) {
 		if (!(style instanceof ImageTextButtonStyle)) throw new IllegalArgumentException("style must be a ImageTextButtonStyle.");
 		super.setStyle(style);
@@ -79,6 +80,7 @@ public class ImageTextButton extends Button {
 		}
 	}
 
+	@Override
 	public ImageTextButtonStyle getStyle () {
 		return style;
 	}
@@ -99,6 +101,7 @@ public class ImageTextButton extends Button {
 		image.setDrawable(drawable);
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		updateImage();
 		Color fontColor;

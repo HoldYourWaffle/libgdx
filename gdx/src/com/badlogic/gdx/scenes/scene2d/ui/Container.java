@@ -37,6 +37,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		setActor(actor);
 	}
 
+	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		validate();
 		if (isTransform()) {
@@ -101,6 +102,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return background;
 	}
 
+	@Override
 	public void layout () {
 		if (actor == null) return;
 
@@ -166,28 +168,37 @@ public class Container<T extends Actor> extends WidgetGroup {
 
 	/** @deprecated Container may have only a single child.
 	 * @see #setActor(Actor) */
+	@Deprecated
+	@Override
 	public void addActor (Actor actor) {
 		throw new UnsupportedOperationException("Use Container#setActor.");
 	}
 
 	/** @deprecated Container may have only a single child.
 	 * @see #setActor(Actor) */
+	@Deprecated
+	@Override
 	public void addActorAt (int index, Actor actor) {
 		throw new UnsupportedOperationException("Use Container#setActor.");
 	}
 
 	/** @deprecated Container may have only a single child.
 	 * @see #setActor(Actor) */
+	@Deprecated
+	@Override
 	public void addActorBefore (Actor actorBefore, Actor actor) {
 		throw new UnsupportedOperationException("Use Container#setActor.");
 	}
 
 	/** @deprecated Container may have only a single child.
 	 * @see #setActor(Actor) */
+	@Deprecated
+	@Override
 	public void addActorAfter (Actor actorAfter, Actor actor) {
 		throw new UnsupportedOperationException("Use Container#setActor.");
 	}
 
+	@Override
 	public boolean removeActor (Actor actor) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -195,6 +206,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return true;
 	}
 
+	@Override
 	public boolean removeActor (Actor actor, boolean unfocus) {
 		if (actor == null) throw new IllegalArgumentException("actor cannot be null.");
 		if (actor != this.actor) return false;
@@ -586,6 +598,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return this;
 	}
 
+	@Override
 	public float getMinWidth () {
 		return minWidth.get(actor) + padLeft.get(this) + padRight.get(this);
 	}
@@ -594,6 +607,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return minHeight;
 	}
 
+	@Override
 	public float getMinHeight () {
 		return minHeight.get(actor) + padTop.get(this) + padBottom.get(this);
 	}
@@ -602,6 +616,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return prefWidth;
 	}
 
+	@Override
 	public float getPrefWidth () {
 		float v = prefWidth.get(actor);
 		if (background != null) v = Math.max(v, background.getMinWidth());
@@ -612,6 +627,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return prefHeight;
 	}
 
+	@Override
 	public float getPrefHeight () {
 		float v = prefHeight.get(actor);
 		if (background != null) v = Math.max(v, background.getMinHeight());
@@ -622,6 +638,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return maxWidth;
 	}
 
+	@Override
 	public float getMaxWidth () {
 		float v = maxWidth.get(actor);
 		if (v > 0) v += padLeft.get(this) + padRight.get(this);
@@ -632,6 +649,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return maxHeight;
 	}
 
+	@Override
 	public float getMaxHeight () {
 		float v = maxHeight.get(actor);
 		if (v > 0) v += padTop.get(this) + padBottom.get(this);
@@ -713,6 +731,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return clip;
 	}
 
+	@Override
 	public Actor hit (float x, float y, boolean touchable) {
 		if (clip) {
 			if (touchable && getTouchable() == Touchable.disabled) return null;
@@ -721,6 +740,7 @@ public class Container<T extends Actor> extends WidgetGroup {
 		return super.hit(x, y, touchable);
 	}
 
+	@Override
 	public void drawDebug (ShapeRenderer shapes) {
 		validate();
 		if (isTransform()) {

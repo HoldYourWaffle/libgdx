@@ -184,11 +184,13 @@ public class Texture extends GLTexture {
 	}
 
 	/** @return whether this texture is managed or not. */
+	@Override
 	public boolean isManaged () {
 		return data.isManaged();
 	}
 
 	/** Disposes all resources associated with the texture */
+	@Override
 	public void dispose () {
 		// this is a hack. reason: we have to set the glHandle to 0 for textures that are
 		// reloaded through the asset manager as we first remove (and thus dispose) the texture

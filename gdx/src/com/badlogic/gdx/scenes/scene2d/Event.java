@@ -63,6 +63,7 @@ public class Event implements Poolable {
 		stopped = true;
 	}
 
+	@Override
 	public void reset () {
 		stage = null;
 		targetActor = null;

@@ -51,6 +51,7 @@ public class TextTooltip extends Tooltip<Label> {
 
 		container.setActor(label);
 		container.width(new Value() {
+			@Override
 			public float get (Actor context) {
 				return Math.min(manager.maxWidth, container.getActor().getGlyphLayout().width);
 			}

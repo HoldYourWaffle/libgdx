@@ -16,7 +16,6 @@
 
 package com.badlogic.gdx.graphics.glutils;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
@@ -99,23 +98,28 @@ public class ImmediateModeRenderer20 implements ImmediateModeRenderer {
 		ownsShader = false;
 	}
 
+	@Override
 	public void begin (Matrix4 projModelView, int primitiveType) {
 		this.projModelView.set(projModelView);
 		this.primitiveType = primitiveType;
 	}
 
+	@Override
 	public void color (Color color) {
 		vertices[vertexIdx + colorOffset] = color.toFloatBits();
 	}
 
+	@Override
 	public void color (float r, float g, float b, float a) {
 		vertices[vertexIdx + colorOffset] = Color.toFloatBits(r, g, b, a);
 	}
 	
+	@Override
 	public void color (float colorBits) {
 		vertices[vertexIdx + colorOffset] = colorBits;
 	}
 
+	@Override
 	public void texCoord (float u, float v) {
 		final int idx = vertexIdx + texCoordOffset;
 		vertices[idx + numSetTexCoords] = u;
@@ -123,6 +127,7 @@ public class ImmediateModeRenderer20 implements ImmediateModeRenderer {
 		numSetTexCoords += 2;
 	}
 
+	@Override
 	public void normal (float x, float y, float z) {
 		final int idx = vertexIdx + normalOffset;
 		vertices[idx] = x;
@@ -130,6 +135,7 @@ public class ImmediateModeRenderer20 implements ImmediateModeRenderer {
 		vertices[idx + 2] = z;
 	}
 
+	@Override
 	public void vertex (float x, float y, float z) {
 		final int idx = vertexIdx;
 		vertices[idx] = x;
@@ -141,6 +147,7 @@ public class ImmediateModeRenderer20 implements ImmediateModeRenderer {
 		numVertices++;
 	}
 
+	@Override
 	public void flush () {
 		if (numVertices == 0) return;
 		shader.begin();
@@ -156,10 +163,12 @@ public class ImmediateModeRenderer20 implements ImmediateModeRenderer {
 		numVertices = 0;
 	}
 
+	@Override
 	public void end () {
 		flush();
 	}
 
+	@Override
 	public int getNumVertices () {
 		return numVertices;
 	}
@@ -169,6 +178,7 @@ public class ImmediateModeRenderer20 implements ImmediateModeRenderer {
 		return maxVertices;
 	}
 
+	@Override
 	public void dispose () {
 		if (ownsShader && shader != null) shader.dispose();
 		mesh.dispose();
