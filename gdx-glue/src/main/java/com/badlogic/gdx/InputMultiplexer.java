@@ -24,14 +24,16 @@ import com.badlogic.gdx.utils.Array;
 public class InputMultiplexer implements InputProcessor {
 	private Array<InputProcessor> processors = new Array(4);
 
+	@Deprecated
 	public InputMultiplexer () {
 	}
 
+	@Deprecated
 	public InputMultiplexer (InputProcessor... processors) {
 		for (int i = 0; i < processors.length; i++)
 			this.processors.add(processors[i]);
 	}
-
+	
 	public void addProcessor (int index, InputProcessor processor) {
 		if (processor == null) throw new NullPointerException("processor cannot be null");
 		processors.insert(index, processor);
