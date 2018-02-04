@@ -29,8 +29,13 @@ compileJava {
 }
 
 dependencies {
-    compileOnly project(":api:libgdx-jnigen")
-	compile project(":api:libgdx-glue")
+	if (findProject(':api') != null) {
+		compileOnly project(":api:libgdx-jnigen")
+		compile project(":api:libgdx-glue")
+	} else {
+		compileOnly project(":extensions:gdx-jnigen")
+		compile project(":gdx-glue")
+	}
     testCompile "junit:junit:4.11"
 }
 
