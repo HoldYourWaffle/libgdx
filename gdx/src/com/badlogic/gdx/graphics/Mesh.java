@@ -21,7 +21,6 @@ import java.nio.ShortBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.glutils.IndexArray;
@@ -42,6 +41,8 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import info.zthings.libgdxglue.ApplicationGlue;
 
 /** <p>
  * A Mesh holds vertices composed of attributes specified by a {@link VertexAttributes} instance. The vertices are held either in
@@ -70,7 +71,7 @@ public class Mesh implements Disposable {
 	}
 
 	/** list of all meshes **/
-	static final Map<Application, Array<Mesh>> meshes = new HashMap<Application, Array<Mesh>>();
+	static final Map<ApplicationGlue, Array<Mesh>> meshes = new HashMap<ApplicationGlue, Array<Mesh>>();
 
 	final VertexData vertices;
 	final IndexData indices;
@@ -815,7 +816,7 @@ public class Mesh implements Disposable {
 		return indices.getBuffer();
 	}
 
-	private static void addManagedMesh (Application app, Mesh mesh) {
+	private static void addManagedMesh (ApplicationGlue app, Mesh mesh) {
 		Array<Mesh> managedResources = meshes.get(app);
 		if (managedResources == null) managedResources = new Array<Mesh>();
 		managedResources.add(mesh);
@@ -824,7 +825,7 @@ public class Mesh implements Disposable {
 
 	/** Invalidates all meshes so the next time they are rendered new VBO handles are generated.
 	 * @param app */
-	public static void invalidateAllMeshes (Application app) {
+	public static void invalidateAllMeshes (ApplicationGlue app) {
 		Array<Mesh> meshesArray = meshes.get(app);
 		if (meshesArray == null) return;
 		for (int i = 0; i < meshesArray.size; i++) {
@@ -834,7 +835,7 @@ public class Mesh implements Disposable {
 	}
 
 	/** Will clear the managed mesh cache. I wouldn't use this if i was you :) */
-	public static void clearAllMeshes (Application app) {
+	public static void clearAllMeshes (ApplicationGlue app) {
 		meshes.remove(app);
 	}
 
@@ -842,7 +843,7 @@ public class Mesh implements Disposable {
 		StringBuilder builder = new StringBuilder();
 		int i = 0;
 		builder.append("Managed meshes/app: { ");
-		for (Application app : meshes.keySet()) {
+		for (ApplicationGlue app : meshes.keySet()) {
 			builder.append(meshes.get(app).size);
 			builder.append(" ");
 		}

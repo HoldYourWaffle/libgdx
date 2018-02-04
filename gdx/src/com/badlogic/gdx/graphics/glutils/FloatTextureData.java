@@ -18,7 +18,6 @@ package com.badlogic.gdx.graphics.glutils;
 
 import java.nio.FloatBuffer;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -27,6 +26,8 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import info.zthings.libgdxglue.ApplicationGlue.ApplicationType;
 
 /** A {@link TextureData} implementation which should be used to create float textures. */
 public class FloatTextureData implements TextureData {

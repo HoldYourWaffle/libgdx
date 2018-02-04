@@ -22,7 +22,6 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -37,6 +36,8 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectIntMap;
 import com.badlogic.gdx.utils.ObjectMap;
+
+import info.zthings.libgdxglue.ApplicationGlue;
 
 /** <p>
  * A shader program encapsulates a vertex and fragment shader pair linked to form a shader program.
@@ -94,7 +95,7 @@ public class ShaderProgram implements Disposable {
 	public static String prependFragmentCode = "";
 
 	/** the list of currently available shaders **/
-	private final static ObjectMap<Application, Array<ShaderProgram>> shaders = new ObjectMap<Application, Array<ShaderProgram>>();
+	private final static ObjectMap<ApplicationGlue, Array<ShaderProgram>> shaders = new ObjectMap<ApplicationGlue, Array<ShaderProgram>>();
 
 	/** the log **/
 	private String log = "";
@@ -750,7 +751,7 @@ public class ShaderProgram implements Disposable {
 		}
 	}
 
-	private void addManagedShader (Application app, ShaderProgram shaderProgram) {
+	private void addManagedShader (ApplicationGlue app, ShaderProgram shaderProgram) {
 		Array<ShaderProgram> managedResources = shaders.get(app);
 		if (managedResources == null) managedResources = new Array<ShaderProgram>();
 		managedResources.add(shaderProgram);
@@ -759,7 +760,7 @@ public class ShaderProgram implements Disposable {
 
 	/** Invalidates all shaders so the next time they are used new handles are generated
 	 * @param app */
-	public static void invalidateAllShaderPrograms (Application app) {
+	public static void invalidateAllShaderPrograms (ApplicationGlue app) {
 		if (Gdx.gl20 == null) return;
 
 		Array<ShaderProgram> shaderArray = shaders.get(app);
@@ -771,7 +772,7 @@ public class ShaderProgram implements Disposable {
 		}
 	}
 
-	public static void clearAllShaderPrograms (Application app) {
+	public static void clearAllShaderPrograms (ApplicationGlue app) {
 		shaders.remove(app);
 	}
 
@@ -779,7 +780,7 @@ public class ShaderProgram implements Disposable {
 		StringBuilder builder = new StringBuilder();
 		int i = 0;
 		builder.append("Managed shaders/app: { ");
-		for (Application app : shaders.keys()) {
+		for (ApplicationGlue app : shaders.keys()) {
 			builder.append(shaders.get(app).size);
 			builder.append(" ");
 		}

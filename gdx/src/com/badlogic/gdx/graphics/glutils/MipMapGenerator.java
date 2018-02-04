@@ -16,13 +16,14 @@
 
 package com.badlogic.gdx.graphics.glutils;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Blending;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import info.zthings.libgdxglue.ApplicationGlue.ApplicationType;
 
 public class MipMapGenerator {
 

@@ -16,7 +16,6 @@
 
 package com.badlogic.gdx.graphics.g3d.particles.batches;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
@@ -41,6 +40,8 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+
+import info.zthings.libgdxglue.ApplicationGlue.ApplicationType;
 
 /** This class is used to draw particles as point sprites.
  * @author Inferno */

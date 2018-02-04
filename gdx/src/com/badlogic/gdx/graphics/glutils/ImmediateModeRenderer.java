@@ -16,14 +16,15 @@
 
 package com.badlogic.gdx.graphics.glutils;
 
+import java.io.Flushable;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.utils.Disposable;
 
-public interface ImmediateModeRenderer {
+public interface ImmediateModeRenderer extends Disposable, Flushable {
 	public void begin (Matrix4 projModelView, int primitiveType);
 
-	public void flush ();
-	
 	public void color (Color color);
 
 	public void color (float r, float g, float b, float a);
@@ -41,6 +42,4 @@ public interface ImmediateModeRenderer {
 	public int getNumVertices ();
 
 	public int getMaxVertices ();
-
-	public void dispose ();
 }

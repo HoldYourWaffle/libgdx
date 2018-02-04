@@ -22,8 +22,6 @@ import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -33,6 +31,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import info.zthings.libgdxglue.ApplicationGlue;
+import info.zthings.libgdxglue.ApplicationGlue.ApplicationType;
 
 /** <p>
  * Encapsulates OpenGL ES 2.0 frame buffer objects. This is a simple helper class which should cover most FBO uses. It will
@@ -52,7 +53,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * @author mzechner, realitix */
 public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 	/** the frame buffers **/
-	protected final static Map<Application, Array<GLFrameBuffer>> buffers = new HashMap<Application, Array<GLFrameBuffer>>();
+	protected final static Map<ApplicationGlue, Array<GLFrameBuffer>> buffers = new HashMap<ApplicationGlue, Array<GLFrameBuffer>>();
 
 	protected final static int GL_DEPTH24_STENCIL8_OES = 0x88F0;
 
@@ -347,7 +348,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 		return bufferBuilder.width;
 	}
 
-	private static void addManagedFrameBuffer (Application app, GLFrameBuffer frameBuffer) {
+	private static void addManagedFrameBuffer (ApplicationGlue app, GLFrameBuffer frameBuffer) {
 		Array<GLFrameBuffer> managedResources = buffers.get(app);
 		if (managedResources == null) managedResources = new Array<GLFrameBuffer>();
 		managedResources.add(frameBuffer);
@@ -356,7 +357,7 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 
 	/** Invalidates all frame buffers. This can be used when the OpenGL context is lost to rebuild all managed frame buffers. This
 	 * assumes that the texture attached to this buffer has already been rebuild! Use with care. */
-	public static void invalidateAllFrameBuffers (Application app) {
+	public static void invalidateAllFrameBuffers (ApplicationGlue app) {
 		if (Gdx.gl20 == null) return;
 
 		Array<GLFrameBuffer> bufferArray = buffers.get(app);
@@ -366,13 +367,13 @@ public abstract class GLFrameBuffer<T extends GLTexture> implements Disposable {
 		}
 	}
 
-	public static void clearAllFrameBuffers (Application app) {
+	public static void clearAllFrameBuffers (ApplicationGlue app) {
 		buffers.remove(app);
 	}
 
 	public static StringBuilder getManagedStatus (final StringBuilder builder) {
 		builder.append("Managed buffers/app: { ");
-		for (Application app : buffers.keySet()) {
+		for (ApplicationGlue app : buffers.keySet()) {
 			builder.append(buffers.get(app).size);
 			builder.append(" ");
 		}

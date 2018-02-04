@@ -30,6 +30,7 @@ compileJava {
 
 dependencies {
     compileOnly project(":api:libgdx-jnigen")
+	compile project(":api:libgdx-glue")
     testCompile "junit:junit:4.11"
 }
 

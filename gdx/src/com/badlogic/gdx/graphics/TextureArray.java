@@ -19,18 +19,19 @@ package com.badlogic.gdx.graphics;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import info.zthings.libgdxglue.ApplicationGlue;
 
 /**
  * Open GLES wrapper for TextureArray
  * @author Tomski */
 public class TextureArray extends GLTexture {
 
-	final static Map<Application, Array<TextureArray>> managedTextureArrays = new HashMap<Application, Array<TextureArray>>();
+	final static Map<ApplicationGlue, Array<TextureArray>> managedTextureArrays = new HashMap<ApplicationGlue, Array<TextureArray>>();
 
 	private TextureArrayData data;
 
@@ -114,7 +115,7 @@ public class TextureArray extends GLTexture {
 		load(data);
 	}
 
-	private static void addManagedTexture (Application app, TextureArray texture) {
+	private static void addManagedTexture (ApplicationGlue app, TextureArray texture) {
 		Array<TextureArray> managedTextureArray = managedTextureArrays.get(app);
 		if (managedTextureArray == null) managedTextureArray = new Array<TextureArray>();
 		managedTextureArray.add(texture);
@@ -123,12 +124,12 @@ public class TextureArray extends GLTexture {
 
 
 	/** Clears all managed TextureArrays. This is an internal method. Do not use it! */
-	public static void clearAllTextureArrays (Application app) {
+	public static void clearAllTextureArrays (ApplicationGlue app) {
 		managedTextureArrays.remove(app);
 	}
 
 	/** Invalidate all managed TextureArrays. This is an internal method. Do not use it! */
-	public static void invalidateAllTextureArrays (Application app) {
+	public static void invalidateAllTextureArrays (ApplicationGlue app) {
 		Array<TextureArray> managedTextureArray = managedTextureArrays.get(app);
 		if (managedTextureArray == null) return;
 
@@ -141,7 +142,7 @@ public class TextureArray extends GLTexture {
 	public static String getManagedStatus () {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Managed TextureArrays/app: { ");
-		for (Application app : managedTextureArrays.keySet()) {
+		for (ApplicationGlue app : managedTextureArrays.keySet()) {
 			builder.append(managedTextureArrays.get(app).size);
 			builder.append(" ");
 		}

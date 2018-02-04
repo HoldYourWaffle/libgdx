@@ -15,6 +15,7 @@
  ******************************************************************************/
 
 include ":gdx"
+include ":gdx-glue"
 
 include ":backends"
 include ":backends:gdx-backend-android"

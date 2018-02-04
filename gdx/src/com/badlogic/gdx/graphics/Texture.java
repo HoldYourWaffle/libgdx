@@ -19,7 +19,6 @@ package com.badlogic.gdx.graphics;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters.LoadedCallback;
 import com.badlogic.gdx.assets.AssetManager;
@@ -30,6 +29,8 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import info.zthings.libgdxglue.ApplicationGlue;
 
 /** A Texture wraps a standard OpenGL ES texture.
  * <p>
@@ -46,7 +47,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * @author badlogicgames@gmail.com */
 public class Texture extends GLTexture {
 	private static AssetManager assetManager;
-	final static Map<Application, Array<Texture>> managedTextures = new HashMap<Application, Array<Texture>>();
+	final static Map<ApplicationGlue, Array<Texture>> managedTextures = new HashMap<ApplicationGlue, Array<Texture>>();
 
 	public enum TextureFilter {
 		Nearest(GL20.GL_NEAREST), Linear(GL20.GL_LINEAR), MipMap(GL20.GL_LINEAR_MIPMAP_LINEAR), MipMapNearestNearest(
@@ -201,7 +202,7 @@ public class Texture extends GLTexture {
 		if (data.isManaged()) if (managedTextures.get(Gdx.app) != null) managedTextures.get(Gdx.app).removeValue(this, true);
 	}
 
-	private static void addManagedTexture (Application app, Texture texture) {
+	private static void addManagedTexture (ApplicationGlue app, Texture texture) {
 		Array<Texture> managedTextureArray = managedTextures.get(app);
 		if (managedTextureArray == null) managedTextureArray = new Array<Texture>();
 		managedTextureArray.add(texture);
@@ -209,12 +210,12 @@ public class Texture extends GLTexture {
 	}
 
 	/** Clears all managed textures. This is an internal method. Do not use it! */
-	public static void clearAllTextures (Application app) {
+	public static void clearAllTextures (ApplicationGlue app) {
 		managedTextures.remove(app);
 	}
 
 	/** Invalidate all managed textures. This is an internal method. Do not use it! */
-	public static void invalidateAllTextures (Application app) {
+	public static void invalidateAllTextures (ApplicationGlue app) {
 		Array<Texture> managedTextureArray = managedTextures.get(app);
 		if (managedTextureArray == null) return;
 
@@ -284,7 +285,7 @@ public class Texture extends GLTexture {
 	public static String getManagedStatus () {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Managed textures/app: { ");
-		for (Application app : managedTextures.keySet()) {
+		for (ApplicationGlue app : managedTextures.keySet()) {
 			builder.append(managedTextures.get(app).size);
 			builder.append(" ");
 		}
