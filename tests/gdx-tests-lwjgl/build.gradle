@@ -22,7 +22,9 @@ dependencies {
     compile project(":tests:gdx-tests")
     compile project(":backends:gdx-backend-lwjgl")
     compile project(":extensions:gdx-controllers:gdx-controllers-desktop")
-    compile testnatives.desktop
+	
+	if (findProject(':api') != null) compile testnatives.desktopExt
+	else compile testnatives.desktopInt
 }
 
 task launchTestsLwjgl (dependsOn: classes, type: JavaExec) {
