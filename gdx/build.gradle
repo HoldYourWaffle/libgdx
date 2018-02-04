@@ -16,8 +16,8 @@
 
 apply plugin: "java"
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 sourceSets.main.java.srcDirs = ["src"]
 sourceSets.main.resources.srcDirs = ["src"]
@@ -29,6 +29,26 @@ compileJava {
 }
 
 dependencies {
-    compileOnly project(":extensions:gdx-jnigen")
-    testCompile libraries.junit
+    compileOnly project(":api:libgdx-jnigen")
+    testCompile "junit:junit:4.11"
 }
+
+
+/* Configuration from root build.gradle. Could be necessary in the future
+group = 'com.badlogicgames.gdx'
+version = '1.9.5-SNAPSHOT'
+
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+	}
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+*/
