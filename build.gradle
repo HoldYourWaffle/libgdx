@@ -16,9 +16,16 @@
 
 apply from: 'gradle/dependencies.gradle'
 
-configure(rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().contains('api' + File.separator + 'libgdx' + File.separator) } + allprojects) {
+ext.versionName = 'split-1.9.8.0'
+
+def alls;
+if (findProject(':api') != null) alls = rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().contains('api' + File.separator + 'libgdx' + File.separator) }
+else alls = allprojects
+
+//Allprojects:
+configure(alls) {
     group = 'com.badlogicgames.gdx'
-    version = 'split-1.9.8.0'
+    version = "$versionName"
 
     buildscript {
         repositories {
@@ -35,14 +42,25 @@ configure(rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().cont
     }
 }
 
-configure(rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().contains('api' + File.separator + 'libgdx' + File.separator) && it.path != ':api:libgdx' } + subprojects) {
+def subs;
+if (findProject(':api') != null) subs = rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().contains('api' + File.separator + 'libgdx' + File.separator) && it.path != ':api:libgdx' }
+else subs = subprojects
+
+//Subprojects:
+configure(subs) {
     apply plugin: "idea"
     apply plugin: "java"
-
+	
     compileJava {
         options.fork = true
         options.incremental = true
+		options.warnings = false //suppress 1.6 warnings
     }
+	
+	sourceSets.main.java.srcDirs = ["src"]
+    sourceSets.main.resources.srcDirs = ["src"]
+	
+	sourceCompatibility = targetCompatibility = 1.6
 
     idea {
         module {
@@ -59,4 +77,3 @@ task fetchNatives {
         copy.execute()
     }
 }
-

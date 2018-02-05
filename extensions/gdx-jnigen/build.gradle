@@ -16,34 +16,9 @@
 
 apply plugin: "java"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
+sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
-
-sourceSets.main.java.srcDirs = ["src"]
-sourceSets.main.resources.srcDirs = ["src"]
  
 dependencies {
     compile "com.github.javaparser:javaparser-core:2.3.0"
 }
-
-
-/* Configuration from root build.gradle. Could be necessary in the future
-group = 'com.badlogicgames.gdx'
-version = '1.9.5-SNAPSHOT'
-
-buildscript {
-	repositories {
-		mavenCentral()
-		jcenter()
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-	}
-}
-
-repositories {
-	mavenCentral()
-	jcenter()
-	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-*/

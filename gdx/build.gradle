@@ -14,19 +14,8 @@
  * limitations under the License.
  ******************************************************************************/
 
-apply plugin: "java"
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-sourceSets.main.java.srcDirs = ["src"]
-sourceSets.main.resources.srcDirs = ["src"]
+sourceCompatibility = targetCompatibility = 1.8
 sourceSets.test.java.srcDirs = ["test"]
-
-compileJava {
-    options.fork = true
-    options.incremental = true
-}
 
 dependencies {
 	compileOnly project(":extensions:gdx-jnigen")
