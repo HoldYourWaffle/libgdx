@@ -47,11 +47,13 @@ public class LwjglApplet extends Applet {
 	public LwjglApplet (final ApplicationListener listener, final LwjglApplicationConfiguration config) {
 		LwjglNativesLoader.load = false;
 		canvas = new Canvas() {
+			@Override
 			public final void addNotify () {
 				super.addNotify();
 				app = new LwjglAppletApplication(listener, canvas, config);
 			}
 
+			@Override
 			public final void removeNotify () {
 				app.stop();
 				super.removeNotify();
@@ -67,11 +69,13 @@ public class LwjglApplet extends Applet {
 	public LwjglApplet (final ApplicationListener listener) {
 		LwjglNativesLoader.load = false;
 		canvas = new Canvas() {
+			@Override
 			public final void addNotify () {
 				super.addNotify();
 				app = new LwjglAppletApplication(listener, canvas);
 			}
 
+			@Override
 			public final void removeNotify () {
 				app.stop();
 				super.removeNotify();
@@ -84,6 +88,7 @@ public class LwjglApplet extends Applet {
 		canvas.requestFocus();
 	}
 
+	@Override
 	public void destroy () {
 		remove(canvas);
 		super.destroy();

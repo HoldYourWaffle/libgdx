@@ -31,6 +31,7 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 public class TreeTest extends GdxTest {
 	Stage stage;
 
+	@Override
 	public void create () {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
@@ -55,6 +56,7 @@ public class TreeTest extends GdxTest {
 		tree.add(moo5);
 
 		moo5.getActor().addListener(new ClickListener() {
+			@Override
 			public void clicked (InputEvent event, float x, float y) {
 				tree.remove(moo4);
 			}
@@ -63,6 +65,7 @@ public class TreeTest extends GdxTest {
 		table.add(tree).fill().expand();
 	}
 
+	@Override
 	public void render () {
 		// System.out.println(meow.getValue());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -70,10 +73,12 @@ public class TreeTest extends GdxTest {
 		stage.draw();
 	}
 
+	@Override
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
 	}
 
+	@Override
 	public void dispose () {
 		stage.dispose();
 	}

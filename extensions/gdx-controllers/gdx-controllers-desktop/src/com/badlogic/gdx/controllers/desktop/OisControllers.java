@@ -16,6 +16,13 @@
 
 package com.badlogic.gdx.controllers.desktop;
 
+import java.awt.Component;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
+import javax.swing.SwingUtilities;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.GraphicsType;
 import com.badlogic.gdx.controllers.ControlType;
@@ -29,13 +36,6 @@ import com.badlogic.gdx.controllers.desktop.ois.OisListener;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
-import java.awt.Component;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-
-import javax.swing.SwingUtilities;
 
 /** @author Nathan Sweet */
 public class OisControllers {
@@ -62,6 +62,7 @@ public class OisControllers {
 
 			private long lastCheckForLostWindowHandleTime;
 
+			@Override
 			public void run () {
 				// we won't do the rather heavy check for a lost window handle each and every frame, but rather each second only
 				long now = System.nanoTime();
@@ -111,6 +112,7 @@ public class OisControllers {
 		public OisController (OisJoystick joystick) {
 			this.joystick = joystick;
 			joystick.setListener(new OisListener() {
+				@Override
 				public void buttonReleased (OisJoystick joystick, int buttonIndex) {
 					Array<ControllerListener> allListeners = manager.listeners;
 					for (int ii = 0, nn = allListeners.size; ii < nn; ii++)
@@ -119,6 +121,7 @@ public class OisControllers {
 						listeners.get(ii).buttonUp(OisController.this, buttonIndex);
 				}
 
+				@Override
 				public void buttonPressed (OisJoystick joystick, int buttonIndex) {
 					Array<ControllerListener> allListeners = manager.listeners;
 					for (int ii = 0, nn = allListeners.size; ii < nn; ii++)
@@ -127,6 +130,7 @@ public class OisControllers {
 						listeners.get(ii).buttonDown(OisController.this, buttonIndex);
 				}
 
+				@Override
 				public void axisMoved (OisJoystick joystick, int axisIndex, float value) {
 					Array<ControllerListener> allListeners = manager.listeners;
 					for (int ii = 0, nn = allListeners.size; ii < nn; ii++)
@@ -135,6 +139,7 @@ public class OisControllers {
 						listeners.get(ii).axisMoved(OisController.this, axisIndex, value);
 				}
 
+				@Override
 				public void povMoved (OisJoystick joystick, int povIndex, OisPov ignored) {
 					PovDirection value = getPov(povIndex);
 					Array<ControllerListener> allListeners = manager.listeners;
@@ -144,6 +149,7 @@ public class OisControllers {
 						listeners.get(ii).povMoved(OisController.this, povIndex, value);
 				}
 
+				@Override
 				public void xSliderMoved (OisJoystick joystick, int sliderIndex, boolean value) {
 					Array<ControllerListener> allListeners = manager.listeners;
 					for (int ii = 0, nn = allListeners.size; ii < nn; ii++)
@@ -152,6 +158,7 @@ public class OisControllers {
 						listeners.get(ii).xSliderMoved(OisController.this, sliderIndex, value);
 				}
 
+				@Override
 				public void ySliderMoved (OisJoystick joystick, int sliderIndex, boolean value) {
 					Array<ControllerListener> allListeners = manager.listeners;
 					for (int ii = 0, nn = allListeners.size; ii < nn; ii++)
@@ -162,14 +169,17 @@ public class OisControllers {
 			});
 		}
 
+		@Override
 		public boolean getButton (int buttonIndex) {
 			return joystick.isButtonPressed(buttonIndex);
 		}
 
+		@Override
 		public float getAxis (int axisIndex) {
 			return joystick.getAxis(axisIndex);
 		}
 
+		@Override
 		public PovDirection getPov (int povIndex) {
 			OisPov pov = joystick.getPov(povIndex);
 			switch (pov) {
@@ -195,18 +205,22 @@ public class OisControllers {
 			return null; // Impossible.
 		}
 
+		@Override
 		public boolean getSliderX (int sliderIndex) {
 			return joystick.getSliderX(sliderIndex);
 		}
 
+		@Override
 		public boolean getSliderY (int sliderIndex) {
 			return joystick.getSliderY(sliderIndex);
 		}
 
+		@Override
 		public Vector3 getAccelerometer (int accelerometerIndex) {
 			throw new GdxRuntimeException("Invalid accelerometer index: " + accelerometerIndex);
 		}
 
+		@Override
 		public void setAccelerometerSensitivity (float sensitivity) {
 		}
 
@@ -224,18 +238,22 @@ public class OisControllers {
 			return 0;
 		}
 
+		@Override
 		public void addListener (ControllerListener listener) {
 			listeners.add(listener);
 		}
 
+		@Override
 		public void removeListener (ControllerListener listener) {
 			listeners.removeValue(listener, true);
 		}
 
+		@Override
 		public String getName () {
 			return joystick.getName();
 		}
 
+		@Override
 		public String toString () {
 			return joystick.getName();
 		}

@@ -23,12 +23,12 @@ import java.awt.EventQueue;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.badlogic.gdx.ApplicationLogger;
 import org.lwjgl.opengl.AWTGLCanvas;
 import org.lwjgl.opengl.Display;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.ApplicationLogger;
 import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
@@ -80,10 +80,12 @@ public class LwjglCanvas implements Application {
 		canvas = new Canvas() {
 			private final Dimension minSize = new Dimension(1, 1);
 
+			@Override
 			public final void addNotify () {
 				super.addNotify();
 				if (SharedLibraryLoader.isMac) {
 					EventQueue.invokeLater(new Runnable() {
+						@Override
 						public void run () {
 							create();
 						}
@@ -92,11 +94,13 @@ public class LwjglCanvas implements Application {
 					create();
 			}
 
+			@Override
 			public final void removeNotify () {
 				stop();
 				super.removeNotify();
 			}
 
+			@Override
 			public Dimension getMinimumSize () {
 				return minSize;
 			}
@@ -105,6 +109,7 @@ public class LwjglCanvas implements Application {
 		canvas.setIgnoreRepaint(true);
 
 		graphics = new LwjglGraphics(canvas, config) {
+			@Override
 			public void setTitle (String title) {
 				super.setTitle(title);
 				LwjglCanvas.this.setTitle(title);
@@ -116,6 +121,7 @@ public class LwjglCanvas implements Application {
 				return true;
 			}
 
+			@Override
 			public boolean setFullscreenMode (DisplayMode displayMode) {
 				if (!super.setFullscreenMode(displayMode)) return false;
 				LwjglCanvas.this.setDisplayMode(displayMode.width, displayMode.height);
@@ -205,6 +211,7 @@ public class LwjglCanvas implements Application {
 			int lastWidth = Math.max(1, graphics.getWidth());
 			int lastHeight = Math.max(1, graphics.getHeight());
 
+			@Override
 			public void run () {
 				if (!running || Display.isCloseRequested()) {
 					running = false;
@@ -294,6 +301,7 @@ public class LwjglCanvas implements Application {
 
 	public void stop () {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run () {
 				if (!running) return;
 				running = false;

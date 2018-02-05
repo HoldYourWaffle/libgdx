@@ -45,14 +45,17 @@ public class LwjglFrame extends JFrame {
 
 	private void construct (ApplicationListener listener, LwjglApplicationConfiguration config) {
 		lwjglCanvas = new LwjglCanvas(listener, config) {
+			@Override
 			protected void stopped () {
 				LwjglFrame.this.dispose();
 			}
 
+			@Override
 			protected void setTitle (String title) {
 				LwjglFrame.this.setTitle(title);
 			}
 
+			@Override
 			protected void setDisplayMode (int width, int height) {
 				LwjglFrame.this.getContentPane().setPreferredSize(new Dimension(width, height));
 				LwjglFrame.this.getContentPane().invalidate();
@@ -61,18 +64,22 @@ public class LwjglFrame extends JFrame {
 				updateSize(width, height);
 			}
 
+			@Override
 			protected void resize (int width, int height) {
 				updateSize(width, height);
 			}
 
+			@Override
 			protected void start () {
 				LwjglFrame.this.start();
 			}
 
+			@Override
 			protected void exception (Throwable t) {
 				LwjglFrame.this.exception(t);
 			}
 
+			@Override
 			protected int getFrameRate () {
 				int frameRate = LwjglFrame.this.getFrameRate();
 				return frameRate == 0 ? super.getFrameRate() : frameRate;
@@ -92,6 +99,7 @@ public class LwjglFrame extends JFrame {
 
 		// Finish with invokeLater so any LwjglFrame super constructor has a chance to initialize.
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run () {
 				addCanvas();
 				setVisible(true);
@@ -106,6 +114,7 @@ public class LwjglFrame extends JFrame {
 		if (halt) {
 			if (shutdownHook != null) return;
 			shutdownHook = new Thread() {
+				@Override
 				public void run () {
 					Runtime.getRuntime().halt(0); // Because fuck you, deadlock causing Swing shutdown hooks.
 				}

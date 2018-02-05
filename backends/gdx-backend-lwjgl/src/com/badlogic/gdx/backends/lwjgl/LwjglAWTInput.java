@@ -88,12 +88,14 @@ public class LwjglAWTInput implements Input, MouseMotionListener, MouseListener,
 	}
 
 	Pool<KeyEvent> usedKeyEvents = new Pool<KeyEvent>(16, 1000) {
+		@Override
 		protected KeyEvent newObject () {
 			return new KeyEvent();
 		}
 	};
 
 	Pool<TouchEvent> usedTouchEvents = new Pool<TouchEvent>(16, 1000) {
+		@Override
 		protected TouchEvent newObject () {
 			return new TouchEvent();
 		}
@@ -159,6 +161,7 @@ public class LwjglAWTInput implements Input, MouseMotionListener, MouseListener,
 		return 0;
 	}
 
+	@Override
 	public void getTextInput (final TextInputListener listener, final String title, final String text, final String hint) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -166,6 +169,7 @@ public class LwjglAWTInput implements Input, MouseMotionListener, MouseListener,
 				JPanel panel = new JPanel(new FlowLayout());
 
 				JPanel textPanel = new JPanel() {
+					@Override
 					public boolean isOptimizedDrawingEnabled () {
 						return false;
 					};

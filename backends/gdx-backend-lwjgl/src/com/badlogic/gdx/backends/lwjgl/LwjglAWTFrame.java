@@ -16,11 +16,11 @@
 
 package com.badlogic.gdx.backends.lwjgl;
 
-import com.badlogic.gdx.ApplicationListener;
-
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+
+import com.badlogic.gdx.ApplicationListener;
 
 /** Wraps an {@link LwjglAWTCanvas} in a resizable {@link JFrame}. */
 public class LwjglAWTFrame extends JFrame {
@@ -31,14 +31,17 @@ public class LwjglAWTFrame extends JFrame {
 		super(title);
 
 		lwjglAWTCanvas = new LwjglAWTCanvas(listener) {
+			@Override
 			protected void stopped () {
 				LwjglAWTFrame.this.dispose();
 			}
 
+			@Override
 			protected void setTitle (String title) {
 				LwjglAWTFrame.this.setTitle(title);
 			}
 
+			@Override
 			protected void setDisplayMode (int width, int height) {
 				LwjglAWTFrame.this.getContentPane().setPreferredSize(new Dimension(width, height));
 				LwjglAWTFrame.this.getContentPane().invalidate();
@@ -47,10 +50,12 @@ public class LwjglAWTFrame extends JFrame {
 				updateSize(width, height);
 			}
 
+			@Override
 			protected void resize (int width, int height) {
 				updateSize(width, height);
 			}
 
+			@Override
 			protected void start () {
 				LwjglAWTFrame.this.start();
 			}
@@ -74,6 +79,7 @@ public class LwjglAWTFrame extends JFrame {
 		if (halt) {
 			if (shutdownHook != null) return;
 			shutdownHook = new Thread() {
+				@Override
 				public void run () {
 					Runtime.getRuntime().halt(0); // Because fuck you, deadlock causing Swing shutdown hooks.
 				}

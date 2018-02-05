@@ -18,10 +18,7 @@ package com.badlogic.gdx.tests.lwjgl;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.tests.*;
-import com.badlogic.gdx.tests.extensions.ControllersTest;
-import com.badlogic.gdx.tests.extensions.FreeTypeMetricsTest;
-import com.badlogic.gdx.tests.superkoalio.SuperKoalio;
+import com.badlogic.gdx.tests.GroupTest;
 import com.badlogic.gdx.tests.utils.GdxTest;
 
 public class LwjglDebugStarter {

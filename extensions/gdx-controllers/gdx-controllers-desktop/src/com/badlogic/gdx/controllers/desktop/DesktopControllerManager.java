@@ -32,14 +32,17 @@ public class DesktopControllerManager implements ControllerManager {
 		new OisControllers(this);
 	}
 
+	@Override
 	public Array<Controller> getControllers () {
 		return controllers;
 	}
 
+	@Override
 	public void addListener (ControllerListener listener) {
 		listeners.add(listener);
 	}
 
+	@Override
 	public void removeListener (ControllerListener listener) {
 		listeners.removeValue(listener, true);
 	}

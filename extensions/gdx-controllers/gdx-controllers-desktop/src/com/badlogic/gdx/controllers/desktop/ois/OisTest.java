@@ -30,6 +30,7 @@ public class OisTest {
 		ApplicationAdapter app = new ApplicationAdapter() {
 			Ois ois;
 
+			@Override
 			public void create () {
 				ois = new Ois(OisControllers.getWindowHandle());
 				if (ois.getJoysticks().size() > 0) {
@@ -68,6 +69,7 @@ public class OisTest {
 				}
 			}
 
+			@Override
 			public void render () {
 				ois.update();
 			}

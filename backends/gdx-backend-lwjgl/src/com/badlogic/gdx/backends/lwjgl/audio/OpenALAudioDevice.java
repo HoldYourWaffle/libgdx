@@ -16,6 +16,28 @@
 
 package com.badlogic.gdx.backends.lwjgl.audio;
 
+import static org.lwjgl.openal.AL10.AL_BUFFERS_PROCESSED;
+import static org.lwjgl.openal.AL10.AL_FALSE;
+import static org.lwjgl.openal.AL10.AL_FORMAT_MONO16;
+import static org.lwjgl.openal.AL10.AL_FORMAT_STEREO16;
+import static org.lwjgl.openal.AL10.AL_GAIN;
+import static org.lwjgl.openal.AL10.AL_INVALID_VALUE;
+import static org.lwjgl.openal.AL10.AL_LOOPING;
+import static org.lwjgl.openal.AL10.AL_NO_ERROR;
+import static org.lwjgl.openal.AL10.AL_PLAYING;
+import static org.lwjgl.openal.AL10.AL_SOURCE_STATE;
+import static org.lwjgl.openal.AL10.alBufferData;
+import static org.lwjgl.openal.AL10.alDeleteBuffers;
+import static org.lwjgl.openal.AL10.alGenBuffers;
+import static org.lwjgl.openal.AL10.alGetError;
+import static org.lwjgl.openal.AL10.alGetSourcef;
+import static org.lwjgl.openal.AL10.alGetSourcei;
+import static org.lwjgl.openal.AL10.alSourcePlay;
+import static org.lwjgl.openal.AL10.alSourceQueueBuffers;
+import static org.lwjgl.openal.AL10.alSourceUnqueueBuffers;
+import static org.lwjgl.openal.AL10.alSourcef;
+import static org.lwjgl.openal.AL10.alSourcei;
+
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
@@ -25,8 +47,6 @@ import org.lwjgl.openal.AL11;
 import com.badlogic.gdx.audio.AudioDevice;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
-import static org.lwjgl.openal.AL10.*;
 
 /** @author Nathan Sweet */
 public class OpenALAudioDevice implements AudioDevice {
@@ -56,6 +76,7 @@ public class OpenALAudioDevice implements AudioDevice {
 		tempBuffer = BufferUtils.createByteBuffer(bufferSize);
 	}
 
+	@Override
 	public void writeSamples (short[] samples, int offset, int numSamples) {
 		if (bytes == null || bytes.length < numSamples * 2) bytes = new byte[numSamples * 2];
 		int end = Math.min(offset + numSamples, samples.length);
@@ -67,6 +88,7 @@ public class OpenALAudioDevice implements AudioDevice {
 		writeSamples(bytes, 0, numSamples * 2);
 	}
 
+	@Override
 	public void writeSamples (float[] samples, int offset, int numSamples) {
 		if (bytes == null || bytes.length < numSamples * 2) bytes = new byte[numSamples * 2];
 		int end = Math.min(offset + numSamples, samples.length);
@@ -172,6 +194,7 @@ public class OpenALAudioDevice implements AudioDevice {
 		return isPlaying;
 	}
 
+	@Override
 	public void setVolume (float volume) {
 		this.volume = volume;
 		if (sourceID != -1) alSourcef(sourceID, AL_GAIN, volume);
@@ -194,6 +217,7 @@ public class OpenALAudioDevice implements AudioDevice {
 		return sampleRate;
 	}
 
+	@Override
 	public void dispose () {
 		if (buffers == null) return;
 		if (sourceID != -1) {
@@ -204,10 +228,12 @@ public class OpenALAudioDevice implements AudioDevice {
 		buffers = null;
 	}
 
+	@Override
 	public boolean isMono () {
 		return channels == 1;
 	}
 
+	@Override
 	public int getLatency () {
 		return (int)(secondsPerBuffer * bufferCount * 1000);
 	}

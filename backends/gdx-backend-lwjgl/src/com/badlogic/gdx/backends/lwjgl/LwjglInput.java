@@ -20,8 +20,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.nio.ByteOrder;
-import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +35,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.IntSet;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -51,6 +42,7 @@ import org.lwjgl.opengl.Display;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.utils.IntSet;
 import com.badlogic.gdx.utils.Pool;
 
 /** An implementation of the {@link Input} interface hooking a LWJGL panel for input.
@@ -78,12 +70,14 @@ final public class LwjglInput implements Input {
 	long lastTime;
 
 	Pool<KeyEvent> usedKeyEvents = new Pool<KeyEvent>(16, 1000) {
+		@Override
 		protected KeyEvent newObject () {
 			return new KeyEvent();
 		}
 	};
 
 	Pool<TouchEvent> usedTouchEvents = new Pool<TouchEvent>(16, 1000) {
+		@Override
 		protected TouchEvent newObject () {
 			return new TouchEvent();
 		}
@@ -94,30 +88,37 @@ final public class LwjglInput implements Input {
 		Mouse.setClipMouseCoordinatesToWindow(false);
 	}
 
+	@Override
 	public float getAccelerometerX () {
 		return 0;
 	}
 
+	@Override
 	public float getAccelerometerY () {
 		return 0;
 	}
 
+	@Override
 	public float getAccelerometerZ () {
 		return 0;
 	}
 	
+	@Override
 	public float getGyroscopeX () {
 		return 0;
 	}
 
+	@Override
 	public float getGyroscopeY () {
 		return 0;
 	}
 
+	@Override
 	public float getGyroscopeZ () {
 		return 0;
 	}
 
+	@Override
 	public void getTextInput (final TextInputListener listener, final String title, final String text, final String hint) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -125,6 +126,7 @@ final public class LwjglInput implements Input {
 				JPanel panel = new JPanel(new FlowLayout());
 
 				JPanel textPanel = new JPanel() {
+					@Override
 					public boolean isOptimizedDrawingEnabled () {
 						return false;
 					};
@@ -208,10 +210,12 @@ final public class LwjglInput implements Input {
 		});
 	}
 
+	@Override
 	public int getX () {
 		return (int)(Mouse.getX() * Display.getPixelScaleFactor());
 	}
 
+	@Override
 	public int getY () {
 		return Gdx.graphics.getHeight() - 1 - (int)(Mouse.getY() * Display.getPixelScaleFactor());
 	}
@@ -224,6 +228,7 @@ final public class LwjglInput implements Input {
 		return false;
 	}
 
+	@Override
 	public boolean isKeyPressed (int key) {
 		if (!Keyboard.isCreated()) return false;
 
@@ -244,11 +249,13 @@ final public class LwjglInput implements Input {
 		return justPressedKeys[key];
 	}
 
+	@Override
 	public boolean isTouched () {
 		boolean button = Mouse.isButtonDown(0) || Mouse.isButtonDown(1) || Mouse.isButtonDown(2);
 		return button;
 	}
 
+	@Override
 	public int getX (int pointer) {
 		if (pointer > 0)
 			return 0;
@@ -256,6 +263,7 @@ final public class LwjglInput implements Input {
 			return getX();
 	}
 
+	@Override
 	public int getY (int pointer) {
 		if (pointer > 0)
 			return 0;
@@ -263,6 +271,7 @@ final public class LwjglInput implements Input {
 			return getY();
 	}
 
+	@Override
 	public boolean isTouched (int pointer) {
 		if (pointer > 0)
 			return false;

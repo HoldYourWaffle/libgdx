@@ -35,6 +35,7 @@ public class KinematicBodyTest extends GdxTest {
 	World world;
 	Box2DDebugRenderer renderer;
 
+	@Override
 	public void create () {
 		cam = new OrthographicCamera(48, 32);
 		cam.position.set(0, 15, 0);
@@ -55,6 +56,7 @@ public class KinematicBodyTest extends GdxTest {
 		body.setLinearVelocity(new Vector2(50f, 0));
 	}
 
+	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		world.step(Math.min(0.032f, Gdx.graphics.getDeltaTime()), 3, 4);

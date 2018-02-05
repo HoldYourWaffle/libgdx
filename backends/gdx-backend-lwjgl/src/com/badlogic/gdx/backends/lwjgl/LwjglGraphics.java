@@ -20,8 +20,6 @@ import java.awt.Canvas;
 import java.awt.Toolkit;
 import java.nio.ByteBuffer;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.graphics.glutils.GLVersion;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.ContextAttribs;
@@ -29,14 +27,15 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.glutils.GLVersion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
@@ -84,6 +83,7 @@ public class LwjglGraphics implements Graphics {
 	}
 
 
+	@Override
 	public int getHeight () {
 		if (canvas != null)
 			return Math.max(1, canvas.getHeight());
@@ -91,6 +91,7 @@ public class LwjglGraphics implements Graphics {
 			return (int)(Display.getHeight() * Display.getPixelScaleFactor());
 	}
 
+	@Override
 	public int getWidth () {
 		if (canvas != null)
 			return Math.max(1, canvas.getWidth());
@@ -109,22 +110,27 @@ public class LwjglGraphics implements Graphics {
 	}
 
 
+	@Override
 	public long getFrameId () {
 		return frameId;
 	}
 
+	@Override
 	public float getDeltaTime () {
 		return deltaTime;
 	}
 
+	@Override
 	public float getRawDeltaTime () {
 		return deltaTime;
 	}
 
+	@Override
 	public GraphicsType getType () {
 		return GraphicsType.LWJGL;
 	}
 
+	@Override
 	public GLVersion getGLVersion () {
 		return glVersion;
 	}
@@ -133,6 +139,7 @@ public class LwjglGraphics implements Graphics {
 		return gl20 != null;
 	}
 
+	@Override
 	public GL20 getGL20 () {
 		return gl20;
 	}
@@ -168,6 +175,7 @@ public class LwjglGraphics implements Graphics {
 		}
 	}
 
+	@Override
 	public int getFramesPerSecond () {
 		return fps;
 	}

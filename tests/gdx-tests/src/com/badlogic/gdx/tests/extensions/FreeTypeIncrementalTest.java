@@ -38,6 +38,7 @@ public class FreeTypeIncrementalTest extends GdxTest {
 	BitmapFont font;
 	FreeTypeFontGenerator generator;
 
+	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		shapes = new ShapeRenderer();
@@ -53,18 +54,20 @@ public class FreeTypeIncrementalTest extends GdxTest {
 		param.characters = "howdY\u0000";
 
 		FreeTypeBitmapFontData data = new FreeTypeBitmapFontData() {
+			@Override
 			public int getWrapIndex (Array<Glyph> glyphs, int start) {
 				return SimplifiedChinese.getWrapIndex(glyphs, start);
 			}
 		};
 
 		// By default latin chars are used for x and cap height, causing some fonts to display non-latin chars out of bounds.
-		data.xChars = new char[] {'动'};
-		data.capChars = new char[] {'动'};
+		data.xChars = new char[] {'åŠ¨'};
+		data.capChars = new char[] {'åŠ¨'};
 
 		font = generator.generateFont(param, data);
 	}
 
+	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -89,13 +92,14 @@ public class FreeTypeIncrementalTest extends GdxTest {
 		font.draw(batch, "LYA", 10, 300); // Shows kerning.
 		font.draw(batch, "hello world", 100, 300);
 		font.draw(batch,
-			"动画能给游戏带来生机和灵气。我们相信创作一段美妙的动画，不仅需要强大的软件工具，更需要一套牛 B 的工作流程。" //
-				+ "Spine专注于此，为您创建惊艳的骨骼动画，并将其整合到游戏当中，提供了一套高效的工作流程。",
+			"åŠ¨ç”»èƒ½ç»™æ¸¸æˆ�å¸¦æ�¥ç”Ÿæœºå’Œç�µæ°”ã€‚æˆ‘ä»¬ç›¸ä¿¡åˆ›ä½œä¸€æ®µç¾Žå¦™çš„åŠ¨ç”»ï¼Œä¸�ä»…éœ€è¦�å¼ºå¤§çš„è½¯ä»¶å·¥å…·ï¼Œæ›´éœ€è¦�ä¸€å¥—ç‰› B çš„å·¥ä½œæµ�ç¨‹ã€‚" //
+				+ "Spineä¸“æ³¨äºŽæ­¤ï¼Œä¸ºæ‚¨åˆ›å»ºæƒŠè‰³çš„éª¨éª¼åŠ¨ç”»ï¼Œå¹¶å°†å…¶æ•´å�ˆåˆ°æ¸¸æˆ�å½“ä¸­ï¼Œæ��ä¾›äº†ä¸€å¥—é«˜æ•ˆçš„å·¥ä½œæµ�ç¨‹ã€‚",
 			10, 250, //
 			Gdx.graphics.getWidth() - 20, Align.left, true);
 		batch.end();
 	}
 
+	@Override
 	public void resize (int width, int height) {
 		batch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
 		shapes.setProjectionMatrix(batch.getProjectionMatrix());
@@ -129,52 +133,52 @@ public class FreeTypeIncrementalTest extends GdxTest {
 			case '?':
 			case ']':
 			case '}':
-			case '¢':
-			case '¨':
-			case '°':
-			case '·':
-			case 'ˇ':
-			case 'ˉ':
-			case '―':
-			case '‖':
-			case '’':
-			case '”':
-			case '„':
-			case '‟':
-			case '†':
-			case '‡':
-			case '›':
-			case '℃':
-			case '∶':
-			case '、':
-			case '。':
-			case '〃':
-			case '〆':
-			case '〈':
-			case '《':
-			case '「':
-			case '『':
-			case '〕':
-			case '〗':
-			case '〞':
-			case '﹘':
-			case '﹚':
-			case '﹜':
-			case '！':
-			case '＂':
-			case '％':
-			case '＇':
-			case '）':
-			case '，':
-			case '．':
-			case '：':
-			case '；':
-			case '？':
-			case '］':
-			case '｀':
-			case '｜':
-			case '｝':
-			case '～':
+			case 'Â¢':
+			case 'Â¨':
+			case 'Â°':
+			case 'Â·':
+			case 'Ë‡':
+			case 'Ë‰':
+			case 'â€•':
+			case 'â€–':
+			case 'â€™':
+			case 'â€�':
+			case 'â€ž':
+			case 'â€Ÿ':
+			case 'â€ ':
+			case 'â€¡':
+			case 'â€º':
+			case 'â„ƒ':
+			case 'âˆ¶':
+			case 'ã€�':
+			case 'ã€‚':
+			case 'ã€ƒ':
+			case 'ã€†':
+			case 'ã€ˆ':
+			case 'ã€Š':
+			case 'ã€Œ':
+			case 'ã€Ž':
+			case 'ã€•':
+			case 'ã€—':
+			case 'ã€ž':
+			case 'ï¹˜':
+			case 'ï¹š':
+			case 'ï¹œ':
+			case 'ï¼�':
+			case 'ï¼‚':
+			case 'ï¼…':
+			case 'ï¼‡':
+			case 'ï¼‰':
+			case 'ï¼Œ':
+			case 'ï¼Ž':
+			case 'ï¼š':
+			case 'ï¼›':
+			case 'ï¼Ÿ':
+			case 'ï¼½':
+			case 'ï½€':
+			case 'ï½œ':
+			case 'ï½�':
+			case 'ï½ž':
 				return false;
 			}
 			return true;
@@ -186,29 +190,29 @@ public class FreeTypeIncrementalTest extends GdxTest {
 			case '(':
 			case '*':
 			case ',':
-			case '£':
-			case '¥':
-			case '·':
-			case '‘':
-			case '“':
-			case '〈':
-			case '《':
-			case '「':
-			case '『':
-			case '【':
-			case '〔':
-			case '〖':
-			case '〝':
-			case '﹗':
-			case '﹙':
-			case '﹛':
-			case '＄':
-			case '（':
-			case '．':
-			case '［':
-			case '｛':
-			case '￡':
-			case '￥':
+			case 'Â£':
+			case 'Â¥':
+			case 'Â·':
+			case 'â€˜':
+			case 'â€œ':
+			case 'ã€ˆ':
+			case 'ã€Š':
+			case 'ã€Œ':
+			case 'ã€Ž':
+			case 'ã€�':
+			case 'ã€”':
+			case 'ã€–':
+			case 'ã€�':
+			case 'ï¹—':
+			case 'ï¹™':
+			case 'ï¹›':
+			case 'ï¼„':
+			case 'ï¼ˆ':
+			case 'ï¼Ž':
+			case 'ï¼»':
+			case 'ï½›':
+			case 'ï¿¡':
+			case 'ï¿¥':
 				return false;
 			}
 			return true;

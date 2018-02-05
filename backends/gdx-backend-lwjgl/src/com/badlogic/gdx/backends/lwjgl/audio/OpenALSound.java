@@ -16,12 +16,24 @@
 
 package com.badlogic.gdx.backends.lwjgl.audio;
 
+import static org.lwjgl.openal.AL10.AL_BUFFER;
+import static org.lwjgl.openal.AL10.AL_FALSE;
+import static org.lwjgl.openal.AL10.AL_FORMAT_MONO16;
+import static org.lwjgl.openal.AL10.AL_FORMAT_STEREO16;
+import static org.lwjgl.openal.AL10.AL_GAIN;
+import static org.lwjgl.openal.AL10.AL_LOOPING;
+import static org.lwjgl.openal.AL10.AL_TRUE;
+import static org.lwjgl.openal.AL10.alBufferData;
+import static org.lwjgl.openal.AL10.alDeleteBuffers;
+import static org.lwjgl.openal.AL10.alGenBuffers;
+import static org.lwjgl.openal.AL10.alSourcePlay;
+import static org.lwjgl.openal.AL10.alSourcef;
+import static org.lwjgl.openal.AL10.alSourcei;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import com.badlogic.gdx.audio.Sound;
-
-import static org.lwjgl.openal.AL10.*;
 
 /** @author Nathan Sweet */
 public class OpenALSound implements Sound {
@@ -49,10 +61,12 @@ public class OpenALSound implements Sound {
 		}
 	}
 
+	@Override
 	public long play () {
 		return play(1);
 	}
 
+	@Override
 	public long play (float volume) {
 		if (audio.noDevice) return 0;
 		int sourceID = audio.obtainSource(false);
@@ -71,6 +85,7 @@ public class OpenALSound implements Sound {
 		return soundId;
 	}
 
+	@Override
 	public long loop () {
 		return loop(1);
 	}
@@ -88,11 +103,13 @@ public class OpenALSound implements Sound {
 		return soundId;
 	}
 
+	@Override
 	public void stop () {
 		if (audio.noDevice) return;
 		audio.stopSourcesWithBuffer(bufferID);
 	}
 
+	@Override
 	public void dispose () {
 		if (audio.noDevice) return;
 		if (bufferID == -1) return;

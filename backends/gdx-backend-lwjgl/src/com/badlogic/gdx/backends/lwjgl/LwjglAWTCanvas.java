@@ -32,7 +32,6 @@ import java.util.Map;
 
 import javax.swing.SwingUtilities;
 
-import com.badlogic.gdx.ApplicationLogger;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.AWTGLCanvas;
 import org.lwjgl.opengl.Display;
@@ -40,6 +39,7 @@ import org.lwjgl.opengl.PixelFormat;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.ApplicationLogger;
 import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
@@ -156,6 +156,7 @@ public class LwjglAWTCanvas implements Application {
 				return true;
 			}
 
+			@Override
 			public boolean shouldRender () {
 				synchronized (this) {
 					boolean rq = requestRendering;

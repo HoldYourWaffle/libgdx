@@ -16,6 +16,25 @@
 
 package com.badlogic.gdx.backends.lwjgl.audio;
 
+import static org.lwjgl.openal.AL10.AL_BUFFER;
+import static org.lwjgl.openal.AL10.AL_NO_ERROR;
+import static org.lwjgl.openal.AL10.AL_ORIENTATION;
+import static org.lwjgl.openal.AL10.AL_PAUSED;
+import static org.lwjgl.openal.AL10.AL_PLAYING;
+import static org.lwjgl.openal.AL10.AL_POSITION;
+import static org.lwjgl.openal.AL10.AL_SOURCE_STATE;
+import static org.lwjgl.openal.AL10.AL_STOPPED;
+import static org.lwjgl.openal.AL10.AL_VELOCITY;
+import static org.lwjgl.openal.AL10.alDeleteSources;
+import static org.lwjgl.openal.AL10.alGenSources;
+import static org.lwjgl.openal.AL10.alGetError;
+import static org.lwjgl.openal.AL10.alGetSourcei;
+import static org.lwjgl.openal.AL10.alListener;
+import static org.lwjgl.openal.AL10.alSourcePause;
+import static org.lwjgl.openal.AL10.alSourcePlay;
+import static org.lwjgl.openal.AL10.alSourceStop;
+import static org.lwjgl.openal.AL10.alSourcei;
+
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
@@ -34,8 +53,6 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.LongMap;
 import com.badlogic.gdx.utils.ObjectMap;
-
-import static org.lwjgl.openal.AL10.*;
 
 /** @author Nathan Sweet */
 public class OpenALAudio implements Audio {
@@ -109,6 +126,7 @@ public class OpenALAudio implements Audio {
 		extensionToMusicClass.put(extension, musicClass);
 	}
 
+	@Override
 	public OpenALSound newSound (FileHandle file) {
 		if (file == null) throw new IllegalArgumentException("file cannot be null.");
 		Class<? extends OpenALSound> soundClass = extensionToSoundClass.get(file.extension().toLowerCase());
@@ -120,6 +138,7 @@ public class OpenALAudio implements Audio {
 		}
 	}
 
+	@Override
 	public OpenALMusic newMusic (FileHandle file) {
 		if (file == null) throw new IllegalArgumentException("file cannot be null.");
 		Class<? extends OpenALMusic> musicClass = extensionToMusicClass.get(file.extension().toLowerCase());
@@ -299,6 +318,7 @@ public class OpenALAudio implements Audio {
 		}
 	}
 
+	@Override
 	public AudioDevice newAudioDevice (int sampleRate, final boolean isMono) {
 		if (noDevice) return new AudioDevice() {
 			@Override
@@ -330,6 +350,7 @@ public class OpenALAudio implements Audio {
 		return new OpenALAudioDevice(this, sampleRate, isMono, deviceBufferSize, deviceBufferCount);
 	}
 
+	@Override
 	public AudioRecorder newAudioRecorder (int samplingRate, boolean isMono) {
 		if (noDevice) return new AudioRecorder() {
 			@Override

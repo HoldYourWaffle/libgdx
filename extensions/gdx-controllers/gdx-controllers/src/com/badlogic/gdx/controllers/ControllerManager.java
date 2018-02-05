@@ -16,8 +16,6 @@
 
 package com.badlogic.gdx.controllers;
 
-import java.util.Collection;
-
 import com.badlogic.gdx.utils.Array;
 
 /** @author Nathan Sweet */

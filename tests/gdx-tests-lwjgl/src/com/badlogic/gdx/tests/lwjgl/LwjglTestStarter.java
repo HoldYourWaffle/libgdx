@@ -100,12 +100,14 @@ public class LwjglTestStarter extends JFrame {
 			list.setSelectionModel(m);
 
 			list.addMouseListener(new MouseAdapter() {
+				@Override
 				public void mouseClicked (MouseEvent event) {
 					if (event.getClickCount() == 2) button.doClick();
 				}
 			});
 
 			list.addKeyListener(new KeyAdapter() {
+				@Override
 				public void keyPressed (KeyEvent e) {
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) button.doClick();
 				}
