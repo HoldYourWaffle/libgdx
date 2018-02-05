@@ -24,12 +24,13 @@ import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.TimeUtils;
+
+import info.zthings.libgdxglue.ApplicationGlue.ApplicationType;
 
 public class BufferUtilsTest extends GdxTest {
 	static final int NUM_MB = 5;
