@@ -16,7 +16,7 @@
 
 apply from: 'gradle/dependencies.gradle'
 
-ext.versionName = 'split-1.9.8.0'
+ext.versionName = 'split-1.9.8.1'
 
 def alls;
 if (findProject(':api') != null) alls = rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().contains('api' + File.separator + 'libgdx' + File.separator) }
