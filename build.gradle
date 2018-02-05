@@ -14,10 +14,9 @@
  * limitations under the License.
  ******************************************************************************/
 
-apply from: "gradle/dependencies.gradle"
+apply from: 'gradle/dependencies.gradle'
 
-
-allprojects {
+configure(rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().contains('api' + File.separator + 'libgdx' + File.separator) } + allprojects) {
     group = 'com.badlogicgames.gdx'
     version = 'split-1.9.8.0'
 
@@ -36,7 +35,7 @@ allprojects {
     }
 }
 
-configure(subprojects) {// - project(":tests:gdx-tests-android")) {
+configure(rootProject.allprojects.findAll { it.projectDir.getAbsolutePath().contains('api' + File.separator + 'libgdx' + File.separator) && it.path != ':api:libgdx' } + subprojects) {
     apply plugin: "idea"
     apply plugin: "java"
 

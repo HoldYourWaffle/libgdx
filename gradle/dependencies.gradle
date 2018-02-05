@@ -117,11 +117,3 @@ testnatives.desktopExt = [
         files("api/libgdx/extensions/gdx-controllers/gdx-controllers-desktop/libs/gdx-controllers-desktop-natives.jar"),
         files("api/libgdx/extensions/gdx-freetype/libs/gdx-freetype-natives.jar")
 ]
-
-/*testnatives.ios = [
-        files("gdx/libs/ios32/"),
-        files("extensions/gdx-box2d/gdx-box2d/libs/ios32/"),
-        files("extensions/gdx-bullet/libs/ios32/"),
-        files("extensions/gdx-freetype/libs/ios32/")
-]*/
-

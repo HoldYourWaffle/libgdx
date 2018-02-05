@@ -33,23 +33,3 @@ dependencies {
 	compile project(":gdx-glue")
     testCompile libraries.junit
 }
-
-
-/* Configuration from root build.gradle. Could be necessary in the future
-group = 'com.badlogicgames.gdx'
-version = '1.9.5-SNAPSHOT'
-
-buildscript {
-	repositories {
-		mavenCentral()
-		jcenter()
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-	}
-}
-
-repositories {
-	mavenCentral()
-	jcenter()
-	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-*/
