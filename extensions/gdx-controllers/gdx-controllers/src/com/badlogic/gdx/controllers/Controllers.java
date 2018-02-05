@@ -16,18 +16,18 @@
 
 package com.badlogic.gdx.controllers;
 
-import java.util.Collection;
-
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.GraphicsType;
 import com.badlogic.gdx.LifecycleListener;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+
+import info.zthings.libgdxglue.ApplicationGlue;
+
+//import info.zthings.libgdxglue.ApplicationGlue.ApplicationType;
 
 /** Provides access to connected {@link Controller} instances. Query the available controllers via {@link #getControllers()}, add
  * and remove global {@link ControllerListener} instances via {@link #addListener(ControllerListener)} and
@@ -37,7 +37,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
  * @author Nathan Sweet */
 public class Controllers {
 	private static final String TAG = "Controllers";
-	static final ObjectMap<Application, ControllerManager> managers = new ObjectMap<Application, ControllerManager>();
+	static final ObjectMap<ApplicationGlue, ControllerManager> managers = new ObjectMap<ApplicationGlue, ControllerManager>();
 
 	/** Returns an array of connected {@link Controller} instances. This method should only be called on the rendering thread.
 	 * 
@@ -82,23 +82,23 @@ public class Controllers {
 		if (managers.containsKey(Gdx.app)) return;
 
 		String className = null;
-		ApplicationType type = Gdx.app.getType();
+		ApplicationGlue.ApplicationType type = Gdx.app.getType();
 		ControllerManager manager = null;
 
-		if (type == ApplicationType.Android) {
+		if (type == ApplicationGlue.ApplicationType.Android) {
 			if (Gdx.app.getVersion() >= 12) {
 				className = "com.badlogic.gdx.controllers.android.AndroidControllers";
 			} else {
 				Gdx.app.log(TAG, "No controller manager is available for Android versions < API level 12");
 				manager = new ControllerManagerStub();
 			}
-		} else if (type == ApplicationType.Desktop) {
+		} else if (type == ApplicationGlue.ApplicationType.Desktop) {
 			if(Gdx.graphics.getType() == GraphicsType.LWJGL3) {
 				className = "com.badlogic.gdx.controllers.lwjgl3.Lwjgl3ControllerManager";
 			} else {
 				className = "com.badlogic.gdx.controllers.desktop.DesktopControllerManager";
 			}
-		} else if (type == ApplicationType.WebGL) {
+		} else if (type == ApplicationGlue.ApplicationType.WebGL) {
 			className = "com.badlogic.gdx.controllers.gwt.GwtControllers";
 		} else {
 			Gdx.app.log(TAG, "No controller manager is available for: " + Gdx.app.getType());
@@ -115,7 +115,7 @@ public class Controllers {
 		}
 
 		managers.put(Gdx.app, manager);
-		final Application app = Gdx.app;
+		final ApplicationGlue app = Gdx.app;
 		Gdx.app.addLifecycleListener(new LifecycleListener() {
 			@Override
 			public void resume () {
