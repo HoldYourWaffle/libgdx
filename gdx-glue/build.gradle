@@ -1,9 +1,2 @@
-apply plugin: "java"
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-compileJava {
-    options.fork = true
-    options.incremental = true
-}
+sourceCompatibility = targetCompatibility = 1.8
+sourceSets.test.java.srcDirs = ["test"]

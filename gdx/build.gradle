@@ -14,47 +14,11 @@
  * limitations under the License.
  ******************************************************************************/
 
-apply plugin: "java"
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-sourceSets.main.java.srcDirs = ["src"]
-sourceSets.main.resources.srcDirs = ["src"]
+sourceCompatibility = targetCompatibility = 1.8
 sourceSets.test.java.srcDirs = ["test"]
 
-compileJava {
-    options.fork = true
-    options.incremental = true
-}
-
 dependencies {
-	if (findProject(':api') != null) {
-		compileOnly project(":api:libgdx-jnigen")
-		compile project(":api:libgdx-glue")
-	} else {
-		compileOnly project(":extensions:gdx-jnigen")
-		compile project(":gdx-glue")
-	}
-    testCompile "junit:junit:4.11"
+	compileOnly project(":extensions:gdx-jnigen")
+	compile project(":gdx-glue")
+    testCompile libraries.junit
 }
-
-
-/* Configuration from root build.gradle. Could be necessary in the future
-group = 'com.badlogicgames.gdx'
-version = '1.9.5-SNAPSHOT'
-
-buildscript {
-	repositories {
-		mavenCentral()
-		jcenter()
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-	}
-}
-
-repositories {
-	mavenCentral()
-	jcenter()
-	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-*/

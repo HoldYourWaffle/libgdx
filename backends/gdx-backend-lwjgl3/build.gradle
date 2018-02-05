@@ -14,8 +14,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = targetCompatibility = 1.8
 
 dependencies {
     compile libraries.lwjgl3

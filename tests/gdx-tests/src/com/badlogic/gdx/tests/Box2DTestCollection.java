@@ -16,7 +16,6 @@
 
 package com.badlogic.gdx.tests;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -31,7 +30,6 @@ import com.badlogic.gdx.tests.box2d.Cantilever;
 import com.badlogic.gdx.tests.box2d.Chain;
 import com.badlogic.gdx.tests.box2d.CharacterCollision;
 import com.badlogic.gdx.tests.box2d.CollisionFiltering;
-import com.badlogic.gdx.tests.box2d.ContactListenerTest;
 import com.badlogic.gdx.tests.box2d.ContinuousTest;
 import com.badlogic.gdx.tests.box2d.ConveyorBelt;
 import com.badlogic.gdx.tests.box2d.DebugRendererTest;
@@ -44,6 +42,8 @@ import com.badlogic.gdx.tests.box2d.VaryingRestitution;
 import com.badlogic.gdx.tests.box2d.VerticalStack;
 import com.badlogic.gdx.tests.utils.GdxTest;
 
+import info.zthings.libgdxglue.ApplicationGlue;
+
 public class Box2DTestCollection extends GdxTest implements InputProcessor, GestureListener {
 	private final Box2DTest[] tests = {new DebugRendererTest(), new CollisionFiltering(), new Chain(), new Bridge(),
 		new SphereStack(), new Cantilever(), new ApplyForce(), new ContinuousTest(), new Prismatic(), new CharacterCollision(),
@@ -52,7 +52,7 @@ public class Box2DTestCollection extends GdxTest implements InputProcessor, Gest
 
 	private int testIndex = 0;
 
-	private Application app = null;
+	private ApplicationGlue app = null;
 
 	@Override
 	public void render () {
